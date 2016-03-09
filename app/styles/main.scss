@@ -1,14 +1,23 @@
-$icon-font-path: '../fonts/';
-
 // bower:scss
-//@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin-ext');
+@import 'mixins';
+@import 'variables';
 
-@import "mixins";
+* {
+    @include box-sizing(border-box);
+}
+
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
 
 body {
-    background-color: #353535;
-    font: 16px/1.428571429 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+    background-color: #252525;
+    font: 16px/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
     color: #fff;
     margin: 0;
 }
@@ -23,20 +32,49 @@ a {
     }
 }
 
+.header__section {
+    background-color: #000;
+    border-bottom: 0.1em solid lighten(#252525, 5%);
+    padding: 0 1em;
+    height: 3.25em;
+    @include clearfix();
+}
+
+.header__logo {
+    font: 1.75em/1.75 'Lobster', Sans-serif;
+    display: inline-block;
+    color: lighten(#c69111, 35%);
+    @include transition(.2s color linear);
+    @include user-select(none);
+
+    &:after {
+        font: .55em/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+        content: 'Front-End Developer';
+        color: #fff;
+        display: inline-block;
+        border-left: .0625em solid #c69111;
+        margin-left: .9em;
+        margin-top: -0.15em;
+        padding-left: .65em;
+        vertical-align: middle;
+    }
+
+    &:hover,
+    &:focus {
+        color: #fff;
+    }
+
+    &:focus {
+        @include tab-focus();
+    }
+}
+
 .main__navigation {
     float: right;
 }
 
-.header__section {
-    background-color: #000;
-    padding: 0 1em;
-    @include clearfix();
-}
-
 .menu__list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+    @include list-reset();
     @include clearfix();
 
     > li {
@@ -44,20 +82,29 @@ a {
 
         > a {
             display: block;
-            padding: .75em 1em;
+            padding: 1em;
             text-transform: uppercase;
-            font-size: .9em;
+            font-size: 1em;
+            font-weight: bold;
+            @include user-select(none);
+            @include transition(.1s box-shadow linear, .15s color linear);
 
             &:hover,
-            &focus {
-                background-color: lighten(#000, 10%);
-                box-shadow: inset 0 -.1em 0 0 #c42583;
+            &:focus {
+                color: lighten(#c69111, 35%);
+                box-shadow: inset 0 -0.2em 0 0 #c69111;
+            }
+
+            &:focus {
+                @include tab-focus();
+            }
+
+            [class*="fa-"] {
+                margin-right: 0.5em;
             }
         }
     }
 }
-
-
 
 @media screen and (min-width: 48em) {}
 

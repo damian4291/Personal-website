@@ -2,15 +2,14 @@
   "name": "sajt",
   "private": true,
   "dependencies": {
-    "bootstrap-sass": "~3.3.5",
+    "font-awesome": "~4.5.0",
     "modernizr": "~2.8.1"
   },
   "overrides": {
-    "bootstrap-sass": {
+    "font-awesome": {
       "main": [
-        "assets/stylesheets/_bootstrap.scss",
-        "assets/fonts/bootstrap/*",
-        "assets/javascripts/bootstrap.js"
+        "scss/font-awesome.scss",
+        "fonts/*"
       ]
     }
   },
