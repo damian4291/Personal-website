@@ -35,29 +35,24 @@ a {
 .header__section {
     background-color: #000;
     border-bottom: 0.1em solid lighten(#252525, 5%);
-    padding: 0 1em;
     height: 3.25em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     @include clearfix();
 }
 
+.main__navigation {
+    background-color: lighten(#252525, 8%);
+    width: 100%
+}
+
 .header__logo {
-    font: 1.75em/1.75 'Lobster', Sans-serif;
+    font: 1.75em/1.88 'Lobster', Sans-serif;
     display: inline-block;
     color: lighten(#c69111, 35%);
     @include transition(.2s color linear);
     @include user-select(none);
-
-    &:after {
-        font: .55em/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
-        content: 'Front-End Developer';
-        color: #fff;
-        display: inline-block;
-        border-left: .0625em solid #c69111;
-        margin-left: .9em;
-        margin-top: -0.15em;
-        padding-left: .65em;
-        vertical-align: middle;
-    }
 
     &:hover,
     &:focus {
@@ -69,20 +64,22 @@ a {
     }
 }
 
-.main__navigation {
-    float: right;
-}
-
 .menu__list {
-    @include list-reset();
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 19.2em;
     @include clearfix();
 
     > li {
         float: left;
+        border-right: 0.0625em solid #c69111;
+        margin-top: .4em;
+        margin-bottom: .4em;
 
         > a {
             display: block;
-            padding: 1em;
+            padding: 0.2em 1em;
             text-transform: uppercase;
             font-size: 1em;
             font-weight: bold;
@@ -92,7 +89,6 @@ a {
             &:hover,
             &:focus {
                 color: lighten(#c69111, 35%);
-                box-shadow: inset 0 -0.2em 0 0 #c69111;
             }
 
             &:focus {
@@ -100,13 +96,64 @@ a {
             }
 
             [class*="fa-"] {
-                margin-right: 0.5em;
+                display: none;
             }
+        }
+
+        &:last-child {
+            border-right: 0;
         }
     }
 }
 
-@media screen and (min-width: 48em) {}
+@media screen and (min-width: 48em) {
+
+    .header__section {
+        padding-left: 1em;
+        padding-right: 1em;
+        display: block;
+    }
+
+    .main__navigation {
+        width: auto;
+        background-color: transparent;
+        float: right;
+    }
+
+    .header__logo {
+        &:after {
+            font: .55em/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            content: 'Front-End Developer';
+            color: #fff;
+            display: inline-block;
+            border-left: .0625em solid #c69111;
+            margin-left: .9em;
+            margin-top: -0.15em;
+            padding-left: .65em;
+            vertical-align: middle;
+        }
+    }
+
+    .menu__list {
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+        > li {
+            border-right: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            a {
+                padding-top: 1em;
+                padding-bottom: 1em;
+
+                &:hover,
+                &:focus {
+                    box-shadow: inset 0 -0.2em 0 0 #c69111;
+                }
+            }
+        }
+    }
+}
 
 @media screen and (min-width: 62em) {}
 
