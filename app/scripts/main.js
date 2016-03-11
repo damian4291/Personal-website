@@ -119,9 +119,9 @@
             }
         });
 
-        // Close dropdown by clicking outside of element or by pressing ESC key
-        $(document).on('click keyup',function(e) {
-            if ( $('.menu__item').hasClass('expanded') && ( !$(e.target).is('.menu__item *') || e.keyCode == 27 ) ) {
+        // Close dropdown by clicking outside of element
+        $(document).on('click',function(e) {
+            if ( $('.menu__item').hasClass('expanded') && !$(e.target).is('.menu__item *') ) {
                 $('.menu__item').removeClass('expanded');
             }
         });

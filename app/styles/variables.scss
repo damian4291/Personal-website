@@ -1,0 +1,79 @@
+$global-text-color: #fff;
+$global-link-color: #fff;
+$global-link-color-hover: darken($global-link-color, 15%);
+
+$header-color: #181620;
+
+// Logo
+$logo-color: #46ede8;
+$logo-color-hover: #fff;
+
+// Logo description
+$logo-description: 'Front-End Developer';
+$logo-description-color: #fff;
+$logo-description-separator-color: #46ede8;
+
+// Main navigation
+$main-navigation-color: transparent;
+$mobile-main-navigation-color: lighten(#1b1a27, 4.5%);
+$mobile-menu-list-separator-color: #46ede8;
+
+// Menu list
+$menu-list-background-active: darken(#181620, 2.5%);
+
+$menu-list-link-color: #fff;
+$menu-list-link-color-hover: #46ede8;
+$menu-list-link-color-active: #fff;
+
+$menu-list-link-icon-color: #46ede8;
+$menu-list-link-icon-color-hover: #fff;
+$menu-list-link-icon-color-active: #46ede8;
+
+$menu-list-link-border-bottom-hover: #46ede8;
+
+// Mobile menu list
+$mobile-menu-list-link-color: #fff;
+$mobile-menu-list-link-color-hover: #46ede8;
+$mobile-menu-list-link-color-active: #46ede8;
+
+$mobile-menu-list-link-icon-color: #46ede8;
+$mobile-menu-list-link-icon-color-hover: #fff;
+$mobile-menu-list-link-icon-color-active: #fff;
+
+// dropdown-menu colors
+$dropdown-background: darken(#181620, 2.5%);
+
+$dropdown-link-color: #B3B3B3;
+$dropdown-link-color-hover: #46ede8;
+
+$dropdown-link-background: transparent;
+$dropdown-link-background-hover: lighten(#181620, .15%);
+
+$dropdown-link-icon-color: darken(#fff, 45%);
+$dropdown-link-icon-color-hover: #fff;
+
+// Mobile dropdown-menu colors
+$mobile-dropdown-background: #fff;
+
+$mobile-dropdown-link-color: lighten(#000, 28%);
+$mobile-dropdown-link-color-hover: lighten(#000, 26%);
+
+$mobile-dropdown-link-background: darken(#fff, 11%);
+$mobile-dropdown-link-background-hover: darken(#fff, 15%);
+
+$mobile-dropdown-link-icon-color: darken(#fff, 45%);
+$mobile-dropdown-link-icon-color-hover: darken(#fff, 55%);
+
+// Sub dropdown-menu colors
+$sub-dropdown-link-color: darken(#B3B3B3, 27%);
+$sub-dropdown-link-color-hover: #46ede8;
+
+$sub-dropdown-link-background: transparent;
+$sub-dropdown-link-background-hover: lighten(#181620, .15%);
+
+// Mobile sub dropdown-menu colors
+$mobile-sub-dropdown-link-color: desaturate(lighten(#1e1c2b, 25%), 13%);
+$mobile-sub-dropdown-link-color-hover: desaturate(lighten(#1e1c2b, 22%), 13%);
+
+$mobile-sub-dropdown-link-background: desaturate(lighten(#1e1c2b, 67%), 16%);
+$mobile-sub-dropdown-link-background-hover: desaturate(lighten(#1e1c2b, 63.5%), 13%)

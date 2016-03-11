@@ -16,17 +16,17 @@
 body {
     background-color: #1e1c2b;
     font: 16px/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
-    color: #fff;
+    color: $global-text-color;
     margin: 0;
 }
 
 a {
-    color: #fff;
+    color: $global-link-color;
     text-decoration: none;
 
     &:hover,
     &:focus {
-        color: darken(#fff, 15%);
+        color: $global-link-color-hover;
     }
 }
 
@@ -50,13 +50,13 @@ a {
 }
 
 .header__section {
-    background-color: #181620;
+    background-color: $header-color;
     height: 3.25em;
     @include clearfix();
 }
 
 .main__navigation {
-    background-color: lighten(#1b1a27, 4.5%);
+    background-color: $mobile-main-navigation-color;
     width: 100%
 }
 
@@ -64,13 +64,13 @@ a {
     font: 1.75em/1.88 'Lobster', Sans-serif;
     display: flex;
     justify-content: center;
-    color: lighten(#43ebe7, 5%);
+    color: $logo-color;
     @include transition(.2s color linear);
     @include user-select(none);
 
     &:hover,
     &:focus {
-        color: #fff;
+        color: $logo-color-hover;
     }
 
     &:focus {
@@ -88,7 +88,7 @@ a {
 
     > li {
         float: left;
-        border-right: .0625em solid #46ede8;
+        border-right: .0625em solid $mobile-menu-list-separator-color;
         margin-top: .4em;
         margin-bottom: .4em;
 
@@ -96,6 +96,7 @@ a {
             display: block;
             padding: .2em .75em;
             text-transform: uppercase;
+            color: $mobile-menu-list-link-color;
             font-size: 1em;
             font-weight: bold;
             position: relative;
@@ -104,7 +105,7 @@ a {
             @include transition(.1s box-shadow linear, .15s color linear, background-color .2s linear);
 
             [class*="fa-"] {
-                color: lighten(#46ede8, 2%);
+                color: $mobile-menu-list-link-icon-color;
                 margin-right: 0.35em;
                 display: none;
                 @include transition(.15s color linear);
@@ -128,9 +129,9 @@ a {
             }
 
             &:hover {
-                color: lighten(#46ede8, 2%);
+                color: $mobile-menu-list-link-color-hover;
 
-                [class*="fa-"] { color: #fff }
+                [class*="fa-"] { color: $mobile-menu-list-link-icon-color-hover }
             }
 
             &:focus { @include tab-focus() }
@@ -139,11 +140,11 @@ a {
         &.expanded {
             > a {
                 @include transition(.15s color linear, background-color .2s linear);
-                color: lighten(#46ede8, 2%);
+                color: $mobile-menu-list-link-color-active;
                 &:hover { box-shadow: none }
 
                 [class*="fa-"] {
-                    color: #fff;
+                    color: $mobile-menu-list-link-icon-color-active;
                 }
 
                 .dropdown--icon {
@@ -164,7 +165,7 @@ a {
 .dropdown__menu {
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: $mobile-dropdown-background;
     list-style: none;
     padding: .325em;
     margin-top: .375em;
@@ -174,8 +175,8 @@ a {
     > li {
         margin-bottom: .325em;
         > a {
-            background-color: darken(#fff, 11%);
-            color: lighten(#000, 28%);
+            background-color: $mobile-dropdown-link-background;
+            color: $mobile-dropdown-link-color;
             position: relative;
             overflow: hidden;
             display: block;
@@ -183,10 +184,11 @@ a {
             @include transition(color .25s linear, background-color 0.15s linear);
 
             &:hover {
-                background-color: darken(#fff, 15%);
+                color: $mobile-dropdown-link-color-hover;
+                background-color: $mobile-dropdown-link-background-hover;
 
                 .dropdown--icon {
-                    color: darken(#fff, 55%);
+                    color: $mobile-dropdown-link-icon-color-hover;
                 }
             }
 
@@ -196,7 +198,7 @@ a {
         &:last-child { margin-bottom: 0 }
 
         .dropdown--icon {
-            color: darken(#fff, 45%);
+            color: $mobile-dropdown-link-icon-color;
             font-size: .75em;
             margin-top: 0.4em;
             float: right;
@@ -224,8 +226,8 @@ a {
         margin-top: .325em;
 
         > a {
-            background-color: desaturate(lighten(#1e1c2b, 67%), 16%);
-            color: desaturate(lighten(#1e1c2b, 25%), 13%);
+            background-color: $mobile-sub-dropdown-link-background;
+            color: $mobile-sub-dropdown-link-color;
             font-size: 0.9em;
             position: relative;
             overflow: hidden;
@@ -235,8 +237,8 @@ a {
 
 
             &:hover {
-                background-color: desaturate(lighten(#1e1c2b, 63.5%), 13%);
-                color: desaturate(lighten(#1e1c2b, 22%), 13%);
+                background-color: $mobile-sub-dropdown-link-background-hover;
+                color: $mobile-sub-dropdown-link-color-hover;
             }
 
             &:focus { @include tab-focus() }
@@ -249,7 +251,7 @@ a {
 }
 
 @media screen and (min-width: 48em) {
-    .container { max-width: 48em }
+    .container { max-width: 46em }
 
     .header__section {
         padding-left: 1em;
@@ -258,7 +260,7 @@ a {
 
     .main__navigation {
         width: auto;
-        background-color: transparent;
+        background-color: $main-navigation-color;
         float: right;
     }
 
@@ -266,10 +268,10 @@ a {
         display: inline-block;
         &:after {
             font: .55em/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
-            content: 'Front-End Developer';
-            color: #fff;
+            content: $logo-description;
+            color: $logo-description-color;
             display: inline-block;
-            border-left: .0625em solid #46ede8;
+            border-left: .0625em solid $logo-description-separator-color;
             margin-left: .9em;
             margin-top: -.15em;
             padding-left: .65em;
@@ -288,29 +290,36 @@ a {
             margin-top: 0;
             margin-bottom: 0;
             > a {
+                color: $menu-list-link-color;
                 padding: 1em;
 
-                &:hover {
-                    box-shadow: inset 0 -0.2em 0 0 #46ede8;
-                }
-
                 [class*="fa-"] {
+                    color: $menu-list-link-icon-color;
                     display: inline-block;
 
                     &.small {
                         margin-top: -.155em;
                     }
                 }
+
+                &:hover {
+                    color: $menu-list-link-color-hover;
+                    box-shadow: inset 0 -0.2em 0 0 $menu-list-link-border-bottom-hover;
+
+                    [class*="fa-"] {
+                        color: $menu-list-link-icon-color-hover;
+                    }
+                }
             }
 
             &.expanded {
-                background-color: darken(#181620, 2.5%);
+                background-color: $menu-list-background-active;
 
                 > a {
-                    color: #fff;
+                    color: $menu-list-link-color-active;
 
                     [class*="fa-"] {
-                        color: lighten(#46ede8, 2%);
+                        color: $menu-list-link-icon-color-active;
                     }
                 }
 
@@ -320,7 +329,7 @@ a {
     }
 
     .dropdown__menu {
-        background-color: darken(#181620, 2.5%);
+        background-color: $dropdown-background;
         border-bottom-left-radius: 0.3em;
         border-bottom-right-radius: 0.3em;
         min-width: 12em;
@@ -335,18 +344,22 @@ a {
         > li {
             margin-bottom: 0;
             > a {
-                background-color: transparent;
+                background-color: $dropdown-link-background;
                 font-size: 0.85em;
                 padding: 0.5em 0.75em;
-                color: #B3B3B3;
+                color: $dropdown-link-color;
 
                 &:hover {
-                    color: #46ede8;
-                    background-color: lighten(#181620, .15%);
+                    color: $dropdown-link-color-hover;
+                    background-color: $dropdown-link-background-hover;
 
                     .dropdown--icon {
-                        color: #fff;
+                        color: $dropdown-link-icon-color-hover;
                     }
+                }
+
+                .dropdown--icon {
+                    color: $dropdown-link-icon-color;
                 }
             }
         }
@@ -359,14 +372,14 @@ a {
             margin-top: 0;
 
             > a {
-                background-color: transparent;
-                color: darken(#B3B3B3, 27%);
+                background-color: $sub-dropdown-link-background;
+                color: $sub-dropdown-link-color;
                 font-size: 0.85em;
                 padding-left: 1.25em;
 
                 &:hover {
-                    color: #46ede8;
-                    background-color: lighten(#181620, .15%);
+                    color: $sub-dropdown-link-color-hover;
+                    background-color: $sub-dropdown-link-background-hover;
                 }
             }
         }
@@ -381,7 +394,11 @@ a {
     100% { opacity: 0; transform: scale(2.5) }
 }
 
-@media screen and (min-width: 62em) {}
+@media screen and (min-width: 62em) {
+    .container {
+        max-width: 60em;
+    }
+}
 
 @media screen and (min-width: 75em) {}
 
