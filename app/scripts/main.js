@@ -1,6 +1,13 @@
 (function($, window, document) {
 
-    $(function(){
+    var globals = {
+        mobile:     Modernizr.mq('(max-width: 47.9375em)'),
+        tablet:     Modernizr.mq('(min-width: 48em) and (max-width: 61.9375em)'),
+        minTablet:  Modernizr.mq('(min-width: 48em)'),
+        dekstop:    Modernizr.mq('(min-width: 62em)')
+    }
+
+    $(function() {
         clickEffect('.click__effect a', 600);
         menuDropdownToggle();
     });
@@ -69,10 +76,12 @@
             }
         });
 
-        // Close dropdown by clicking outside of element
-        $(document).click(function(e) {
-            if( !$(e.target).is('.menu__item *') ) {
-                $('.menu__item').removeClass('expanded');
+        // Close dropdown by clicking outside of element or by pressing ESC key
+        $(document).on('click keyup',function(e) {
+            if(globals.minTablet) {
+                if( $('.menu__item').hasClass('expanded') && ( !$(e.target).is('.menu__item *') || e.keyCode == 27 ) ) {
+                    $('.menu__item').removeClass('expanded');
+                }
             }
         });
     }

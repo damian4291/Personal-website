@@ -1,10 +1,8 @@
-// bower:scss
-@import "bower_components/font-awesome/scss/font-awesome.scss";
-// endbower
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin-ext');
-@import 'mixins';
-@import 'variables';
+@import "reset";
+@import "mixins";
+@import "variables";
 
 * {
     @include box-sizing(border-box);
@@ -140,8 +138,12 @@ a {
         &.expanded {
             > a {
                 @include transition(.15s color linear, background-color .2s linear);
-                background-color: darken(#181620, 2.5%);
+                color: lighten(#46ede8, 2%);
                 &:hover { box-shadow: none }
+
+                [class*="fa-"] {
+                    color: #fff;
+                }
 
                 .dropdown--icon {
                     transform: rotate(90deg);
@@ -162,25 +164,40 @@ a {
     display: none;
     position: absolute;
     background-color: #fff;
-    @include list-reset();
+    list-style: none;
+    padding: .325em;
     margin-top: .375em;
     width: 100%;
     left: 0;
 
     > li {
-
+        margin-bottom: .325em;
         > a {
+            background-color: darken(#fff, 11%);
             color: #1e1c2b;
             position: relative;
             overflow: hidden;
+            display: block;
+            padding: 0.35em .5em;
+            @include transition(color .25s linear, background-color 0.15s linear);
+
+            &:hover {
+                background-color: darken(#fff, 15%);
+            }
+
+            &:focus { @include tab-focus() }
         }
+
+        &:last-child { margin-bottom: 0 }
     }
 }
 
+@media screen and (max-width: 47.9375em) {
+    .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
+}
+
 @media screen and (min-width: 48em) {
-    .container {
-        max-width: 48em;
-    }
+    .container { max-width: 48em }
 
     .header__section {
         padding-left: 1em;
@@ -233,6 +250,20 @@ a {
                     }
                 }
             }
+
+            &.expanded {
+                background-color: darken(#181620, 2.5%);
+
+                > a {
+                    color: #fff;
+
+                    [class*="fa-"] {
+                        color: lighten(#46ede8, 2%);
+                    }
+                }
+
+                .dropdown__menu { display: block }
+            }
         }
     }
 
@@ -241,8 +272,7 @@ a {
         border-bottom-left-radius: 0.3em;
         border-bottom-right-radius: 0.3em;
         min-width: 12em;
-        padding-top: .3em;
-        padding-bottom: .3em;
+        padding: .3em 0;
         margin-top: 0;
 
         &.right {
@@ -251,13 +281,12 @@ a {
         }
 
         > li {
-
+            margin-bottom: 0;
             > a {
-                display: block;
+                background-color: transparent;
                 font-size: 0.85em;
                 padding: 0.5em 0.75em;
                 color: #B3B3B3;
-                @include transition(color .25s linear, background-color 0.15s linear);
 
                 &:hover {
                     color: #46ede8;
@@ -280,3 +309,7 @@ a {
 @media screen and (min-width: 62em) {}
 
 @media screen and (min-width: 75em) {}
+
+// bower:scss
+@import "bower_components/font-awesome/scss/font-awesome.scss";
+// endbower
