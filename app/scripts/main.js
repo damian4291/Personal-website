@@ -1,10 +1,10 @@
 (function($, window, document) {
 
     var globals = {
-        mobile:     Modernizr.mq('(max-width: 47.9375em)'),
-        tablet:     Modernizr.mq('(min-width: 48em) and (max-width: 61.9375em)'),
-        minTablet:  Modernizr.mq('(min-width: 48em)'),
-        dekstop:    Modernizr.mq('(min-width: 62em)')
+        mobile:     Modernizr.mq('(max-width: 47.9375em)'), /* max 767px */
+        tablet:     Modernizr.mq('(min-width: 48em) and (max-width: 61.9375em)'), /*  min 768px & max 991px */
+        minTablet:  Modernizr.mq('(min-width: 48em)'), /* min 768px */
+        dekstop:    Modernizr.mq('(min-width: 62em)') /* min 992px */
     }
 
     $(function() {
@@ -60,28 +60,69 @@
         });
     }
 
-    // Main navigation dropdown toggle
+    // Class toggler for navigation
+    function toggleElem(trigger, element, listElem, multiple) {
+        // On click toggle class for list element
+        trigger.click(function(e) {
+            e.preventDefault();
+            element.toggleClass('expanded');
+
+            if ( element.hasClass('expanded') ) {
+                trigger.attr('aria-expanded', true);
+            } else {
+                trigger.attr('aria-expanded', false);
+            }
+
+            // Prevent toggling more than one dropdown
+            if ( multiple === false ) {
+                $(listElem).not(element).removeClass('expanded');
+            }
+        });
+    }
+
+    // Main navigation construction
     function menuDropdownToggle() {
-        $('.menu__item').children('a').click(function(e) {
+
+        $('.menu__item').each(function() {
             var elem = $(this),
-                listElem = elem.parent();
+                elemLink = elem.children('a')
 
-            // If element has child list then toggle class.
-            if ( listElem.children('ul').length > 0) {
-                e.preventDefault();
-                listElem.toggleClass('expanded');
+            // Check if element has dropdown menu
+            if ( elem.children('.dropdown__menu').length ) {
 
-                // Prevent open more than one dropdown.
-                $('.menu__item').not(listElem).removeClass('expanded');
+                // Append icon to the end of list element if child dropdown exists and apply ARIA tags
+                elemLink
+                    .append('<i class="fa fa-chevron-right dropdown--icon right small" />')
+                    .attr({
+                        'role': 'button',
+                        'aria-haspopup': true,
+                        'aria-expanded': false
+                    });
+
+                // Create toggler for first level dropdown.
+                toggleElem(elemLink, elem, '.menu__item', false);
+
+                var dropdownElem = elem.find('.sub--menu__item');
+                dropdownElem.each(function(e) {
+                    var dropElem = $(this),
+                        dropLink = dropElem.children('a');
+
+                    // Check if element has dropdown menu
+                    if ( dropElem.children('.sub--dropdown__menu').length ) {
+
+                        dropLink.append('<i class="fa fa-chevron-right dropdown--icon right small" />');
+
+                        // Create toggler for first level dropdown.
+                        toggleElem(dropLink, dropElem, '.sub--menu__item', true);
+                    }
+                });
             }
         });
 
         // Close dropdown by clicking outside of element or by pressing ESC key
         $(document).on('click keyup',function(e) {
-            if(globals.minTablet) {
-                if( $('.menu__item').hasClass('expanded') && ( !$(e.target).is('.menu__item *') || e.keyCode == 27 ) ) {
-                    $('.menu__item').removeClass('expanded');
-                }
+            if ( $('.menu__item').hasClass('expanded') && ( !$(e.target).is('.menu__item *') || e.keyCode == 27 ) ) {
+                $('.menu__item').removeClass('expanded');
             }
         });
     }

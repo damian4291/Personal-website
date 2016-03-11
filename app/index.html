@@ -26,27 +26,50 @@
         <header class="header__section">
             <div class="container">
                 <a class="header__logo" href="#">Zawadziński</a>
-                <nav class="main__navigation">
+                <nav class="main__navigation" role="navigation">
                     <ul class="menu__list click__effect">
                         <li class="menu__item">
                             <a href="#">O mnie</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#">Realizacje<i class="fa fa-chevron-right dropdown--icon right small"></i></a>
+                            <a href="#">Realizacje</a>
                             <ul class="dropdown__menu right">
-                                <li><a href="#">Sub link #1</a></li>
-                                <li><a href="#">Sub link #2</a></li>
-                                <li><a href="#">Sub link #3</a></li>
-                                <li><a href="#">Sub link #4</a></li>
+                                <li class="sub--menu__item"><a href="#">Dropdown link #1</a></li>
+                                <li class="sub--menu__item">
+                                    <a href="#">Sub link #2</a>
+                                    <ul class="sub--dropdown__menu">
+                                        <li><a href="#">Sub Drop down #1</a></li>
+                                        <li><a href="#">Sub Drop down #2</a></li>
+                                        <li><a href="#">Sub Drop down #3</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub--menu__item"><a href="#">Dropdown link #3</a></li>
+                                <li class="sub--menu__item">
+                                    <a href="#">Dropdown link #4</a>
+                                </li>
                             </ul>
                         </li>
-                        <li class="menu__item"><a href="#">Kontakt</a></li>
+                        <li class="menu__item">
+                            <a href="#">Kontakt</a>
+                            <ul class="dropdown__menu right">
+                                <li class="sub--menu__item"><a href="#">Dropdown link #1</a></li>
+                                <li class="sub--menu__item">
+                                    <a href="#">Sub link #2</a>
+                                    <ul class="sub--dropdown__menu">
+                                        <li><a href="#">Sub Drop down #1</a></li>
+                                        <li><a href="#">Sub Drop down #2</a></li>
+                                        <li><a href="#">Sub Drop down #3</a></li>
+                                    </ul>
+                                </li>
+                                <li class="sub--menu__item"><a href="#">Dropdown link #3</a></li>
+                                <li class="sub--menu__item"><a href="#">Dropdown link #4</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
         </header>
         <main class="main__section">
-
         </main>
         <footer class="footer__section"></footer>
 

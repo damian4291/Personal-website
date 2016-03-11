@@ -123,7 +123,8 @@ a {
             }
 
             .dropdown--icon {
-                @include transition(transform .15s linear);
+                @include transition(transform .15s linear, color .15s linear);
+
             }
 
             &:hover {
@@ -174,7 +175,7 @@ a {
         margin-bottom: .325em;
         > a {
             background-color: darken(#fff, 11%);
-            color: #1e1c2b;
+            color: lighten(#000, 28%);
             position: relative;
             overflow: hidden;
             display: block;
@@ -183,12 +184,63 @@ a {
 
             &:hover {
                 background-color: darken(#fff, 15%);
+
+                .dropdown--icon {
+                    color: darken(#fff, 55%);
+                }
             }
 
             &:focus { @include tab-focus() }
         }
 
         &:last-child { margin-bottom: 0 }
+
+        .dropdown--icon {
+            color: darken(#fff, 45%);
+            font-size: .75em;
+            margin-top: 0.4em;
+            float: right;
+            @include transition(transform .15s linear, color .15s linear);
+        }
+
+        &.expanded {
+
+            .sub--dropdown__menu {
+                display: block;
+            }
+
+            .dropdown--icon {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
+
+.sub--dropdown__menu {
+    @include list-reset();
+    display: none;
+
+    > li {
+        margin-top: .325em;
+
+        > a {
+            background-color: desaturate(lighten(#1e1c2b, 67%), 16%);
+            color: desaturate(lighten(#1e1c2b, 25%), 13%);
+            font-size: 0.9em;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            padding: .4em .5em .4em 1em;
+            @include transition(color .25s linear, background-color 0.15s linear);
+
+
+            &:hover {
+                background-color: desaturate(lighten(#1e1c2b, 63.5%), 13%);
+                color: desaturate(lighten(#1e1c2b, 22%), 13%);
+            }
+
+            &:focus { @include tab-focus() }
+        }
     }
 }
 
@@ -291,10 +343,33 @@ a {
                 &:hover {
                     color: #46ede8;
                     background-color: lighten(#181620, .15%);
+
+                    .dropdown--icon {
+                        color: #fff;
+                    }
                 }
             }
         }
+    }
 
+
+    .sub--dropdown__menu {
+
+        > li {
+            margin-top: 0;
+
+            > a {
+                background-color: transparent;
+                color: darken(#B3B3B3, 27%);
+                font-size: 0.85em;
+                padding-left: 1.25em;
+
+                &:hover {
+                    color: #46ede8;
+                    background-color: lighten(#181620, .15%);
+                }
+            }
+        }
     }
 }
 
