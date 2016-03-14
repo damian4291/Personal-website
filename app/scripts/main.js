@@ -10,7 +10,7 @@
     $(function() {
         clickEffect('.click__effect a', 600, false);
         menuDropdownToggle();
-        scrollDown('.arrow_scroll--down', 650);
+        scrollToSection('.scroll--link', 650);
     });
 
     // Material UI click style effect
@@ -145,21 +145,25 @@
         });
     }
 
-    // Smooth scroll down from welcome section
-    function scrollDown(element, delay) {
+    // Smooth scroll to section via href target
+    function scrollToSection(element, delay) {
         $(element).click(function(e) {
             var elem = $(this),
-                mainOffset = $('.main__container').find('.section__container:eq(1)').offset().top,
-                headerHeight = $('.header__container').outerHeight();
+                target = $(this).attr('href'),
+                headerHeight = $('.header__container').outerHeight(),
+                body = $('body', 'html');
 
             e.preventDefault();
 
             // animated scroll to the second content section with header offset
-            $('body', 'html').animate({
-                scrollTop: mainOffset - headerHeight
+            body.animate({
+                scrollTop: $(target).offset().top - headerHeight
             }, delay);
 
-            clickEffect(elem, 600, true);
+            // Stop the animation if the user scrolls manually (only during the animation)
+            body.on('scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove', function() {
+                $(this).stop()
+            });
         });
     }
 }(window.jQuery, window, document));

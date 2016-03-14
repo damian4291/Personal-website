@@ -126,32 +126,19 @@ textarea {
     @include clearfix();
 
     label {
-        float: left;
         color: darken(#a6a6a6, 20%);
-        display: inline-block;
-        text-align: right;
-        margin-right: .65em;
-        min-width: 3em;
+        display: block;
         padding-top: .56em;
         padding-bottom: .56em;
     }
-
-    .form__control {
-        float: left;
-    }
-
-    textarea {
-        min-height: 5em;
-    }
 }
 
-
-.form__group--input {
-    width: calc(100% - 3.65em);
+.form__control {
+    width: 100%;
 }
 
-.form__group--textarea {
-    height: 2.5em;
+.form_buttons {
+    text-align: right;
 }
 
 .header__container {
@@ -460,18 +447,26 @@ textarea {
 }
 
 .work__box {
-    background-color: #fff;
+    display: block;
     color: #555;
-    padding: 1em;
     border-radius: .25em;
-    box-shadow: 0 .25em 0 rgba(0, 0, 0, .05)
+    box-shadow: 0 .25em 0 rgba(0, 0, 0, .05);
+
+    img {
+        display: block;
+        border-radius: .25em .25em 0 0;
+    }
+
+    .work__content {
+        border-radius: 0 0 .25em .25em;
+        background-color: #fff;
+        padding: 1em;
+    }
 }
 
 @media screen and (max-width: 47.9375em) {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
-    .column {
-        margin-bottom: .8em;
-    }
+    .form__buttons button { display: block; width: 100% }
 }
 
 @media screen and (min-width: 48em) {
@@ -635,13 +630,39 @@ textarea {
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
         margin-top: 3.25em;
     }
+
+    .form__group {
+        label {
+            float: left;
+            text-align: right;
+            margin-right: 1em;
+            min-width: 3.5em;
+        }
+    }
+
+    .form__control {
+        float: left;
+    }
+
+    .form__control {
+        width: calc(100% - 4.5em);
+    }
+
+    .form__buttons {
+        text-align: right;
+    }
+
+    .form__column {
+        border-left: .0625em solid #d0d0d0;
+        padding-left: 1em;
+    }
 }
 
 @media screen and (min-width: 62em) {
 
-    .section__container  {
-        min-height: 35em;
-        height: calc(100vh - 3.25em);
+    #welcome__section,
+    #work__section  {
+        min-height: calc(100vh - 3.25em);
     }
 
     .arrow_scroll--down {
