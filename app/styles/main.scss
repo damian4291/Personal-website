@@ -39,6 +39,12 @@ img {
     height: auto;
 }
 
+textarea {
+    width: 100%;
+    display: block;
+    resize: vertical;
+}
+
 .sr-only {
     position: absolute;
     width: 1px;
@@ -74,6 +80,78 @@ img {
             }
         }
     }
+}
+
+
+.button {
+    color: darken(#a6a6a6, 8%);
+    font-size: 1em;
+    padding: .5em 1em;
+    background-color: transparent;
+    border: .0625em solid #a6a6a6;
+    border-radius: .25em;
+    user-select: none;
+    transition: background-color .15s linear, color .15s linear;
+
+    &:hover,
+    &:focus {
+        color: darken(#a6a6a6, 15%);
+        background-color: lighten(#a6a6a6, 25%);
+    }
+
+    &:focus {
+        @include tab-focus();
+        box-shadow: inset 0 .2em .2em .05em rgba(0, 0, 0, 0.15);
+    }
+}
+
+.button-block {
+    width: 100%;
+    display: block;
+}
+
+.form__control {
+    color: darken(#a6a6a6, 8%);
+    background-color: #fff;
+    border: .0625em solid #a6a6a6;
+    padding: .5em;
+
+    &:focus {
+        @include tab-focus();
+    }
+}
+
+.form__group {
+    margin-bottom: .65em;
+    @include clearfix();
+
+    label {
+        float: left;
+        color: darken(#a6a6a6, 20%);
+        display: inline-block;
+        text-align: right;
+        margin-right: .65em;
+        min-width: 3em;
+        padding-top: .56em;
+        padding-bottom: .56em;
+    }
+
+    .form__control {
+        float: left;
+    }
+
+    textarea {
+        min-height: 5em;
+    }
+}
+
+
+.form__group--input {
+    width: calc(100% - 3.65em);
+}
+
+.form__group--textarea {
+    height: 2.5em;
 }
 
 .header__container {
@@ -278,7 +356,7 @@ img {
     }
 }
 
-.page__heading {
+.section__heading {
     margin-top: 0;
     margin-bottom: .8em;
     span {
@@ -294,7 +372,6 @@ img {
     position: relative;
     @include clearfix();
 }
-
 
 #welcome__section {
     background: $welcome-section-background;
@@ -378,12 +455,18 @@ img {
     }
 }
 
-
-.box {
-    background-color: #eee;
-    padding: .5em;
-    border-radius: .25em;
+#work__section {
+    background: #eee;
 }
+
+.work__box {
+    background-color: #fff;
+    color: #555;
+    padding: 1em;
+    border-radius: .25em;
+    box-shadow: 0 .25em 0 rgba(0, 0, 0, .05)
+}
+
 @media screen and (max-width: 47.9375em) {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
     .column {
