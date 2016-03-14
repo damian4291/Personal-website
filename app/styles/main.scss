@@ -15,12 +15,17 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: $page-background-color;
     font: 16px/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
     color: $global-text-color;
     min-width: 20em;
     margin: 0;
+    height: 100%;
 }
 
 a {
@@ -94,13 +99,17 @@ textarea {
     transition: background-color .15s linear, color .15s linear;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:active {
         color: darken(#a6a6a6, 15%);
-        background-color: lighten(#a6a6a6, 25%);
+        background-color: lighten(#a6a6a6, 30%);
     }
 
     &:focus {
         @include tab-focus();
+    }
+
+    &:active {
         box-shadow: inset 0 .2em .2em .05em rgba(0, 0, 0, 0.15);
     }
 }
@@ -443,14 +452,15 @@ textarea {
 }
 
 #work__section {
-    background: #eee;
+    background: #f1f1f1;
+    border-bottom: .0625em solid darken(#f1f1f1, 3%);
 }
 
 .work__box {
     display: block;
     color: #555;
     border-radius: .25em;
-    box-shadow: 0 .25em 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 .2em .1em rgba(0, 0, 0, .05);
 
     img {
         display: block;
@@ -462,6 +472,11 @@ textarea {
         background-color: #fff;
         padding: 1em;
     }
+}
+
+#contact__section {
+    background-color: #fff;
+    box-shadow: 0 -.2em .5em rgba(0, 0, 0, .025);
 }
 
 @media screen and (max-width: 47.9375em) {
@@ -642,9 +657,6 @@ textarea {
 
     .form__control {
         float: left;
-    }
-
-    .form__control {
         width: calc(100% - 4.5em);
     }
 

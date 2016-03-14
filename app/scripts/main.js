@@ -4,7 +4,8 @@
         mobile:     Modernizr.mq('(max-width: 47.9375em)'), /* max 767px */
         tablet:     Modernizr.mq('(min-width: 48em) and (max-width: 61.9375em)'), /*  min 768px & max 991px */
         minTablet:  Modernizr.mq('(min-width: 48em)'), /* min 768px */
-        dekstop:    Modernizr.mq('(min-width: 62em)') /* min 992px */
+        dekstop:    Modernizr.mq('(min-width: 62em)'), /* min 992px */
+        isWebkit:   'WebkitAppearance' in document.documentElement.style
     }
 
     $(function() {
@@ -102,8 +103,8 @@
     function menuDropdownToggle() {
 
         $('.menu__item').each(function() {
-            var elem = $(this),
-                elemLink = elem.children('a')
+            var elem        = $(this),
+                elemLink    = elem.children('a')
 
             // Check if element has dropdown menu
             if ( elem.children('.dropdown__menu').length ) {
@@ -148,20 +149,38 @@
     // Smooth scroll to section via href target
     function scrollToSection(element, delay) {
         $(element).click(function(e) {
-            var elem = $(this),
-                target = $(this).attr('href'),
-                headerHeight = $('.header__container').outerHeight(),
-                body = $('body', 'html');
+            var elem            = $(this),
+                target          = $(this).attr('href'),
+                headerHeight    = $('.header__container').outerHeight(),
+                body            = (globals.isWebkit) ? $('body') : $('html');
 
             e.preventDefault();
 
-            // animated scroll to the second content section with header offset
-            body.animate({
-                scrollTop: $(target).offset().top - headerHeight
-            }, delay);
+            // Prevent double click which destroys animate scroll
+            if( elem.data('clicked') ) {
+                e.stopPropagation();
+            } else {
+                // trigger animation if window scroll top position isn't equal element offset top
+                if( $(window).scrollTop() + headerHeight != $(target).offset().top) {
+
+                    // animated scroll to the second content section with header offset
+                    body.stop(true, true).animate({
+                        scrollTop: $(target).offset().top - headerHeight
+                    }, delay);
+
+                }
+
+                // Mark to ignore next click
+                elem.data('clicked', true);
+
+                // Unmark after 1,5 second
+                window.setTimeout(function() {
+                    elem.removeData('clicked');
+                }, 1500)
+            }
 
             // Stop the animation if the user scrolls manually (only during the animation)
-            body.on('scroll mousedown wheel DOMMouseScroll mousewheel keyup touchmove', function() {
+            body.on('scroll wheel DOMMouseScroll mousewheel touchmove', function() {
                 $(this).stop()
             });
         });
