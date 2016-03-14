@@ -8,12 +8,13 @@
     }
 
     $(function() {
-        clickEffect('.click__effect a', 600);
+        clickEffect('.click__effect a', 600, false);
         menuDropdownToggle();
+        scrollDown('.arrow_scroll--down', 650);
     });
 
     // Material UI click style effect
-    function clickEffect(element, delay) {
+    function clickEffect(element, delay, centered) {
         var circle, d, x, y, removeElem;
 
         $(element).click(function(e) {
@@ -36,16 +37,33 @@
                 });
             }
 
-            // Define cursor click position
-            x = e.pageX - elem.offset().left - circle.width() / 2;
-            y = e.pageY - elem.offset().top - circle.height() / 2;
+            if (centered === true) {
+                // Set centered position
+                x = - (elem.outerWidth() / 2);
+                y = - (elem.outerHeight() / 2);
 
-            // Apply cursor clicked position to the element
-            circle.addClass('clicked--animate')
-            .css({
-                top: y + 'px',
-                left: x + 'px'
-            });
+                // Apply cursor position to the element
+                circle
+                    .addClass('clicked--animate')
+                    .css({
+                        marginLeft: x,
+                        marginTop: y,
+                        top: '50%',
+                        left: '50%'
+                    });
+            } else {
+                // Define cursor click position
+                x = e.pageX - elem.offset().left - circle.width() / 2;
+                y = e.pageY - elem.offset().top - circle.height() / 2;
+
+                // Apply cursor position to the element
+                circle
+                    .addClass('clicked--animate')
+                    .css({
+                        top: y,
+                        left: x
+                    });
+            }
 
             // Renew timeout for clickable link.
             clearTimeout(removeElem);
@@ -124,6 +142,24 @@
             if ( $('.menu__item').hasClass('expanded') && !$(e.target).is('.menu__item *') ) {
                 $('.menu__item').removeClass('expanded');
             }
+        });
+    }
+
+    // Smooth scroll down from welcome section
+    function scrollDown(element, delay) {
+        $(element).click(function(e) {
+            var elem = $(this),
+                mainOffset = $('.main__container').find('.section__container:eq(1)').offset().top,
+                headerHeight = $('.header__container').outerHeight();
+
+            e.preventDefault();
+
+            // animated scroll to the second content section with header offset
+            $('body', 'html').animate({
+                scrollTop: mainOffset - headerHeight
+            }, delay);
+
+            clickEffect(elem, 600, true);
         });
     }
 }(window.jQuery, window, document));

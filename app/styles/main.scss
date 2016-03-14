@@ -63,20 +63,16 @@ img {
 }
 
 .container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: .8em;
-    padding-right: .8em;
-    @include clearfix();
-}
+    .row {
+        > [class^="col-"] {
+            padding-bottom: 1em;
+        }
 
-.row {
-    margin-left: -.8em;
-    margin-right: -.8em;
-
-    > .column {
-        padding-left: .8em;
-        padding-right: .8em;
+        &:last-child {
+            > [class^="col-"]:last-child {
+                padding-bottom: 0;
+            }
+        }
     }
 }
 
@@ -293,6 +289,8 @@ img {
 }
 
 .section__container {
+    padding-top: 2em;
+    padding-bottom: 2em;
     position: relative;
     @include clearfix();
 }
@@ -309,8 +307,6 @@ img {
 
 .welcome__message {
     text-align: center;
-    margin-top: 2em;
-    margin-bottom: 3em;
 
     h2 {
         font: 3em 'Lobster', Sans-serif;
@@ -321,7 +317,9 @@ img {
 
     p {
         max-width: 32em;
-        margin: 0 1em;
+        margin: 0 auto;
+        padding-left: 1em;
+        padding-right: 1em;
     }
 }
 
@@ -330,9 +328,15 @@ img {
     font-size: 2em;
     bottom: 1.5em;
     left: 50%;
+    overflow: hidden;
     transform: translateX(-50%);
-    animation: bounce 2s infinite;
+    animation: bounce 2.5s infinite;
     transition: .2s color linear;
+    height: 1.5em;
+    width: 1.5em;
+    text-align: center;
+    border-radius: 50%;
+    display: none;
 
     &:hover {
         color: #46ede8;
@@ -374,6 +378,12 @@ img {
     }
 }
 
+
+.box {
+    background-color: #eee;
+    padding: .5em;
+    border-radius: .25em;
+}
 @media screen and (max-width: 47.9375em) {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
     .column {
@@ -383,7 +393,19 @@ img {
 
 @media screen and (min-width: 48em) {
 
-    .container { max-width: 46em }
+    .container {
+        .row {
+            > [class^="col-"] {
+                padding-bottom: 1em;
+            }
+
+            &:last-child {
+                > [class^="col-"] {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
 
     .header__container {
         height: 3.25em;
@@ -533,12 +555,14 @@ img {
 }
 
 @media screen and (min-width: 62em) {
-    .container {
-        max-width: 60em;
+
+    .section__container  {
+        min-height: 35em;
+        height: calc(100vh - 3.25em);
     }
 
-    #welcome__section {
-        height: calc(100vh - 3.25em);
+    .arrow_scroll--down {
+        display: block;
     }
 }
 
@@ -559,9 +583,11 @@ img {
 }
 
 @keyframes ripple {
-    100% { opacity: 0; transform: scale(2.5) }
+    100% {
+        opacity: 0;
+        transform: scale(2.5)
+    }
 }
-
 
 // Boostrap imports
 @import "bootstrap/grid";
