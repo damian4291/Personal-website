@@ -1,0 +1,5 @@
+.clearfix { @include clearfix }
+.pull-right { float: right !important }
+.pull-left { float: left !important }
+.hide { display: none !important }
+.show { display: block !important }

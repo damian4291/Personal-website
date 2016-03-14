@@ -3,17 +3,16 @@
 // endbower
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin-ext');
-@import "reset";
-@import "mixins";
 @import "variables";
+@import "bootstrap/imports";
 
 * {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
 }
 
 *:before,
 *:after {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
 }
 
 body {
@@ -326,7 +325,7 @@ img {
     }
 }
 
-.arrow_scroll__down {
+.arrow_scroll--down {
     position: absolute;
     font-size: 2em;
     bottom: 1.5em;
@@ -562,3 +561,9 @@ img {
 @keyframes ripple {
     100% { opacity: 0; transform: scale(2.5) }
 }
+
+
+// Boostrap imports
+@import "bootstrap/grid";
+@import "bootstrap/utilities";
+@import "bootstrap/responsive-utilities";

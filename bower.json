@@ -4,8 +4,7 @@
   "dependencies": {
     "font-awesome": "~4.5.0",
     "modernizr": "~2.8.1",
-    "jquery": "~2.2.1",
-    "neat": "^1.7.4"
+    "jquery": "~2.2.1"
   },
   "overrides": {
     "font-awesome": {
