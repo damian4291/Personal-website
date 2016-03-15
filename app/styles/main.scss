@@ -485,6 +485,7 @@ textarea {
     border-radius: .25em;
     transition: .15s all linear;
     box-shadow: 0 0 .2em .1em rgba(0, 0, 0, .05);
+    user-select: none;
 
     &:hover,
     &:focus {
@@ -522,11 +523,12 @@ textarea {
     opacity: 0;
     visibility: hidden;
     position: fixed;
-    right: 1em;
-    bottom: 2em;
+    right: 1.5em;
+    bottom: 2.5em;
     transition: all .2s linear;
 
     &.visible {
+        background-color: white;
         transform: translateY(1em);
         visibility: visible;
         opacity: 1;
@@ -744,6 +746,9 @@ textarea {
     .work__box {
         position: relative;
         overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateX(-1em);
         .work__content {
             position: absolute;
             bottom: .3em;
@@ -751,7 +756,7 @@ textarea {
             right: .3em;
             border-radius: 0;
             transform: translateY(100%);
-            transition: .25s transform linear;
+            transition: .15s transform linear;
         }
 
         &:hover,
@@ -759,6 +764,12 @@ textarea {
             .work__content {
                 transform: translateY(.3em);
             }
+        }
+
+        &.box__loaded {
+            transform: translateX(0);
+            visibility: visible;
+            opacity: 1;
         }
     }
 }

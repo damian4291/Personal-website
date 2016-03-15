@@ -8,15 +8,6 @@
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     }
 
-    // When DOM is ready...
-    $(function() {
-        clickEffect('.click__effect a, .button', 600, false);
-        menuDropdownToggle();
-        scrollToSection('.scroll--link', 650);
-        updateYear('.copyright__year');
-        backToTop('.top--scroller');
-    });
-
     // Material UI click style effect
     function clickEffect(element, delay, centered) {
         var circle, d, x, y, removeElem;
@@ -194,7 +185,7 @@
             var screenScroll = $(window).scrollTop(),
                 sectionHeight = $('#welcome__section').outerHeight();
 
-            if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight ) {
+            if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight / 2 ) {
                 $(element).addClass('visible');
 
             } else {
@@ -218,5 +209,21 @@
 
         $(element).text(ActualYear);
     }
+
+    var wow = new WOW({
+        boxClass: 'work__box',
+        animateClass: 'box__loaded',
+        offset: 125
+    });
+
+    // When DOM is ready...
+    $(function() {
+        clickEffect('.click__effect a, .button', 600, false);
+        menuDropdownToggle();
+        scrollToSection('.scroll--link', 650);
+        updateYear('.copyright__year');
+        backToTop('.top--scroller');
+        wow.init();
+    });
 
 }(window.jQuery, window, document));
