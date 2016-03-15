@@ -1,17 +1,20 @@
 (function($, window, document) {
 
     var globals = {
-        mobile:     Modernizr.mq('(max-width: 47.9375em)'), /* max 767px */
-        tablet:     Modernizr.mq('(min-width: 48em) and (max-width: 61.9375em)'), /*  min 768px & max 991px */
-        minTablet:  Modernizr.mq('(min-width: 48em)'), /* min 768px */
-        dekstop:    Modernizr.mq('(min-width: 62em)'), /* min 992px */
+        mobile:     '(max-width: 47.9375em)', /* max 767px */
+        tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
+        minTablet:  '(min-width: 48em)', /* min 768px */
+        desktop:    '(min-width: 62em)', /* min 992px */
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     }
 
+    // When DOM is ready...
     $(function() {
-        clickEffect('.click__effect a', 600, false);
+        clickEffect('.click__effect a, .button', 600, false);
         menuDropdownToggle();
         scrollToSection('.scroll--link', 650);
+        updateYear('.copyright__year');
+        backToTop('.top--scroller');
     });
 
     // Material UI click style effect
@@ -40,15 +43,15 @@
 
             if (centered === true) {
                 // Set centered position
-                x = - (elem.outerWidth() / 2);
-                y = - (elem.outerHeight() / 2);
+                x = elem.outerWidth() / 2;
+                y = elem.outerHeight() / 2;
 
                 // Apply cursor position to the element
                 circle
                     .addClass('clicked--animate')
                     .css({
-                        marginLeft: x,
-                        marginTop: y,
+                        marginLeft: - x,
+                        marginTop: - y,
                         top: '50%',
                         left: '50%'
                     });
@@ -101,7 +104,6 @@
 
     // Main navigation construction
     function menuDropdownToggle() {
-
         $('.menu__item').each(function() {
             var elem        = $(this),
                 elemLink    = elem.children('a')
@@ -157,9 +159,7 @@
             e.preventDefault();
 
             // Prevent double click which destroys animate scroll
-            if( elem.data('clicked') ) {
-                e.stopPropagation();
-            } else {
+            if( !elem.data('clicked') ) {
                 // trigger animation if window scroll top position isn't equal element offset top
                 if( $(window).scrollTop() + headerHeight != $(target).offset().top) {
 
@@ -181,8 +181,42 @@
 
             // Stop the animation if the user scrolls manually (only during the animation)
             body.on('scroll wheel DOMMouseScroll mousewheel touchmove', function() {
-                $(this).stop()
+                $(this).stop();
+                elem.removeData('clicked');
             });
         });
     }
+
+
+    function backToTop(element) {
+        // Toggle class for element if its not mobile device and scroll top of screen is in half of second section.
+        function fadeElem() {
+            var screenScroll = $(window).scrollTop(),
+                sectionHeight = $('#welcome__section').outerHeight();
+
+            if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight ) {
+                $(element).addClass('visible');
+
+            } else {
+                $(element).removeClass('visible');
+            }
+        }
+
+        // Initialize function
+        fadeElem();
+
+        // Update element on scroll
+        $(document).on('scroll', fadeElem);
+
+        // Check if resolution is not mobile
+        $(window).on('resize', fadeElem);
+    }
+
+    function updateYear(element) {
+        var fullDate = new Date(),
+            ActualYear = fullDate.getFullYear();
+
+        $(element).text(ActualYear);
+    }
+
 }(window.jQuery, window, document));

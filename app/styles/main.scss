@@ -38,7 +38,6 @@ a {
     }
 }
 
-
 img {
     width: 100%;
     height: auto;
@@ -73,30 +72,33 @@ textarea {
   }
 }
 
-.container {
-    .row {
-        > [class^="col-"] {
-            padding-bottom: 1em;
-        }
-
-        &:last-child {
-            > [class^="col-"]:last-child {
-                padding-bottom: 0;
-            }
-        }
-    }
-}
-
-
 .button {
     color: darken(#a6a6a6, 8%);
     font-size: 1em;
     padding: .5em 1em;
+    display: inline-block;
     background-color: transparent;
     border: .0625em solid #a6a6a6;
     border-radius: .25em;
     user-select: none;
-    transition: background-color .15s linear, color .15s linear;
+    transition: all .15s linear;
+    position: relative;
+    overflow: hidden;
+
+    i[class*="fa-"] {
+
+        &.left {
+            margin-right: .5em;
+        }
+
+        &.right {
+            margin-left: .5em;
+        }
+    }
+
+    .clicked {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
     &:hover,
     &:focus,
@@ -114,19 +116,32 @@ textarea {
     }
 }
 
+.button-transparent {
+
+    &:hover,
+    &:focus {
+        background: transparent
+    }
+}
+
 .button-block {
     width: 100%;
     display: block;
 }
 
 .form__control {
-    color: darken(#a6a6a6, 8%);
+    color: darken(#a6a6a6, 10%);
     background-color: #fff;
     border: .0625em solid #a6a6a6;
     padding: .5em;
+    transition: all .15s linear;
 
     &:focus {
-        @include tab-focus();
+        box-shadow: inset 0 0 .2em .1em rgba(0, 0, 0, 0.08);
+        color: darken(#a6a6a6, 20%);
+        outline: 0;
+        background-color: lighten(#a6a6a6, 31%);
+        border-color: darken(#a6a6a6, 5%);
     }
 }
 
@@ -454,15 +469,32 @@ textarea {
 #work__section {
     background: #f1f1f1;
     border-bottom: .0625em solid darken(#f1f1f1, 3%);
+
+    [class^="col-"] {
+        margin-bottom: 1em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .work__box {
     display: block;
-    color: #555;
+    color: #888;
     border-radius: .25em;
-    box-shadow: 0 .2em .1em rgba(0, 0, 0, .05);
+    transition: .15s all linear;
+    box-shadow: 0 0 .2em .1em rgba(0, 0, 0, .05);
+
+    &:hover,
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 .2em rgba(0, 0, 0, .08);
+        color: #555;
+    }
 
     img {
+        border: .35em solid #fff;
         display: block;
         border-radius: .25em .25em 0 0;
     }
@@ -479,26 +511,34 @@ textarea {
     box-shadow: 0 -.2em .5em rgba(0, 0, 0, .025);
 }
 
+.footer__container {
+    color: darken(#fff, 50%);
+    background-color: darken(#fff, 13%);
+    border-top: .0625em solid darken(#fff, 15%);
+    padding: 1em 0;
+}
+
+.top--scroller {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    right: 1em;
+    bottom: 2em;
+    transition: all .2s linear;
+
+    &.visible {
+        transform: translateY(1em);
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 @media screen and (max-width: 47.9375em) {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
     .form__buttons button { display: block; width: 100% }
 }
 
 @media screen and (min-width: 48em) {
-
-    .container {
-        .row {
-            > [class^="col-"] {
-                padding-bottom: 1em;
-            }
-
-            &:last-child {
-                > [class^="col-"] {
-                    padding-bottom: 0;
-                }
-            }
-        }
-    }
 
     .header__container {
         height: 3.25em;
@@ -664,9 +704,14 @@ textarea {
         text-align: right;
     }
 
-    .form__column {
-        border-left: .0625em solid #d0d0d0;
-        padding-left: 1em;
+    #work__section {
+
+        [class^="col-"] {
+
+            &:nth-last-child(2) {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
@@ -679,6 +724,42 @@ textarea {
 
     .arrow_scroll--down {
         display: block;
+    }
+
+    .form__column {
+        border-left: .0625em solid #d0d0d0;
+        padding-left: 1em;
+    }
+
+    #work__section {
+
+        [class^="col-"] {
+
+            &:nth-last-child(3) {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .work__box {
+        position: relative;
+        overflow: hidden;
+        .work__content {
+            position: absolute;
+            bottom: .3em;
+            left: .3em;
+            right: .3em;
+            border-radius: 0;
+            transform: translateY(100%);
+            transition: .25s transform linear;
+        }
+
+        &:hover,
+        &:focus {
+            .work__content {
+                transform: translateY(.3em);
+            }
+        }
     }
 }
 

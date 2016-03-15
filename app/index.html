@@ -27,7 +27,7 @@
         <script src="/bower_components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
     </head>
-    <body>
+    <body id="top">
         <header class="header__container">
             <div class="container">
                 <div class="row">
@@ -85,51 +85,49 @@
                         <span>Realizacje</span>
                     </h2>
                     <div class="row">
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
                             </a>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-4 col-md-4">
+                        <div class="col-sm-6 col-md-4">
                             <a href="#" class="work__box">
-                                <img src="http://placehold.it/300x150" alt="alt">
+                                <img src="http://placehold.it/300x200" alt="alt">
                                 <div class="work__content">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam unde dicta corporis laboriosam eos.
                                 </div>
@@ -144,10 +142,10 @@
                         <span>Kontakt</span>
                     </h2>
                     <div class="row">
-                        <div class="col-sm-5 info__column">
-                            asdad
+                        <div class="col-sm-12 col-md-5 info__column">
+                            <h3>Janusz Biznesu</h3>
                         </div>
-                        <div class="col-sm-7 form__column">
+                        <div class="col-sm 12 col-md-7 form__column">
                             <form class="contact__form" action="">
                                 <div class="form__group">
                                     <label for="firstname">Imię</label>
@@ -159,10 +157,10 @@
                                 </div>
                                 <div class="form__group">
                                     <label for="contentmessage">Treść</label>
-                                    <textarea id="contentmessage" class="form__control" name="contentmessage"  rows="6"></textarea>
+                                    <textarea id="contentmessage" class="form__control" name="contentmessage"  rows="6" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit..."></textarea>
                                 </div>
                                 <div class="form__buttons">
-                                    <button type="submit" class="button">Wyślij wiadomość</button>
+                                    <button type="submit" class="button">Wyślij wiadomość<i class="fa fa-angle-right right"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -171,8 +169,15 @@
             </section>
         </main>
         <footer class="footer__container">
-            &copy; 2016. Wszelkie prawa zastrzeżone. <a href="" class="button">test</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        &copy; <span class="copyright__year"></span>. Wszelkie prawa zastrzeżone.
+                    </div>
+                </div>
+            </div>
         </footer>
+        <a href="#top" class="scroll--link button button-transparent top--scroller"><i class="fa fa-arrow-up"></i></a>
 
         <!-- Google Analytics -->
         <script>
