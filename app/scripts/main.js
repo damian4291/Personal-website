@@ -94,7 +94,7 @@
     }
 
     // Main navigation construction
-    function menuDropdownToggle() {
+    function mainNav() {
         $('.menu__item').each(function() {
             var elem        = $(this),
                 elemLink    = elem.children('a')
@@ -137,6 +137,20 @@
                 $('.menu__item').removeClass('expanded');
             }
         });
+
+        function dropShadow() {
+            if( $(window).scrollTop() + $('.header__container').height() >= $('#work__section').offset().top ) {
+                $('.header__container').addClass('shadow');
+            } else {
+                $('.header__container').removeClass('shadow');
+            }
+        }
+
+        // Initialize
+        dropShadow();
+
+        // Update on scroll
+        $(window).on('scroll', dropShadow);
     }
 
     // Smooth scroll to section via href target
@@ -220,8 +234,6 @@
             var elem = $(this),
                 target = elem.attr('href');
 
-            $(target).addClass('modal-off');
-
             // Click element to trigger modal
             elem.click(function(e) {
                 var modal_id = $(this).attr('href'),
@@ -238,15 +250,8 @@
 
                 // Check if target element exists
                 if( $(modal_id).length ) {
-
                     body.addClass('overflow-hidden');
-
-                    $(modal_id)
-                        .removeClass('modal-off')
-                        .addClass('modal-on fadeIn active')
-                        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                            $(this).removeClass('fadeIn');
-                        });
+                    $(modal_id).addClass('active');
                 }
 
                 e.preventDefault();
@@ -254,17 +259,12 @@
 
             function close_modal(modal_id) {
                 body.removeClass('overflow-hidden');
-
-                $(modal_id)
-                    .removeClass('modal-on')
-                    .addClass('modal-off fadeOut')
-                    .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-                        $(this).removeClass('fadeOut active');
-                    });
+                $(modal_id).removeClass('active');
             }
         });
     }
 
+    // WOW.js init settings
     var wow = new WOW({
         boxClass: 'work__box',
         animateClass: 'box__loaded',
@@ -274,7 +274,7 @@
     // When DOM is ready...
     $(function() {
         clickEffect('.click__effect a, .button', 600, false);
-        menuDropdownToggle();
+        mainNav();
         scrollToSection('.scroll--link', 650);
         updateYear('.copyright__year');
         backToTop('.top--scroller');

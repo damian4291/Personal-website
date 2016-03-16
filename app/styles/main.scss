@@ -82,7 +82,7 @@ textarea {
     padding: .5em 1em;
     display: inline-block;
     background-color: transparent;
-    border: .0625em solid #a6a6a6;
+    border: .0625em solid darken(#fff, 25%);
     border-radius: .25em;
     user-select: none;
     transition: all .15s linear;
@@ -134,18 +134,18 @@ textarea {
 }
 
 .form__control {
-    color: darken(#a6a6a6, 10%);
+    color: darken(#fff, 40%);
     background-color: #fff;
-    border: .0625em solid #a6a6a6;
+    border: .0625em solid darken(#fff, 25%);
     padding: .5em;
     transition: all .15s linear;
 
     &:focus {
-        box-shadow: inset 0 0 .2em .1em rgba(0, 0, 0, 0.08);
+        box-shadow: inset 0 0 .2em .1em rgba(0, 0, 0, 0.05);
         color: darken(#a6a6a6, 20%);
         outline: 0;
         background-color: lighten(#a6a6a6, 31%);
-        border-color: darken(#a6a6a6, 5%);
+        border-color: darken(#fff, 27%);
     }
 }
 
@@ -178,6 +178,10 @@ textarea {
     right: 0;
     z-index: $header-zindex;
     @include clearfix();
+
+    &.shadow {
+        box-shadow: 0 .2em .25em 0px rgba(0, 0, 0, 0.25);
+    }
 }
 
 .main__navigation {
@@ -372,6 +376,7 @@ textarea {
 }
 
 .section__heading {
+    color: darken(#fff, 45%);
     margin-top: 0;
     margin-bottom: .8em;
     span {
@@ -494,7 +499,7 @@ textarea {
     &:hover,
     &:focus {
         outline: 0;
-        box-shadow: 0 0 0 .2em rgba(0, 0, 0, .08);
+        box-shadow: 0 0 0 .2em rgba(0, 0, 0, .1);
         color: #555;
     }
 
@@ -538,31 +543,50 @@ textarea {
     top: 0;
     left: 0;
     color: #fff;
-    background-color: rgba(#181620, .95);
+    background-color: #181620;
     overflow-y: auto;
     opacity: 0;
     z-index: -9999;
+    transition: opacity .15s linear;
 
     .modal__heading {
         padding: 1.25em 0;
+        color: #fff;
         @include clearfix();
     }
 
     .modal__title {
+        color: #181620;
+        padding: .25em;
+        background-color: #fff;
         width: calc(100% - 2em);
         font-size: 1.5em;
         font-weight: bold;
-        display: inline-block;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        float: left;
+    }
+
+    .modal__content {
+        font-size: 1.25em;
+        line-height: 1.5
     }
 
     .close__button {
+        background-color: #fff;
+        color: #181620;
+        padding: .132em .25em;
         float: right;
         display: block;
         font-size: 2.1em;
         line-height: 1;
+        transition: .1s all linear;
+
+        &:hover {
+            color: #fff;
+            background-color: darken(red, 12%);
+        }
     }
 
     &.active {
@@ -572,14 +596,59 @@ textarea {
 }
 
 #contact__section {
+    color: #737373;
     background-color: #fff;
     box-shadow: 0 -.2em .5em rgba(0, 0, 0, .025);
+
+    a {
+        color: #737373;
+        display: inline-block;
+    }
+}
+
+.contact__links {
+    @include list-reset();
+
+    li {
+        margin-bottom: .75em;
+
+        a {
+            line-height: 1.5em;
+            border-bottom: .0625em dotted darken(#fff, 15%);
+
+            &:hover {
+                border-bottom: .0625em dotted darken(#fff, 30%);
+            }
+
+            &:focus {
+                @include tab-focus();
+            }
+        }
+    }
+}
+
+.form__column {
+    border-top: .0625em solid #d0d0d0;
+    padding-top: 2em;
+    margin-top: 1.25em;
+}
+
+.contact__icon {
+    background: darken(#fff, 10%);
+    line-height: 1.5em;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 2em;
+    margin-right: .75em;
+    border-radius: .25em;
+    padding-left: .3em;
+    padding-right: .3em;
 }
 
 .footer__container {
     color: darken(#fff, 50%);
-    background-color: darken(#fff, 13%);
-    border-top: .0625em solid darken(#fff, 15%);
+    background-color: darken(#f1f1f1, 4%);
+    border-top: .0625em solid darken(#f1f1f1, 6%);
     padding: 1em 0;
 }
 
@@ -602,6 +671,7 @@ textarea {
 @media screen and (max-width: 47.9375em) {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
     .form__buttons button { display: block; width: 100% }
+    .footer__container { text-align: center }
 }
 
 @media screen and (min-width: 48em) {
@@ -769,17 +839,8 @@ textarea {
     .form__buttons {
         text-align: right;
     }
-
-    #work__section {
-
-        [class^="col-"] {
-
-            &:nth-last-child(2) {
-                margin-bottom: 0;
-            }
-        }
-    }
 }
+
 
 @media screen and (min-width: 62em) {
 
@@ -793,14 +854,17 @@ textarea {
     }
 
     .form__column {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
         border-left: .0625em solid #d0d0d0;
-        padding-left: 1em;
     }
 
     #work__section {
 
         [class^="col-"] {
 
+            &:nth-last-child(2),
             &:nth-last-child(3) {
                 margin-bottom: 0;
             }
@@ -859,43 +923,6 @@ textarea {
         opacity: 0;
         transform: scale(2.5)
     }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-.fadeOut {
-  -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
-}
-
-.animated {
-  -webkit-animation-duration: .5s;
-  animation-duration: .5s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 
 // Boostrap imports

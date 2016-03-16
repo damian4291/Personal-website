@@ -5,8 +5,7 @@
     "font-awesome": "~4.5.0",
     "modernizr": "~2.8.1",
     "jquery": "~2.2.1",
-    "wow": "^1.1.2",
-    "jsanimatedmodal": "^0.3.1"
+    "wow": "^1.1.2"
   },
   "overrides": {
     "font-awesome": {
