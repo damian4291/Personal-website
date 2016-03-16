@@ -26,6 +26,10 @@ body {
     min-width: 20em;
     margin: 0;
     height: 100%;
+
+    &.overflow-hidden {
+        overflow: hidden;
+    }
 }
 
 a {
@@ -172,7 +176,7 @@ textarea {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: $header-zindex;
     @include clearfix();
 }
 
@@ -291,7 +295,7 @@ textarea {
     margin-top: .375em;
     width: 100%;
     left: 0;
-    z-index: 100;
+    z-index: $dropdown-zindex;
 
     > li {
         margin-bottom: .325em;
@@ -504,6 +508,66 @@ textarea {
         border-radius: 0 0 .25em .25em;
         background-color: #fff;
         padding: 1em;
+    }
+}
+
+#overlay {
+    background-color: rgba(#181620, .85);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $overlay-zindex;
+    transition: all .2s linear;
+    visibility: hidden;
+    opacity: 0;
+
+    &.overlay__enabled {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background-color: rgba(#181620, .95);
+    overflow-y: auto;
+    opacity: 0;
+    z-index: -9999;
+
+    .modal__heading {
+        padding: 1.25em 0;
+        @include clearfix();
+    }
+
+    .modal__title {
+        width: calc(100% - 2em);
+        font-size: 1.5em;
+        font-weight: bold;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .close__button {
+        float: right;
+        display: block;
+        font-size: 2.1em;
+        line-height: 1;
+    }
+
+    &.active {
+        opacity: 1;
+        z-index: 9999;
     }
 }
 
@@ -795,6 +859,43 @@ textarea {
         opacity: 0;
         transform: scale(2.5)
     }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+.animated {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
 // Boostrap imports

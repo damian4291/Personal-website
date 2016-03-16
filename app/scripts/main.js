@@ -165,7 +165,7 @@
                 elem.data('clicked', true);
 
                 // Unmark after 1,5 second
-                window.setTimeout(function() {
+                setTimeout(function() {
                     elem.removeData('clicked');
                 }, 1500)
             }
@@ -185,6 +185,7 @@
             var screenScroll = $(window).scrollTop(),
                 sectionHeight = $('#welcome__section').outerHeight();
 
+            // Only on desktops and in half of second section
             if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight / 2 ) {
                 $(element).addClass('visible');
 
@@ -203,11 +204,65 @@
         $(window).on('resize', fadeElem);
     }
 
+    // Auto generate currect year for copyright
     function updateYear(element) {
         var fullDate = new Date(),
             ActualYear = fullDate.getFullYear();
 
         $(element).text(ActualYear);
+    }
+
+    function simpleModal() {
+        var body = $('body'),
+            item = $('.work__box');
+
+        item.each(function() {
+            var elem = $(this),
+                target = elem.attr('href');
+
+            $(target).addClass('modal-off');
+
+            // Click element to trigger modal
+            elem.click(function(e) {
+                var modal_id = $(this).attr('href'),
+                    close = $('.modal').find('.close__button');
+
+                // Unfocus modal trigger element
+                $(this).blur();
+
+                // Close modall
+                close.click(function(e) {
+                    close_modal(modal_id);
+                    e.preventDefault();
+                });
+
+                // Check if target element exists
+                if( $(modal_id).length ) {
+
+                    body.addClass('overflow-hidden');
+
+                    $(modal_id)
+                        .removeClass('modal-off')
+                        .addClass('modal-on fadeIn active')
+                        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                            $(this).removeClass('fadeIn');
+                        });
+                }
+
+                e.preventDefault();
+            });
+
+            function close_modal(modal_id) {
+                body.removeClass('overflow-hidden');
+
+                $(modal_id)
+                    .removeClass('modal-on')
+                    .addClass('modal-off fadeOut')
+                    .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                        $(this).removeClass('fadeOut active');
+                    });
+            }
+        });
     }
 
     var wow = new WOW({
@@ -223,6 +278,7 @@
         scrollToSection('.scroll--link', 650);
         updateYear('.copyright__year');
         backToTop('.top--scroller');
+        simpleModal();
         wow.init();
     });
 

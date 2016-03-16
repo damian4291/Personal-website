@@ -1,3 +1,8 @@
+$header-zindex: 1000;
+$dropdown-zindex: 1000;
+$overlay-zindex: 1100;
+
+
 $global-text-color: darken(#fff, 40%);
 $global-link-color: #fff;
 $global-link-color-hover: darken($global-link-color, 15%);
