@@ -410,14 +410,15 @@ textarea {
 .welcome__message {
     text-align: center;
 
-    h2 {
+    .welcome__heading {
         font: 3em 'Lobster', Sans-serif;
         color: #46ede8;
         margin-top: 0;
         margin-bottom: .5em
     }
 
-    p {
+    .welcome__description {
+        color: #fff;
         max-width: 32em;
         margin: 0 auto;
         padding-left: 1em;
@@ -485,10 +486,22 @@ textarea {
     border-bottom: .0625em solid darken(#f1f1f1, 3%);
 
     [class^="col-"] {
+        margin-top: 1em;
         margin-bottom: 1em;
+    }
 
-        &:last-child {
-            margin-bottom: 0;
+    &.mobile__view {
+        .row {
+            margin-top: -1em;
+            margin-bottom: -1em;
+            white-space: nowrap;
+            overflow-y: hidden;
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+
+            > [class*="col-"] {
+                display: inline-block;
+            }
         }
     }
 }
@@ -518,6 +531,7 @@ textarea {
         border-radius: 0 0 .25em .25em;
         background-color: #fff;
         padding: 1em;
+        white-space: normal;
     }
 }
 
@@ -864,6 +878,12 @@ textarea {
         padding-top: 2em;
         padding-bottom: 2em;
     }
+
+    #work__section {
+        [class^="col-"] {
+            margin-top: 0;
+        }
+    }
 }
 
 @media screen and (min-width: 48em) and (max-width: 61.9375em) {
@@ -872,6 +892,22 @@ textarea {
             padding-top: 3.5em;
             padding-bottom: 3.5em;
         }
+    }
+}
+
+@media screen and (max-width: 61.9375em) {
+
+    .form__column:before {
+        content: 'LUB';
+        background-color: #fff;
+        font-size: .75em;
+        border: .1em solid #d0d0d0;
+        padding: .25em .5em;
+        margin-left: -1.35em;
+        border-radius: .25em;
+        position: absolute;
+        top: -1em;
+        left: 50%;
     }
 }
 

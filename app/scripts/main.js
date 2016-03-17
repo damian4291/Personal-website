@@ -264,6 +264,33 @@
         });
     }
 
+    function mobileHorizontalWork() {
+        var container = $('#work__section'),
+            row = container.find('.row'),
+            element = row.children('[class*="col-"]');
+
+        function setProperties() {
+
+            if( Modernizr.mq(globals.mobile) ) {
+
+                container.addClass('mobile__view')
+                element.css({
+                    width: $(window).width()
+                });
+
+            } else {
+                container.removeClass('mobile__view');
+                element.prop('style', false);
+            }
+        }
+
+        // Initialize function
+        setProperties();
+
+        // Update element on resize
+        $(window).on('resize', setProperties);
+    }
+
     // WOW.js init settings
     var wow = new WOW({
         boxClass: 'work__box',
@@ -279,6 +306,7 @@
         updateYear('.copyright__year');
         backToTop('.top--scroller');
         simpleModal();
+        mobileHorizontalWork();
         wow.init();
     });
 
