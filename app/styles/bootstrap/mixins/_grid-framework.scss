@@ -13,8 +13,13 @@
     // Prevent columns from collapsing when empty
     min-height: 1px;
     // Inner gutter via padding
-    padding-left:  ($grid-gutter-width / 2);
-    padding-right: ($grid-gutter-width / 2);
+    padding-left:  $grid-gutter-width;
+    padding-right: $grid-gutter-width;
+
+    @media (min-width: $screen-sm-min) {
+      padding-left:  ($grid-gutter-width / 2);
+      padding-right: ($grid-gutter-width / 2);
+    }
   }
 }
 
@@ -75,7 +80,7 @@
 @mixin make-grid($class) {
   @include float-grid-columns($class);
   @include loop-grid-columns($grid-columns, $class, width);
-  @include loop-grid-columns($grid-columns, $class, pull);
-  @include loop-grid-columns($grid-columns, $class, push);
-  @include loop-grid-columns($grid-columns, $class, offset);
+  //@include loop-grid-columns($grid-columns, $class, pull);
+  //@include loop-grid-columns($grid-columns, $class, push);
+  //@include loop-grid-columns($grid-columns, $class, offset);
 }

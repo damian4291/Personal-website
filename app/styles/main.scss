@@ -84,10 +84,10 @@ textarea {
     background-color: transparent;
     border: .0625em solid darken(#fff, 25%);
     border-radius: .25em;
-    user-select: none;
-    transition: all .15s linear;
     position: relative;
     overflow: hidden;
+    transition: all .15s linear;
+    user-select: none;
 
     i[class*="fa-"] {
 
@@ -387,10 +387,15 @@ textarea {
 }
 
 .section__container {
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     position: relative;
     @include clearfix();
+
+    &:first-child {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
 }
 
 #welcome__section {
@@ -426,14 +431,14 @@ textarea {
     bottom: 1.5em;
     left: 50%;
     overflow: hidden;
-    transform: translateX(-50%);
-    animation: bounce 2.5s infinite;
-    transition: .2s color linear;
     height: 1.5em;
     width: 1.5em;
     text-align: center;
     border-radius: 50%;
     display: none;
+    animation: bounce 2.5s infinite;
+    transition: .2s color linear;
+    transform: translateX(-50%);
 
     &:hover {
         color: #46ede8;
@@ -557,7 +562,7 @@ textarea {
 
     .modal__title {
         color: #181620;
-        padding: .25em;
+        padding: .25em .5em .25em .25em;
         background-color: #fff;
         width: calc(100% - 2em);
         font-size: 1.5em;
@@ -569,23 +574,33 @@ textarea {
     }
 
     .modal__content {
-        font-size: 1.25em;
-        line-height: 1.5
+        font-size: 1.1em;
+        line-height: 1.5;
     }
 
     .close__button {
         background-color: #fff;
         color: #181620;
-        padding: .132em .25em;
+        padding: .25em;
         float: right;
         display: block;
         font-size: 2.1em;
-        line-height: 1;
+        height: 42px;
         transition: .1s all linear;
+
+        i {
+            height: 30px;
+            line-height: 25px;
+            vertical-align: top;
+        }
 
         &:hover {
             color: #fff;
             background-color: darken(red, 12%);
+        }
+
+        &:focus {
+            outline: 0;
         }
     }
 
@@ -629,8 +644,8 @@ textarea {
 
 .form__column {
     border-top: .0625em solid #d0d0d0;
-    padding-top: 2em;
-    margin-top: 1.25em;
+    padding-top: 1em;
+    margin-top: 1.75em;
 }
 
 .contact__icon {
@@ -662,9 +677,9 @@ textarea {
 
     &.visible {
         background-color: white;
-        transform: translateY(1em);
         visibility: visible;
         opacity: 1;
+        transform: translateY(1em);
     }
 }
 
@@ -831,6 +846,11 @@ textarea {
         }
     }
 
+    .form__column {
+        padding-top: 2em;
+        margin-top: 1.25em;
+    }
+
     .form__control {
         float: left;
         width: calc(100% - 4.5em);
@@ -839,8 +859,21 @@ textarea {
     .form__buttons {
         text-align: right;
     }
+
+    .section__container {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
 }
 
+@media screen and (min-width: 48em) and (max-width: 61.9375em) {
+    .section__container {
+        &:first-child {
+            padding-top: 3.5em;
+            padding-bottom: 3.5em;
+        }
+    }
+}
 
 @media screen and (min-width: 62em) {
 
@@ -883,8 +916,8 @@ textarea {
             left: .3em;
             right: .3em;
             border-radius: 0;
-            transform: translateY(100%);
             transition: .15s transform linear;
+            transform: translateY(100%);
         }
 
         &:hover,
@@ -895,9 +928,21 @@ textarea {
         }
 
         &.box__loaded {
-            transform: translateX(0);
             visibility: visible;
             opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .modal {
+
+        .modal__container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .modal__content {
+            font-size: 1.25em;
         }
     }
 }
