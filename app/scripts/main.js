@@ -267,28 +267,29 @@
     function mobileHorizontalWork() {
         var container = $('#work__section'),
             row = container.find('.row'),
-            element = row.children('[class*="col-"]');
+            element = row.children('[class*="col-"]'),
+            hint = $('.scroll__reminder');
 
-            $('.scroll__reminder').click(function() {
-                row.animate({
-                    scrollLeft: 200
-                }, 600, function() {
-                    $('.scroll__reminder').fadeOut(600).remove()
-                })
-            })
+        function scrollHint() {
+            if( row.scrollLeft() > 100 && Modernizr.mq(globals.mobile) ) {
+                hint.fadeOut();
+            } else {
+                hint.fadeIn();
+            }
+        }
+
+        // Update function o scroll
+        row.on('scroll', scrollHint);
 
         function setProperties() {
-
             if( Modernizr.mq(globals.mobile) ) {
 
-                container.addClass('mobile__view')
-                element.css({
-                    width: $(window).width()
-                });
+                hint.fadeIn();
+                container.addClass('mobile__view');
 
             } else {
+                hint.fadeOut();
                 container.removeClass('mobile__view');
-                element.removeAttr('style');
             }
         }
 
