@@ -269,6 +269,14 @@
             row = container.find('.row'),
             element = row.children('[class*="col-"]');
 
+            $('.scroll__reminder').click(function() {
+                row.animate({
+                    scrollLeft: 200
+                }, 600, function() {
+                    $('.scroll__reminder').fadeOut(600).remove()
+                })
+            })
+
         function setProperties() {
 
             if( Modernizr.mq(globals.mobile) ) {
@@ -280,7 +288,7 @@
 
             } else {
                 container.removeClass('mobile__view');
-                element.prop('style', false);
+                element.removeAttr('style');
             }
         }
 

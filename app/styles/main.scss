@@ -506,6 +506,24 @@ textarea {
     }
 }
 
+.scroll__reminder {
+    float: right;
+    font-weight: normal;
+    font-size: .65em;
+    background-color: #fff;
+    padding: .3em 1em .3em .5em;
+    border-radius: .25em;
+    margin-top: .3em;
+    user-select: none;
+    cursor: pointer;
+
+
+    .right {
+        margin-left: .45em;
+        animation: scroll-right 2s infinite;
+    }
+}
+
 .work__box {
     display: block;
     color: #888;
@@ -1006,6 +1024,20 @@ textarea {
     }
 }
 
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(.5em);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
 // Boostrap imports
 @import "bootstrap/grid";
 @import "bootstrap/utilities";
