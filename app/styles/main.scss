@@ -400,30 +400,51 @@ textarea {
 
 #welcome__section {
     background: $welcome-section-background;
+    line-height: 1.5em;
     margin-top: 5.7em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: table;
+    width: 100%;
+
+    > .container {
+        display: table-cell;
+        vertical-align: middle;
+
+        .row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }
 
 .welcome__message {
-    text-align: center;
 
-    .welcome__heading {
-        font: 3em 'Lobster', Sans-serif;
-        color: #46ede8;
-        margin-top: 0;
-        margin-bottom: .5em
-    }
+}
 
-    .welcome__description {
-        color: #fff;
-        max-width: 32em;
-        margin: 0 auto;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
+.welcome__heading {
+    font: 2em 'Lobster', Sans-serif;
+    color: #46ede8;
+    margin-top: 0;
+    margin-bottom: .5em;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+.welcome__description {
+    color: #fff;
+    max-width: 32em;
+    margin: 0 auto;
+}
+
+.welcome__image {
+    width: 8em;
+    height: 8em;
+    display: block;
+    border: .25em solid #181620;
+    box-shadow: 0 0 0 .25em #46ede8;
+    border-radius: 50%;
+    user-select: none;
 }
 
 .arrow_scroll--down {
@@ -522,14 +543,15 @@ textarea {
     }
 }
 
-
 .scroll__reminder {
     float: right;
     font-size: .55em;
     background-color: #fff;
-    padding: .4em .5em .4em 1em;
+    padding-left: 1em;
+    padding-right: .5em;
+    line-height: 2.25;
     border-radius: .25em;
-    margin-top: .45em;
+    margin-top: .35em;
     display: none;
     text-transform: uppercase;
     font-weight: bold;
@@ -737,6 +759,12 @@ textarea {
     .dropdown__menu > li > a .clicked { background-color: rgba(0, 0, 0, .075) }
     .form__buttons button { display: block; width: 100% }
     .footer__container { text-align: center }
+    .welcome__message { text-align: center }
+    .welcome__image { margin-bottom: 1.5em }
+    .welcome__description {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 }
 
 @media screen and (min-width: 48em) {
@@ -885,6 +913,30 @@ textarea {
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
         margin-top: 3.25em;
+
+        > .container {
+            .row {
+                flex-direction: row;
+            }
+        }
+    }
+
+    .welcome__message {
+        margin-left: 2em;
+    }
+
+    .welcome__image {
+        width: 11em;
+        height: 11em;
+    }
+
+    .welcome__heading {
+        font-size: 3em;
+        margin-bottom: .25em;
+    }
+
+    .welcome__description {
+        max-width: 25em;
     }
 
     .form__group {
