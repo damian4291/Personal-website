@@ -1,13 +1,11 @@
 ## Personal website ##
-I'll write something here, maybe...
+I'll write something here, maybe...    
+  
+*Fonts used:* Font Awesome, Roboto, Lobster*  
+*External CSS used:* Customized bootstrap grid (without push, pull, offset) + responsive utilities  
+*External JS used:* jquery.js, modernizr.js, wow.js  
 
-_Fonts used:_ Font Awesome, Roboto, Lobster*
-_External CSS used: Customized bootstrap grid (without push, pull, offset) + responsive utilities
-_External JS used:_ jquery.js, modernizr.js, wow.js
----
-* - Converted to SVG because I'm using it for name and surname text so don't need whole font (which is 60kb).
-
-### Dropdown code ###
+#### Dropdown code ####
     <ul class="dropdown__menu right">
         <li class="sub--menu__item"><a href="#">Dropdown link #1</a></li>
         <li class="sub--menu__item">
