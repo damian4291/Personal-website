@@ -20,12 +20,12 @@ html {
 }
 
 body {
-    background-color: $page-background-color;
-    font: 16px/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+    background-color: $global-page-background-color;
+    font: #{$global-font-size}/#{$global-line-height} #{$global-font-type};
     color: $global-text-color;
-    min-width: 20em;
-    margin: 0;
+    min-width: $global-page-min-width;
     height: 100%;
+    margin: 0;
 
     &.overflow-hidden {
         overflow: hidden;
@@ -77,12 +77,12 @@ textarea {
 }
 
 .button {
-    color: darken(#a6a6a6, 8%);
     font-size: 1em;
     padding: .5em 1em;
     display: inline-block;
-    background-color: transparent;
-    border: .0625em solid darken(#fff, 25%);
+    color: $button-color;
+    background-color: $button-background-color;
+    border: .0625em solid $button-border-color;
     border-radius: .25em;
     position: relative;
     overflow: hidden;
@@ -107,8 +107,8 @@ textarea {
     &:hover,
     &:focus,
     &:active {
-        color: darken(#a6a6a6, 15%);
-        background-color: lighten(#a6a6a6, 30%);
+        color: $button-color-hover;
+        background-color: $button-background-color-hover;
     }
 
     &:focus {
@@ -190,7 +190,7 @@ textarea {
 }
 
 .header__logo {
-    font: 1.75em/1.88 'Lobster', Sans-serif;
+    font: #{$logo-font-size}/#{$logo-line-height} #{$logo-font-type};
     display: flex;
     justify-content: center;
     color: $logo-color;
@@ -376,7 +376,7 @@ textarea {
 }
 
 .section__heading {
-    color: darken(#fff, 45%);
+    color: $page-heading-color;
     margin-top: 0;
     margin-bottom: .8em;
     span {
@@ -424,7 +424,7 @@ textarea {
 
 .welcome__heading {
     font: 2em 'Lobster', Sans-serif;
-    color: #46ede8;
+    color: $welcome-section-heading-color;
     margin-top: 0;
     margin-bottom: .5em;
     padding-left: .5em;
@@ -432,7 +432,7 @@ textarea {
 }
 
 .welcome__description {
-    color: #fff;
+    color: $welcome-section-description-color;
     max-width: 32em;
     margin: 0 auto;
 }
@@ -441,8 +441,8 @@ textarea {
     width: 8em;
     height: 8em;
     display: block;
-    border: .25em solid #181620;
-    box-shadow: 0 0 0 .25em #46ede8;
+    border: .25em solid $welcome-section-image-border-color;
+    box-shadow: 0 0 0 .25em $welcome-section-image-shadow-color;
     border-radius: 50%;
     user-select: none;
 }
@@ -450,6 +450,7 @@ textarea {
 .arrow_scroll--down {
     position: absolute;
     font-size: 2em;
+    color: $welcome-section-scroll-arrow-color;
     bottom: 1.5em;
     left: 50%;
     overflow: hidden;
@@ -463,7 +464,7 @@ textarea {
     transform: translateX(-50%);
 
     &:hover {
-        color: #46ede8;
+        color: $welcome-section-scroll-arrow-color-hover;
     }
 
     &:focus {
@@ -503,8 +504,8 @@ textarea {
 }
 
 #work__section {
-    background: #f1f1f1;
-    border-bottom: .0625em solid darken(#f1f1f1, 3%);
+    background: $work-section-background-color;
+    border-bottom: .0625em solid $work-section-border-bottom-color;
 
     [class^="col-"] {
         margin-top: 1em;
@@ -546,7 +547,7 @@ textarea {
 .scroll__reminder {
     float: right;
     font-size: .55em;
-    background-color: #fff;
+    background-color: $scroll-reminder-background-color;
     padding-left: 1em;
     padding-right: .5em;
     line-height: 2.25;
@@ -566,7 +567,7 @@ textarea {
 
 .work__box {
     display: block;
-    color: #888;
+    color: $work-box-color;
     border-radius: .25em;
     transition: .15s all linear;
     box-shadow: 0 0 .2em .1em rgba(0, 0, 0, .05);
@@ -576,40 +577,20 @@ textarea {
     &:focus {
         outline: 0;
         box-shadow: 0 0 0 .2em rgba(0, 0, 0, .1);
-        color: #555;
+        color: $work-box-color-hover;
     }
 
     img {
-        border: .35em solid #fff;
+        border: .35em solid $work-box-image-border-color;
         display: block;
         border-radius: .25em .25em 0 0;
     }
 
     .work__content {
         border-radius: 0 0 .25em .25em;
-        background-color: #fff;
+        background-color: $work-box-content-background-color;
         padding: 1em;
         white-space: normal;
-    }
-}
-
-#overlay {
-    background-color: rgba(#181620, .85);
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: $overlay-zindex;
-    transition: all .2s linear;
-    visibility: hidden;
-    opacity: 0;
-
-    &.overlay__enabled {
-        visibility: visible;
-        opacity: 1;
     }
 }
 
@@ -619,8 +600,7 @@ textarea {
     height: 100%;
     top: 0;
     left: 0;
-    color: #fff;
-    background-color: #181620;
+    background-color: $modal-background-color;
     overflow-y: auto;
     opacity: 0;
     z-index: -9999;
@@ -628,14 +608,13 @@ textarea {
 
     .modal__heading {
         padding: 1.25em 0;
-        color: #fff;
         @include clearfix();
     }
 
     .modal__title {
-        color: #181620;
+        color: $modal-title-color;
         padding: .25em .5em .25em .25em;
-        background-color: #fff;
+        background-color: $modal-title-background-color;
         width: calc(100% - 2em);
         font-size: 1.5em;
         font-weight: bold;
@@ -646,13 +625,14 @@ textarea {
     }
 
     .modal__content {
+        color: $modal-content-color;
         font-size: 1.1em;
         line-height: 1.5;
     }
 
     .close__button {
-        background-color: #fff;
-        color: #181620;
+        background-color: $modal-close-button-background-color;
+        color: $modal-close-button-color;
         padding: .25em;
         float: right;
         display: block;
@@ -667,8 +647,8 @@ textarea {
         }
 
         &:hover {
-            color: #fff;
-            background-color: darken(red, 12%);
+            color: $modal-close-button-color-hover;
+            background-color: $modal-close-button-background-color-hover;
         }
 
         &:focus {
@@ -683,8 +663,8 @@ textarea {
 }
 
 #contact__section {
-    color: #737373;
-    background-color: #fff;
+    color: $contact-section-color;
+    background-color: $contact-section-background-color;
     box-shadow: 0 -.2em .5em rgba(0, 0, 0, .025);
 
     a {
@@ -715,7 +695,7 @@ textarea {
 }
 
 .form__column {
-    border-top: .0625em solid #d0d0d0;
+    border-top: .0625em solid $form-column-border-color;
     padding-top: 1em;
     margin-top: 1.75em;
 }
@@ -770,7 +750,7 @@ textarea {
 @media screen and (min-width: 48em) {
 
     .header__container {
-        height: 3.25em;
+        height: $dekstop-header-height;
 
         .row {
             margin-left: 0;
@@ -787,7 +767,7 @@ textarea {
     .header__logo {
         display: inline-block;
         &:after {
-            font: .55em/1.25 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+            font: #{$logo-description-font-size}/#{$logo-description-line-height} #{$logo-description-font-type};
             content: $logo-description;
             color: $logo-description-color;
             display: inline-block;
@@ -912,7 +892,7 @@ textarea {
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed $welcome-section-background;
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
         background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
-        margin-top: 3.25em;
+        margin-top: $dekstop-header-height;
 
         > .container {
             .row {
@@ -993,7 +973,7 @@ textarea {
         content: 'LUB';
         background-color: #fff;
         font-size: .75em;
-        border: .1em solid #d0d0d0;
+        border: .0625em solid $form-column-border-color;
         padding: .25em .5em;
         margin-left: -1.35em;
         border-radius: .25em;
@@ -1007,7 +987,7 @@ textarea {
 
     #welcome__section,
     #work__section  {
-        min-height: calc(100vh - 3.25em);
+        min-height: calc(100vh - #{$dekstop-header-height});
     }
 
     .arrow_scroll--down {
@@ -1018,7 +998,7 @@ textarea {
         margin-top: 0;
         padding-top: 0;
         border-top: 0;
-        border-left: .0625em solid #d0d0d0;
+        border-left: .0625em solid $form-column-border-color;
     }
 
     #work__section {

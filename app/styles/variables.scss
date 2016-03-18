@@ -1,22 +1,34 @@
-$header-zindex: 1000;
-$dropdown-zindex: 1000;
-$overlay-zindex: 1100;
-
-
+// Globals
 $global-text-color: darken(#fff, 40%);
 $global-link-color: #fff;
 $global-link-color-hover: darken($global-link-color, 15%);
 
-$header-color: #181620;
-$page-background-color: #fff;
+$global-font-size: 16px;
+$global-line-height: 1.25;
+$global-font-type: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+$global-page-background-color: #fff;
+$global-page-min-width: 20em;
 
-$welcome-section-background: #1e1c2b;
+// Z-index
+$header-zindex: 1000;
+$dropdown-zindex: 1000;
+$overlay-zindex: 1100;
+
+// Header
+$header-color: #181620;
+$dekstop-header-height: 3.25em;
 
 // Logo
+$logo-font-size: 1.75em;
+$logo-line-height: 1.88;
+$logo-font-type: 'Lobster', Sans-serif;
 $logo-color: #46ede8;
 $logo-color-hover: #fff;
 
 // Logo description
+$logo-description-font-size: .55em;
+$logo-description-line-height: 1.25
+$logo-description-font-type: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
 $logo-description: 'Front-End Developer';
 $logo-description-color: #fff;
 $logo-description-separator-color: #46ede8;
@@ -28,62 +40,92 @@ $mobile-menu-list-separator-color: #46ede8;
 
 // Menu list
 $menu-list-background-active: darken(#181620, 2.5%);
-
 $menu-list-link-color: #fff;
 $menu-list-link-color-hover: #46ede8;
 $menu-list-link-color-active: #fff;
-
 $menu-list-link-icon-color: #46ede8;
 $menu-list-link-icon-color-hover: #fff;
 $menu-list-link-icon-color-active: #46ede8;
-
 $menu-list-link-border-bottom-hover: #46ede8;
 
 // Mobile menu list
 $mobile-menu-list-link-color: #fff;
 $mobile-menu-list-link-color-hover: #46ede8;
 $mobile-menu-list-link-color-active: #46ede8;
-
 $mobile-menu-list-link-icon-color: #46ede8;
 $mobile-menu-list-link-icon-color-hover: #fff;
 $mobile-menu-list-link-icon-color-active: #fff;
 
-// dropdown-menu colors
+// dropdown-menu
 $dropdown-background: darken(#181620, 2.5%);
-
 $dropdown-link-color: #B3B3B3;
 $dropdown-link-color-hover: #46ede8;
-
 $dropdown-link-background: transparent;
 $dropdown-link-background-hover: lighten(#181620, .15%);
-
 $dropdown-link-icon-color: darken(#fff, 45%);
 $dropdown-link-icon-color-hover: #fff;
 
-// Mobile dropdown-menu colors
+// Mobile dropdown-menu
 $mobile-dropdown-background: #fff;
-
 $mobile-dropdown-link-color: lighten(#000, 28%);
 $mobile-dropdown-link-color-hover: lighten(#000, 26%);
-
 $mobile-dropdown-link-background: lighten(#1e1c2b, 75%);
 $mobile-dropdown-link-background-hover: lighten(#1e1c2b, 70%);
-
 $mobile-dropdown-link-icon-color: lighten(#1e1c2b, 45%);
 $mobile-dropdown-link-icon-color-hover: lighten(#1e1c2b, 40%);
 
-// Sub dropdown-menu colors
+// Sub dropdown-menu
 $sub-dropdown-link-color: darken(#B3B3B3, 27%);
 $sub-dropdown-link-color-hover: #46ede8;
-
 $sub-dropdown-link-background: transparent;
 $sub-dropdown-link-background-hover: lighten(#181620, .15%);
 
-// Mobile sub dropdown-menu colors
+// Mobile sub dropdown-menu
 $mobile-sub-dropdown-link-color: lighten(#1e1c2b, 30%);
 $mobile-sub-dropdown-link-color-hover: lighten(#1e1c2b, 25%);
-
 $mobile-sub-dropdown-link-background: lighten(#1e1c2b, 80%);
 $mobile-sub-dropdown-link-background-hover: lighten(#1e1c2b, 77.5%);
 
+// Section heading
+$page-heading-color: darken(#fff, 45%);
 $page-heading-border-bottom-color: #46ede8;
+
+// Welcome section
+$welcome-section-background: #1e1c2b;
+$welcome-section-heading-color: #46ede8;
+$welcome-section-description-color: #fff;
+$welcome-section-image-border-color: #181620;
+$welcome-section-image-shadow-color: #46ede8;
+$welcome-section-scroll-arrow-color: #fff;
+$welcome-section-scroll-arrow-color-hover: #46ede8;
+
+// Work section
+$work-section-background-color: #f1f1f1;
+$work-section-border-bottom-color: darken(#f1f1f1, 3%);
+$scroll-reminder-background-color: #fff;
+$work-box-color: #888;
+$work-box-color-hover: #555;
+$work-box-image-border-color: #fff;
+$work-box-content-background-color: #fff;
+
+// Contact section
+$contact-section-color: #737373;
+$contact-section-background-color: #fff;
+$form-column-border-color: #d0d0d0;
+
+// Modal
+$modal-background-color: #181620;
+$modal-title-color: #181620;
+$modal-title-background-color: #fff;
+$modal-content-color: #fff;
+$modal-close-button-color: $modal-title-color;
+$modal-close-button-color-hover: #fff;
+$modal-close-button-background-color: $modal-title-background-color;
+$modal-close-button-background-color-hover: darken(red, 12%);
+
+// button
+$button-color: darken(#a6a6a6, 8%);
+$button-color-hover:darken(#a6a6a6, 15%);
+$button-background-color: transparent;
+$button-background-color-hover: lighten(#a6a6a6, 30%);
+$button-border-color: darken(#fff, 25%);

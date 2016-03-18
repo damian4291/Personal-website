@@ -304,6 +304,7 @@
     var wow = new WOW({
         boxClass: 'work__box',
         animateClass: 'box__loaded',
+        mobile: false,
         offset: 125
     });
 
