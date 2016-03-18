@@ -1,10 +1,35 @@
 // bower:scss
 @import "bower_components/font-awesome/scss/font-awesome.scss";
 // endbower
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin-ext');
-@import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin-ext');
 @import "variables";
 @import "bootstrap/imports";
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lobster'), local('Lobster-Regular'),
+       url('../fonts/lobster-v16-latin-ext-regular.woff2') format('woff2'),
+       url('../fonts/lobster-v16-latin-ext-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+       url('../fonts/roboto-v15-latin-ext-regular.woff2') format('woff2'),
+       url('../fonts/roboto-v15-latin-ext-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+       url('../fonts/roboto-v15-latin-ext-700.woff2') format('woff2'),
+       url('../fonts/roboto-v15-latin-ext-700.woff') format('woff');
+}
 
 * {
     box-sizing: border-box;
