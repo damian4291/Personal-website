@@ -89,6 +89,12 @@ textarea {
     border: 0;
 }
 
+.divider--right {
+    border-right: .125em solid $divider-color;
+    padding-right: .5em;
+    margin-right: .5em;
+}
+
 .clicked {
   display: block;
   position: absolute;

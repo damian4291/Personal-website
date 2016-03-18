@@ -1,7 +1,7 @@
 ## Personal website ##
 I'll write something here, maybe...    
 
-**Fonts used:** Font Awesome, Roboto, Lobster 
+**Fonts used:** Font Awesome, Roboto, Lobster  
 **External CSS used:** Customized bootstrap grid (without push, pull, offset) + responsive utilities  
 **External JS used:** jQuery.js, Modernizr.js, WOW.js  
 
