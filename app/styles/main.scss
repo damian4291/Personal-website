@@ -467,7 +467,10 @@ textarea {
 .welcome__description {
     color: $welcome-section-description-color;
     max-width: 32em;
-    margin: 0 auto;
+
+    .inner {
+        padding-top: .75em;
+    }
 }
 
 .welcome__image {
@@ -558,6 +561,7 @@ textarea {
                 width: 100%;
                 display: inline-block;
                 margin-right: -1em;
+                vertical-align: top;
 
                 &:last-child {
                     margin-right: 0;
@@ -571,7 +575,7 @@ textarea {
     #work__section.mobile__view {
         .row {
             > [class*="col-"] {
-                width: calc(50% + .25em);
+                width: calc(50% + .5em);
             }
         }
     }
@@ -623,6 +627,7 @@ textarea {
         border-radius: 0 0 .25em .25em;
         background-color: $work-box-content-background-color;
         padding: 1em;
+        margin-top: -.35em;
         white-space: normal;
     }
 }
@@ -774,6 +779,14 @@ textarea {
     .footer__container { text-align: center }
     .welcome__message { text-align: center }
     .welcome__image { margin-bottom: 1.5em }
+    .welcome__heading {
+        margin-left: auto;
+        margin-right: auto
+    }
+    .welcome__description {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 }
 
 @media screen and (min-width: 48em) {
@@ -950,6 +963,7 @@ textarea {
 
     .welcome__description {
         max-width: 25em;
+        margin-left: .5em;
     }
 
     .form__group {

@@ -27,8 +27,8 @@
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png">
         <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
+        <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64x64.png">
         <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
 
@@ -56,7 +56,7 @@
         <header class="header__container">
             <div class="container">
                 <div class="row">
-                    <a class="header__logo" href="#"><span class="sr-only">Zawadziński</span></a>
+                    <a class="header__logo scroll--link" href="#top"><span class="sr-only">Zawadziński</span></a>
                     <nav class="main__navigation" role="navigation">
                         <ul class="menu__list click__effect">
                             <li class="menu__item">
@@ -80,9 +80,12 @@
                         <img class="welcome__image" src="images/twarz.png" alt="Model z Mediolanu">
                         <div class="welcome__message">
                             <h2 class="welcome__heading"><span class="sr-only">Damian Zawadziński</span></h2>
-                            <p class="welcome__description">
+                            <div class="welcome__description">
                                 <span class="divider--right">21 lat</span>Szczecin, Zachodniopomorskie
-                            </p>
+                                <div class="inner">
+                                    Zajmuje się tworzeniem stron i aplikacji internetowych, dbam o detale na które mało kto zwraca uwagę.
+                                </div>
+                            </div>
                         </div>
 
                         <a class="arrow_scroll--down scroll--link" href="#work__section">
@@ -184,7 +187,8 @@
                             <h3>Damian Zawadziński</h3>
                             <ul class="contact__links">
                                 <li><i class="contact__icon fa fa-envelope-o fa-fw"></i><a href="mailto:kontakt@damian.zawadzinski.pl">kontakt@damian.zawadzinski.pl</a></li>
-                                <li><i class="contact__icon fa fa-linkedin fa-fw"></i><a href="https://pl.linkedin.com/in/damianzawadzinski">/damianzawadzinski</a></li>
+                                <li><i class="contact__icon fa fa-linkedin fa-fw"></i><a href="https://pl.linkedin.com/in/damianzawadzinski" target="_blank">/damianzawadzinski</a></li>
+                                <li><i class="contact__icon fa fa-github fa-fw"></i><a href="https://github.com/damian4291" target="_blank">/damian4291</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-12 col-md-7 form__column">
@@ -219,8 +223,11 @@
                 </div>
             </div>
         </footer>
-        <a href="#top" class="scroll--link top--scroller button button-transparent"><i class="fa fa-arrow-up"></i></a>
-        <div id="dupa" class="modal animated">
+        <a href="#top" class="scroll--link top--scroller button button-transparent">
+            <i class="fa fa-arrow-up"></i>
+            <span class="sr-only">Przewiń na samą górę</span>
+        </a>
+        <div id="dupa" class="modal">
             <div class="modal__container container">
                 <div class="modal__heading">
                     <div class="modal__title">
