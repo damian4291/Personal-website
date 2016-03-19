@@ -5,15 +5,6 @@
 @import "bootstrap/imports";
 
 @font-face {
-  font-family: 'Lobster';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lobster'), local('Lobster-Regular'),
-       url('../fonts/lobster-v16-latin-ext-regular.woff2') format('woff2'),
-       url('../fonts/lobster-v16-latin-ext-regular.woff') format('woff');
-}
-
-@font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -49,7 +40,6 @@ body {
     font: #{$global-font-size}/#{$global-line-height} #{$global-font-type};
     color: $global-text-color;
     min-width: $global-page-min-width;
-    height: 100%;
     margin: 0;
 
     &.overflow-hidden {
@@ -221,9 +211,12 @@ textarea {
 }
 
 .header__logo {
-    font: #{$logo-font-size}/#{$logo-line-height} #{$logo-font-type};
-    display: flex;
-    justify-content: center;
+    background: url('../images/logo.svg') no-repeat center center;
+    position: relative;
+    width: 8.85em;
+    height: 3.25em;
+    display: block;
+    margin: 0 auto;
     color: $logo-color;
     transition: .2s color linear;
     user-select: none;
@@ -439,6 +432,8 @@ textarea {
     > .container {
         display: table-cell;
         vertical-align: middle;
+        padding-left: 1em;
+        padding-right: 1em;
 
         .row {
             display: flex;
@@ -454,12 +449,12 @@ textarea {
 }
 
 .welcome__heading {
-    font: 2em 'Lobster', Sans-serif;
-    color: $welcome-section-heading-color;
+    background: url('../images/fullname.svg') no-repeat center center;
+    font-size: 1em;
+    width: 17.5em;
+    height: 2.25em;
     margin-top: 0;
     margin-bottom: .5em;
-    padding-left: .5em;
-    padding-right: .5em;
 }
 
 .welcome__description {
@@ -772,10 +767,6 @@ textarea {
     .footer__container { text-align: center }
     .welcome__message { text-align: center }
     .welcome__image { margin-bottom: 1.5em }
-    .welcome__description {
-        padding-left: 1em;
-        padding-right: 1em;
-    }
 }
 
 @media screen and (min-width: 48em) {
@@ -796,17 +787,20 @@ textarea {
     }
 
     .header__logo {
+        height: 2em;
         display: inline-block;
+        margin-top: .5em;
         &:after {
-            font: #{$logo-description-font-size}/#{$logo-description-line-height} #{$logo-description-font-type};
             content: $logo-description;
             color: $logo-description-color;
             display: inline-block;
             border-left: .0625em solid $logo-description-separator-color;
             margin-left: .9em;
-            margin-top: -.15em;
+            margin-top: -.525em;
             padding-left: .65em;
-            vertical-align: middle;
+            position: absolute;
+            right: -10.5em;
+            top: 50%;
         }
     }
 
@@ -942,8 +936,9 @@ textarea {
     }
 
     .welcome__heading {
-        font-size: 3em;
-        margin-bottom: .25em;
+        width: 25em;
+        height: 2.75em;
+        margin-bottom: .5em;
     }
 
     .welcome__description {
@@ -1008,8 +1003,9 @@ textarea {
         padding: .25em .5em;
         margin-left: -1.35em;
         border-radius: .25em;
+        line-height: 1;
         position: absolute;
-        top: -1em;
+        top: -.833em;
         left: 50%;
     }
 }
