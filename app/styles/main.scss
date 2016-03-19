@@ -213,7 +213,7 @@ textarea {
 .header__logo {
     background: url('../images/logo.svg') no-repeat center center;
     position: relative;
-    width: 8.85em;
+    width: 8.875em;
     height: 3.25em;
     display: block;
     margin: 0 auto;
@@ -426,14 +426,15 @@ textarea {
     background: $welcome-section-background;
     line-height: 1.5em;
     margin-top: 5.7em;
-    display: table;
-    width: 100%;
+    display: flex;
+
 
     > .container {
-        display: table-cell;
-        vertical-align: middle;
         padding-left: 1em;
         padding-right: 1em;
+        display: flex;
+        justify-content: center;
+        align-content: center;
 
         .row {
             display: flex;
@@ -442,10 +443,16 @@ textarea {
             justify-content: center;
         }
     }
-}
 
-.welcome__message {
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        display: table;
+        width: 100%;
 
+        > .container {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
 }
 
 .welcome__heading {
