@@ -2,6 +2,7 @@
 
     var globals = {
         mobile:     '(max-width: 47.9375em)', /* max 767px */
+        landscape:  '(max-height: 23.4375em)', /* max 375px */
         tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
         minTablet:  '(min-width: 48em)', /* min 768px */
         desktop:    '(min-width: 62em)', /* min 992px */
@@ -151,6 +152,24 @@
 
         // Update on scroll
         $(window).on('scroll', dropShadow);
+    }
+
+    // Class toggler for mobile landscape view of main navigation
+    function landscapeMenu() {
+        var trigger = $('.landscape--trigger'),
+            nav = $('.main__navigation'),
+            navLink = nav.find('.scroll--link');
+
+        trigger.click(function(e) {
+            e.preventDefault();
+            $('.main__navigation').toggleClass('open');
+        });
+
+        nav.click(function() {
+            if( nav.hasClass('open') && Modernizr.mq(globals.landscape) ) {
+                nav.removeClass('open');
+            }
+        })
     }
 
     // Smooth scroll to section via href target
@@ -312,6 +331,7 @@
     $(function() {
         clickEffect('.click__effect a, .button', 600, false);
         mainNav();
+        landscapeMenu();
         scrollToSection('.scroll--link', 650);
         updateYear('.copyright__year');
         backToTop('.top--scroller');
