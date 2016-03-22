@@ -862,7 +862,8 @@ textarea {
 
     .header__logo {
         height: 2em;
-        display: inline-block;
+        display: block;
+        float: left;
         margin-top: .5em;
         &:after {
             content: $logo-description;

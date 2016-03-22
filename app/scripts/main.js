@@ -7,7 +7,7 @@
         minTablet:  '(min-width: 48em)', /* min 768px */
         desktop:    '(min-width: 62em)', /* min 992px */
         isWebkit:   'WebkitAppearance' in document.documentElement.style
-    }
+    };
 
     // Material UI click style effect
     function clickEffect(element, delay, centered) {
@@ -98,7 +98,7 @@
     function mainNav() {
         $('.menu__item').each(function() {
             var elem        = $(this),
-                elemLink    = elem.children('a')
+                elemLink    = elem.children('a');
 
             // Check if element has dropdown menu
             if ( elem.children('.dropdown__menu').length ) {
@@ -165,12 +165,17 @@
             $('.main__navigation').toggleClass('open');
         });
 
-        nav.click(function() {
-            // Toggle Class only on
+        $(window).on('resize', function() {
+            if( nav.hasClass('open') && !Modernizr.mq(globals.landscape) ) {
+                nav.removeClass('open');
+            }
+        });
+
+        $(window).on('scroll', function() {
             if( nav.hasClass('open') && Modernizr.mq(globals.landscape) ) {
                 nav.removeClass('open');
             }
-        })
+        });
     }
 
     // Smooth scroll to section via href target
@@ -182,6 +187,9 @@
                 body            = (globals.isWebkit) ? $('body') : $('html');
 
             e.preventDefault();
+
+            // Unfocus clicked link
+            elem.blur();
 
             // Prevent double click which destroys animate scroll
             if( !elem.data('clicked') ) {
@@ -201,25 +209,24 @@
                 // Unmark after 1,5 second
                 setTimeout(function() {
                     elem.removeData('clicked');
-                }, 1500)
+                }, 1500);
             }
 
             // Stop the animation if the user scrolls manually (only during the animation)
-            body.on('scroll wheel DOMMouseScroll mousewheel touchmove', function() {
+            body.on('scroll wheel', function() {
                 $(this).stop();
                 elem.removeData('clicked');
             });
         });
     }
 
-
     function backToTop(element) {
-        // Toggle class for element if its not mobile device and scroll top of screen is in half of second section.
         function fadeElem() {
             var screenScroll = $(window).scrollTop(),
                 sectionHeight = $('#welcome__section').outerHeight();
 
-            // Only on desktops and in half of second section
+
+            // Toggle class for element if its not mobile device and scroll top of screen is in half of second section.
             if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight / 2 ) {
                 $(element).addClass('visible');
 
@@ -241,9 +248,9 @@
     // Auto generate currect year for copyright
     function updateYear(element) {
         var fullDate = new Date(),
-            ActualYear = fullDate.getFullYear();
+            actualYear = fullDate.getFullYear();
 
-        $(element).text(ActualYear);
+        $(element).text(actualYear);
     }
 
     function simpleModal() {
@@ -251,11 +258,9 @@
             item = $('.work__box');
 
         item.each(function() {
-            var elem = $(this),
-                target = elem.attr('href');
 
             // Click element to trigger modal
-            elem.click(function(e) {
+            $(this).click(function(e) {
                 var modal_id = $(this).attr('href'),
                     close = $('.modal').find('.close__button');
 
@@ -287,7 +292,6 @@
     function mobileHorizontalWork() {
         var container = $('#work__section'),
             row = container.find('.row'),
-            element = row.children('[class*="col-"]'),
             hint = $('.scroll__reminder');
 
         function scrollHint() {
