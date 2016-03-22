@@ -713,6 +713,10 @@ textarea {
     a {
         color: #737373;
         display: inline-block;
+
+        &:focus {
+            @include tab-focus();
+        }
     }
 }
 
@@ -725,9 +729,10 @@ textarea {
         a {
             line-height: 1.5em;
             border-bottom: .0625em dotted darken(#fff, 15%);
+            transition: .15s border linear;
 
             &:hover {
-                border-bottom: .0625em dotted darken(#fff, 30%);
+                border-bottom: .0625em dotted darken(#fff, 32%);
             }
 
             &:focus {
@@ -1100,6 +1105,13 @@ textarea {
         visibility: hidden;
         opacity: 0;
         transform: translateX(-1em);
+
+        html.no-js & {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         .work__content {
             position: absolute;
             bottom: 0;

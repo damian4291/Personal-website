@@ -2,7 +2,7 @@
 
     var globals = {
         mobile:     '(max-width: 47.9375em)', /* max 767px */
-        landscape:  '(max-height: 23.4375em)', /* max 375px */
+        landscape:  '(max-width: 47.9375em) and (max-height: 23.4375em)', /* max 767px & 375px */
         tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
         minTablet:  '(min-width: 48em)', /* min 768px */
         desktop:    '(min-width: 62em)', /* min 992px */
@@ -34,7 +34,7 @@
             }
 
             if (centered === true) {
-                // Set centered position
+                // Set centered position (e.g. for circle/square buttons)
                 x = elem.outerWidth() / 2;
                 y = elem.outerHeight() / 2;
 
@@ -166,6 +166,7 @@
         });
 
         nav.click(function() {
+            // Toggle Class only on
             if( nav.hasClass('open') && Modernizr.mq(globals.landscape) ) {
                 nav.removeClass('open');
             }
@@ -324,7 +325,7 @@
         boxClass: 'work__box',
         animateClass: 'box__loaded',
         mobile: false,
-        offset: 125
+        offset: 120
     });
 
     // When DOM is ready...
