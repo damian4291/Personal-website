@@ -792,14 +792,30 @@ textarea {
     .form__buttons button { display: block; width: 100% }
     .footer__container { text-align: center }
     .welcome__message { text-align: center }
-    .welcome__image { margin-bottom: 1.5em }
+    .welcome__image {
+        margin-bottom: 1.5em;
+    }
+
     .welcome__heading {
         margin-left: auto;
         margin-right: auto
     }
+
     .welcome__description {
         padding-left: 1em;
         padding-right: 1em;
+    }
+
+    @media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        .welcome__image,
+        .welcome__description {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #welcome__section > .container .row {
+            display: block;
+        }
     }
 
     @media screen and (max-height: 23.4375em) {
