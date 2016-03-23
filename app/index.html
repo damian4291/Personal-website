@@ -206,31 +206,6 @@
             <i class="fa fa-arrow-up"></i>
             <span class="sr-only">Przewiń na samą górę</span>
         </a>
-        <div id="dupa" class="modal">
-            <div class="modal__container container">
-                <div class="modal__heading">
-                    <div class="modal__title">
-                        This is very very very very very long heading title
-                    </div>
-                    <a href="#" class="close__button">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                <div class="modal__content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga ea ipsa dolorem magni eaque reiciendis itaque, aliquam error nobis quo.
-                </div>
-            </div>
-        </div>
 
         <!-- Google Analytics -->
         <script>
@@ -241,14 +216,38 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-68146183-1');ga('send','pageview');
         </script>
-        <script>
-
+        <script id="project-template" type="text/x-handlebars-template">
+            <div class="col-sm-6 col-md-4">
+                <a href="#{{ id }}" class="work__box">
+                    <img src="{{ thumbUrl }}" alt="{{ thumbAlt }}">
+                    <div class="work__content">
+                        {{ title }}
+                    </div>
+                </a>
+            </div>
         </script>
-
+        <script id="modal-temaplte" type="text/x-handlebars-template">
+            <div id="dupa" class="modal">
+                <div class="modal__container container">
+                    <div class="modal__heading">
+                        <div class="modal__title">
+                            {{ modalTitle }}
+                        </div>
+                        <a href="#" class="close__button">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                    <div class="modal__content">
+                        {{ modalContent }}
+                    </div>
+                </div>
+            </div>
+        </script>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/handlebars/handlebars.js"></script>
         <script src="/bower_components/wow/dist/wow.js"></script>
         <!-- endbower -->
         <!-- endbuild -->

@@ -1,0 +1,34 @@
+{
+    "projects": [
+        {
+            "title": "Baptcare",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        },
+        {
+            "title": "Tibia OTS",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        },
+        {
+            "title": "HLTV.org redesign",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        },
+        {
+            "title": "Violetrix",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        },
+        {
+            "title": "Helpbet",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        },
+        {
+            "title": "Minecraft",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "test"
+        }
+    ]
+}
