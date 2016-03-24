@@ -101,47 +101,10 @@
                         <span>Realizacje</span>
                         <div class="scroll__reminder"><i class="fa fa-hand-o-left left"></i>Przesuń w lewo</div>
                     </h2>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <a href="#dupa" class="work__box">
-                                <img src="images/projects/baptcare.png" alt="alt">
-                                <div class="work__content">
-                                    Baptcare
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <a href="#dupa2" class="work__box">
-                                <img src="images/projects/tibiaots.png" alt="alt">
-                                <div class="work__content">
-                                    Tibia ots
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <a href="#" class="work__box">
-                                <img src="images/projects/hltv-redesign.png" alt="alt">
-                                <div class="work__content">
-                                    HLTV.org redesign
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <a href="#" class="work__box">
-                                <img src="images/projects/violetrix.png" alt="alt">
-                                <div class="work__content">
-                                    Violetrix
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                            <a href="#" class="work__box">
-                                <img src="images/projects/minecraft.png" alt="alt">
-                                <div class="work__content">
-                                    Minecraft
-                                </div>
-                            </a>
-                        </div>
+                    <div id="projects__items" class="row">
+                        <noscript>
+                            <div class="nojs--messageja tuta">Do prawidłowego wyświetlenia projektów wymagany jest włączony <strong>javascript</strong></div>
+                        </noscript>
                     </div>
                 </div>
             </section>
@@ -202,6 +165,7 @@
                 </div>
             </div>
         </footer>
+        <div id="projects__modals"></div>
         <a href="#top" class="scroll--link top--scroller button button-transparent">
             <i class="fa fa-arrow-up"></i>
             <span class="sr-only">Przewiń na samą górę</span>
@@ -216,39 +180,12 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-68146183-1');ga('send','pageview');
         </script>
-        <script id="project-template" type="text/x-handlebars-template">
-            <div class="col-sm-6 col-md-4">
-                <a href="#{{ id }}" class="work__box">
-                    <img src="{{ thumbUrl }}" alt="{{ thumbAlt }}">
-                    <div class="work__content">
-                        {{ title }}
-                    </div>
-                </a>
-            </div>
-        </script>
-        <script id="modal-temaplte" type="text/x-handlebars-template">
-            <div id="dupa" class="modal">
-                <div class="modal__container container">
-                    <div class="modal__heading">
-                        <div class="modal__title">
-                            {{ modalTitle }}
-                        </div>
-                        <a href="#" class="close__button">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                    <div class="modal__content">
-                        {{ modalContent }}
-                    </div>
-                </div>
-            </div>
-        </script>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/bower_components/handlebars/handlebars.js"></script>
         <script src="/bower_components/wow/dist/wow.js"></script>
+        <script src="/bower_components/handlebars/handlebars.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

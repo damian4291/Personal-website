@@ -1,34 +1,46 @@
 {
     "projects": [
         {
-            "title": "Baptcare",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 0,
+            "Title": "Baptcare",
+            "Content": "baptcare content",
+            "ThumbUrl": "images/projects/baptcare.png",
+            "ThumbAlt": "test"
         },
         {
-            "title": "Tibia OTS",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 1,
+            "Title": "Tibia OTS",
+            "Content": "tibia content",
+            "ThumbUrl": "images/projects/tibiaots.png",
+            "ThumbAlt": "test"
         },
         {
-            "title": "HLTV.org redesign",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 2,
+            "Title": "HLTV.org redesign",
+            "Content": "hltv content",
+            "ThumbUrl": "images/projects/hltv-redesign.png",
+            "ThumbAlt": "test"
         },
         {
-            "title": "Violetrix",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 3,
+            "Title": "Violetrix",
+            "Content": "violetrix content",
+            "ThumbUrl": "images/projects/violetrix.png",
+            "ThumbAlt": "test"
         },
         {
-            "title": "Helpbet",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 4,
+            "Title": "Helpbet",
+            "Content": "helpbet content",
+            "ThumbUrl": "images/projects/helpbet.png",
+            "ThumbAlt": "test"
         },
         {
-            "title": "Minecraft",
-            "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "test"
+            "Id": 5,
+            "Title": "Minecraft",
+            "Content": "minecraft content",
+            "ThumbUrl": "images/projects/minecraft.png",
+            "ThumbAlt": "test"
         }
     ]
 }

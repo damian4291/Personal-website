@@ -1,5 +1,7 @@
 (function($, window, document) {
 
+    'use strict';
+
     var globals = {
         mobile:     '(max-width: 47.9375em)', /* max 767px */
         landscape:  '(max-width: 47.9375em) and (max-height: 23.4375em)', /* max 767px & 375px */
@@ -8,6 +10,38 @@
         desktop:    '(min-width: 62em)', /* min 992px */
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     };
+
+    // Render handlebars templates via AJAX
+    function getTemplateAjax(path, callback) {
+        var source, template;
+        $.ajax({
+            url: path,
+            success: function(data) {
+                source = data;
+                template = Handlebars.compile(source);
+                if (callback) callback(template);
+            }
+        });
+    }
+
+    // Function to render compiled handlebars templates
+    function renderHandlebarsTemplate(withTemplate, inElement, withData) {
+        getTemplateAjax(withTemplate, function(template) {
+            $(inElement).html(template(withData));
+        });
+    }
+
+    // Render compiled handlebars templates
+    function renderDataVisualsTemplate(data) {
+        renderHandlebarsTemplate('templates/projectTemplate.hbs', '#projects__items', data);
+        renderHandlebarsTemplate('templates/modalTemplate.hbs', '#projects__modals', data);
+    }
+
+    // Grab data
+    function retriveData() {
+        var dataSource = window.location.pathname + 'content.json';
+        $.getJSON(dataSource, renderDataVisualsTemplate);
+    }
 
     // Material UI click style effect
     function clickEffect(element, delay, centered) {
@@ -35,15 +69,15 @@
 
             if (centered === true) {
                 // Set centered position (e.g. for circle/square buttons)
-                x = elem.outerWidth() / 2;
-                y = elem.outerHeight() / 2;
+                x = elem.outerWidth() / -2;
+                y = elem.outerHeight() / -2;
 
                 // Apply cursor position to the element
                 circle
                     .addClass('clicked--animate')
                     .css({
-                        marginLeft: - x,
-                        marginTop: - y,
+                        marginLeft: x,
+                        marginTop: y,
                         top: '50%',
                         left: '50%'
                     });
@@ -116,7 +150,7 @@
                 toggleElem(elemLink, elem, '.menu__item', false);
 
                 var dropdownElem = elem.find('.sub--menu__item');
-                dropdownElem.each(function(e) {
+                dropdownElem.each(function() {
                     var dropElem = $(this),
                         dropLink = dropElem.children('a');
 
@@ -133,7 +167,7 @@
         });
 
         // Close dropdown by clicking outside of element
-        $(document).on('click',function(e) {
+        $(document).on('click', function(e) {
             if ( $('.menu__item').hasClass('expanded') && !$(e.target).is('.menu__item *') ) {
                 $('.menu__item').removeClass('expanded');
             }
@@ -157,8 +191,7 @@
     // Class toggler for mobile landscape view of main navigation
     function landscapeMenu() {
         var trigger = $('.landscape--trigger'),
-            nav = $('.main__navigation'),
-            navLink = nav.find('.scroll--link');
+            nav = $('.main__navigation');
 
         trigger.click(function(e) {
             e.preventDefault();
@@ -194,7 +227,7 @@
             // Prevent double click which destroys animate scroll
             if( !elem.data('clicked') ) {
                 // trigger animation if window scroll top position isn't equal element offset top
-                if( $(window).scrollTop() + headerHeight != $(target).offset().top) {
+                if( $(window).scrollTop() + headerHeight !== $(target).offset().top) {
 
                     // animated scroll to the second content section with header offset
                     body.stop(true, true).animate({
@@ -254,38 +287,36 @@
     }
 
     function simpleModal() {
-        var body = $('body'),
-            item = $('.work__box');
+        var body = $('body');
 
-        item.each(function() {
+        // Click element to trigger modal
+        $(document).on('click', '.work__box', function(e) {
+            var modalId = $(this).attr('href'),
+                close = $(modalId).find('.close__button');
 
-            // Click element to trigger modal
-            $(this).click(function(e) {
-                var modal_id = $(this).attr('href'),
-                    close = $('.modal').find('.close__button');
-
-                // Unfocus modal trigger element
-                $(this).blur();
-
-                // Close modall
-                close.click(function(e) {
-                    close_modal(modal_id);
-                    e.preventDefault();
+            function closeModal() {
+                body.removeClass('overflow-hidden');
+                $(modalId).fadeOut(200, function() {
+                    $(this).removeAttr('style');
                 });
+            }
 
-                // Check if target element exists
-                if( $(modal_id).length ) {
-                    body.addClass('overflow-hidden');
-                    $(modal_id).addClass('active');
-                }
+            // Unfocus modal trigger element
+            $(this).blur();
 
+            // Close modall
+            close.on('click', function(e) {
+                closeModal(modalId);
                 e.preventDefault();
             });
 
-            function close_modal(modal_id) {
-                body.removeClass('overflow-hidden');
-                $(modal_id).removeClass('active');
+            // Check if target element exists
+            if( $(modalId).length ) {
+                body.addClass('overflow-hidden');
+                $(modalId).fadeIn(200);
             }
+
+            e.preventDefault();
         });
     }
 
@@ -334,6 +365,7 @@
 
     // When DOM is ready...
     $(function() {
+        retriveData();
         clickEffect('.click__effect a, .button', 600, false);
         mainNav();
         landscapeMenu();

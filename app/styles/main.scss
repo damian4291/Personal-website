@@ -79,6 +79,13 @@ textarea {
     border: 0;
 }
 
+.nojs--message {
+    color: lighten(red, 20%);
+    background-color: lighten(red, 40%);
+    padding: 1em;
+    margin: 0 1em .5em 1em;
+}
+
 .divider--right {
     border-right: .125em solid $divider-color;
     padding-right: .5em;
@@ -643,11 +650,10 @@ textarea {
     height: 100%;
     top: 0;
     left: 0;
+    z-index: 2000;
     background-color: $modal-background-color;
     overflow-y: auto;
-    opacity: 0;
-    z-index: -9999;
-    transition: opacity .15s linear;
+    display: none;
 
     .modal__heading {
         padding: 1.25em 0;
@@ -699,10 +705,6 @@ textarea {
         }
     }
 
-    &.active {
-        opacity: 1;
-        z-index: 9999;
-    }
 }
 
 #contact__section {
