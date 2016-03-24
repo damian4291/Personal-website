@@ -296,24 +296,33 @@
 
             function closeModal() {
                 body.removeClass('overflow-hidden');
-                $(modalId).fadeOut(200, function() {
-                    $(this).removeAttr('style');
-                });
+                $(modalId).addClass('out').one('animationend webkitAnimationEnd mozAnimationEnd', function() {
+                    $(this).removeClass('active out');
+                });;
             }
 
             // Unfocus modal trigger element
             $(this).blur();
 
-            // Close modall
+            // Close modal
             close.on('click', function(e) {
                 closeModal(modalId);
                 e.preventDefault();
             });
 
+            // Close modal by pressing ESC key
+            $(document).keyup(function(e) {
+                if ( e.keyCode == 27 && $(modalId).hasClass('active') ) {
+                    closeModal(modalId);
+                }
+            });
+
             // Check if target element exists
             if( $(modalId).length ) {
                 body.addClass('overflow-hidden');
-                $(modalId).fadeIn(200);
+                $(modalId).addClass('active in').one('animationend webkitAnimationEnd mozAnimationEnd', function() {
+                    $(this).removeClass('in');
+                });
             }
 
             e.preventDefault();
