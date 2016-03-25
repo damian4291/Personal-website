@@ -156,6 +156,27 @@ textarea {
     }
 }
 
+.button--loading {
+    color: $button-color-hover;
+    background-color: $button-background-color-hover;
+}
+
+.button--success,
+.button--success:focus,
+.button--success:hover {
+    color: darken(greenyellow, 30%);
+    background-color: lighten(greenyellow, 30%);
+    border-color: darken(greenyellow, 20%);
+}
+
+.button--error,
+.button--error:focus,
+.button--error:hover {
+    color: lighten(crimson, 20%);
+    background-color: lighten(crimson, 45%);
+    border-color: lighten(crimson, 35%)
+}
+
 .button-block {
     width: 100%;
     display: block;
@@ -174,6 +195,11 @@ textarea {
         outline: 0;
         background-color: lighten(#a6a6a6, 31%);
         border-color: darken(#fff, 27%);
+    }
+
+    &[disabled] {
+        color: darken(#fff, 40%);
+        background-color: lighten(#a6a6a6, 31%);
     }
 }
 

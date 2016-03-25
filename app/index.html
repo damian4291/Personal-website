@@ -134,20 +134,21 @@
                             </ul>
                         </div>
                         <div class="col-sm-12 col-md-7 form__column">
-                            <form class="contact__form" action="dupa.php">
+                            <form method="POST" id="contact__form" action="http://formspree.io/kontakt@damian-zawadzinski.pl">
                                 <div class="form__group">
-                                    <label for="firstname">Imię</label>
-                                    <input id="firstname" class="form__control" type="text" name="firstname" placeholder="Np. Janusz">
+                                    <label for="emailaddress">Email</label>
+                                    <input id="emailaddress" class="form__control" type="email" name="_replyto" placeholder="przyklad@adres.pl" required>
                                 </div>
                                 <div class="form__group">
                                     <label for="titlemessage">Tytuł</label>
-                                    <input id="titlemessage"  class="form__control" type="text" name="titlemessage" placeholder="Np. Zlecenie za milion monet!">
+                                    <input id="titlemessage"  class="form__control" type="text" name="_subject" placeholder="krótki tytuł wprowadzający" required>
                                 </div>
                                 <div class="form__group">
                                     <label for="contentmessage">Treść</label>
-                                    <textarea id="contentmessage" class="form__control" name="contentmessage"  rows="6" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit..."></textarea>
+                                    <textarea id="contentmessage" class="form__control" name="message"  rows="6" required></textarea>
                                 </div>
                                 <div class="form__buttons">
+                                    <input type="text" name="_gotcha" style="display:none">
                                     <button type="submit" class="button">Wyślij wiadomość<i class="fa fa-angle-right right"></i></button>
                                 </div>
                             </form>

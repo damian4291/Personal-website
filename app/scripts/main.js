@@ -43,6 +43,75 @@
         $.getJSON(dataSource, renderDataVisualsTemplate);
     }
 
+    // Contact form ajax submittion
+    function contactFormSubmission() {
+        $('#contact__form').submit(function(e) {
+            var self = $(this);
+
+            e.preventDefault();
+
+            $.ajax({
+                url: '//formspree.io/kontakt@damian-zawadzinski.pl',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                beforeSend: function() {
+
+                    // Lock all inputs before send
+                    self.find('.form__control, textarea').prop('disabled', true);
+
+                    self.find('.button')
+                        .prop('disabled', true)
+                        .addClass('button--loading')
+                        .html('Wysyłanie wiadomości<i class="fa fa-spinner fa-spin right"></i>');
+                },
+                success: function(data) {
+
+                    self.find('.button')
+                        .removeClass('button--loading')
+                        .addClass('button--success')
+                        .html('Wiadomość została wysłana<i class="fa fa-check right"></i>');
+
+                        window.setTimeout(function() {
+                            // Reset form
+                            self[0].reset();
+
+                            // Unlock all inputs
+                            self.find('.form__control, textarea').prop('disabled', false);
+
+                            self.find('.button')
+                                .prop('disabled', false)
+                                .removeClass('button--success')
+                                .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
+
+                        }, 3000);
+                },
+                error: function(err) {
+
+                    self.find('.button')
+                        .removeClass('button--loading')
+                        .addClass('button--error')
+                        .html('Coś poszło nie tak, spróbuj ponownie<i class="fa fa-bug right"></i>');
+
+                    window.setTimeout(function() {
+                        // Reset form
+                        self[0].reset();
+
+                        // Unlock all inputs
+                        self.find('.form__control, textarea').prop('disabled', false);
+
+                        self.find('.button')
+                            .prop('disabled', false)
+                            .removeClass('button--error')
+                            .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
+
+                    }, 3000);
+
+                }
+            });
+        });
+    }
+
     // Material UI click style effect
     function clickEffect(element, delay, centered) {
         var circle, d, x, y, removeElem;
@@ -369,12 +438,13 @@
         boxClass: 'work__box',
         animateClass: 'box__loaded',
         mobile: false,
-        offset: 120
+        offset: 80
     });
 
     // When DOM is ready...
     $(function() {
         retriveData();
+        contactFormSubmission();
         clickEffect('.click__effect a, .button', 600, false);
         mainNav();
         landscapeMenu();
