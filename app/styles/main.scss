@@ -172,9 +172,9 @@ textarea {
 .button--error,
 .button--error:focus,
 .button--error:hover {
-    color: lighten(crimson, 20%);
-    background-color: lighten(crimson, 45%);
-    border-color: lighten(crimson, 35%)
+    color: lighten(red, 20%);
+    background-color: lighten(red, 47%);
+    border-color: lighten(red, 35%)
 }
 
 .button-block {
@@ -201,6 +201,16 @@ textarea {
         color: darken(#fff, 40%);
         background-color: lighten(#a6a6a6, 31%);
     }
+
+    &.error {
+        color: lighten(red, 15%);
+        border-color: lighten(red, 35%);
+        background-color: lighten(red, 48%);
+
+        &::-webkit-input-placeholder {
+            color: lighten(red, 30%);
+        }
+    }
 }
 
 .form__group {
@@ -221,6 +231,10 @@ textarea {
 
 .form_buttons {
     text-align: right;
+}
+
+.asteriks {
+    color: red;
 }
 
 .header__container {
@@ -1161,9 +1175,6 @@ textarea {
     .work__box {
         position: relative;
         overflow: hidden;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateX(-1em);
 
         html.no-js & {
             visibility: visible;
@@ -1186,12 +1197,6 @@ textarea {
             .work__content {
                 transform: translateY(0);
             }
-        }
-
-        &.box__loaded {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(0);
         }
     }
 

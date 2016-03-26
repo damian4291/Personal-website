@@ -46,31 +46,73 @@
     // Contact form ajax submittion
     function contactFormSubmission() {
         $('#contact__form').submit(function(e) {
-            var self = $(this);
+            var self = $(this),
+                formValid = true;
 
             e.preventDefault();
 
-            $.ajax({
-                url: '//formspree.io/kontakt@damian-zawadzinski.pl',
-                method: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                beforeSend: function() {
+            $('.error--message').remove();
 
-                    // Lock all inputs before send
-                    self.find('.form__control, textarea').prop('disabled', true);
+            self.find('.form__control').each(function() {
+                var elem = $(this);
 
-                    self.find('.button')
-                        .prop('disabled', true)
-                        .addClass('button--loading')
-                        .html('Wysyłanie wiadomości<i class="fa fa-spinner fa-spin right"></i>');
-                },
-                success: function(data) {
+                elem.removeClass('error');
+
+                if ( elem.val().length == 0 ) {
+                    formValid = false;
+                    elem.addClass('error');
 
                     self.find('.button')
-                        .removeClass('button--loading')
-                        .addClass('button--success')
-                        .html('Wiadomość została wysłana<i class="fa fa-check right"></i>');
+                        .addClass('button--error')
+                        .html('Wypełnij poprawnie wszystkie pola<i class="fa fa-pencil right"></i>');
+                }
+            });
+
+            if (formValid) {
+                $.ajax({
+                    url: '//formspree.io/kontakt@damian-zawadzinski.pl',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    beforeSend: function() {
+
+                        // Lock all inputs before send
+                        self.find('.form__control, textarea').prop('disabled', true);
+
+                        self.find('.button')
+                            .prop('disabled', true)
+                            .removeClass('button--error')
+                            .addClass('button--loading')
+                            .html('Wysyłanie wiadomości<i class="fa fa-spinner fa-spin right"></i>');
+                    },
+                    success: function(data) {
+
+                        self.find('.button')
+                            .removeClass('button--loading')
+                            .addClass('button--success')
+                            .html('Wiadomość została wysłana<i class="fa fa-check right"></i>');
+
+                            // After 3 seconds reset for to the initial version
+                            window.setTimeout(function() {
+                                // Reset form
+                                self[0].reset();
+
+                                // Unlock all inputs
+                                self.find('.form__control, textarea').prop('disabled', false);
+
+                                self.find('.button')
+                                    .prop('disabled', false)
+                                    .removeClass('button--success')
+                                    .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
+
+                            }, 3500);
+                    },
+                    error: function(err) {
+
+                        self.find('.button')
+                            .removeClass('button--loading')
+                            .addClass('button--error')
+                            .html('Coś poszło nie tak, spróbuj ponownie<i class="fa fa-bug right"></i>');
 
                         window.setTimeout(function() {
                             // Reset form
@@ -81,34 +123,14 @@
 
                             self.find('.button')
                                 .prop('disabled', false)
-                                .removeClass('button--success')
+                                .removeClass('button--error')
                                 .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
 
                         }, 3000);
-                },
-                error: function(err) {
 
-                    self.find('.button')
-                        .removeClass('button--loading')
-                        .addClass('button--error')
-                        .html('Coś poszło nie tak, spróbuj ponownie<i class="fa fa-bug right"></i>');
-
-                    window.setTimeout(function() {
-                        // Reset form
-                        self[0].reset();
-
-                        // Unlock all inputs
-                        self.find('.form__control, textarea').prop('disabled', false);
-
-                        self.find('.button')
-                            .prop('disabled', false)
-                            .removeClass('button--error')
-                            .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
-
-                    }, 3000);
-
-                }
-            });
+                    }
+                });
+            }
         });
     }
 
@@ -433,14 +455,6 @@
         $(window).on('resize', setProperties);
     }
 
-    // WOW.js init settings
-    var wow = new WOW({
-        boxClass: 'work__box',
-        animateClass: 'box__loaded',
-        mobile: false,
-        offset: 80
-    });
-
     // When DOM is ready...
     $(function() {
         retriveData();
@@ -453,7 +467,6 @@
         backToTop('.top--scroller');
         simpleModal();
         mobileHorizontalWork();
-        wow.init();
     });
 
 }(window.jQuery, window, document));
