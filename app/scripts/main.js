@@ -64,7 +64,7 @@
 
                     self.find('.button')
                         .addClass('button--error')
-                        .html('Wypełnij poprawnie wszystkie pola<i class="fa fa-pencil right"></i>');
+                        .html('Proszę wypełnić wszystkie pola<i class="fa fa-pencil right"></i>');
                 }
             });
 
@@ -92,13 +92,18 @@
                             .addClass('button--success')
                             .html('Wiadomość została wysłana<i class="fa fa-check right"></i>');
 
+                        self.find('.form__control, textarea')
+                            .addClass('success');
+
                             // After 3 seconds reset for to the initial version
                             window.setTimeout(function() {
                                 // Reset form
                                 self[0].reset();
 
                                 // Unlock all inputs
-                                self.find('.form__control, textarea').prop('disabled', false);
+                                self.find('.form__control, textarea')
+                                    .removeClass('success')
+                                    .prop('disabled', false);
 
                                 self.find('.button')
                                     .prop('disabled', false)
