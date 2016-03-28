@@ -2,17 +2,17 @@
     "projects": [
         {
             "Id": 0,
-            "Title": "Baptcare",
-            "Content": "baptcare content",
             "ThumbUrl": "images/projects/baptcare.png",
-            "ThumbAlt": "test"
+            "ThumbAlt": "test",
+            "Title": "Baptcare",
+            "Content": "baptcare content"
         },
         {
             "Id": 1,
-            "Title": "Tibia OTS",
-            "Content": "tibia content",
             "ThumbUrl": "images/projects/tibiaots.png",
-            "ThumbAlt": "test"
+            "ThumbAlt": "test",
+            "Title": "Tibia OTS",
+            "Content": "tibia content"
         },
         {
             "Id": 2,
@@ -20,27 +20,28 @@
             "Content": "hltv content",
             "ThumbUrl": "images/projects/hltv-redesign.png",
             "ThumbAlt": "test"
+            "Content": "hltv content"
         },
         {
             "Id": 3,
-            "Title": "Violetrix",
-            "Content": "violetrix content",
             "ThumbUrl": "images/projects/violetrix.png",
-            "ThumbAlt": "test"
+            "ThumbAlt": "test",
+            "Title": "Violetrix",
+            "Content": "violetrix content"
         },
         {
             "Id": 4,
-            "Title": "Helpbet",
-            "Content": "helpbet content",
             "ThumbUrl": "images/projects/helpbet.png",
-            "ThumbAlt": "test"
+            "ThumbAlt": "test",
+            "Title": "Helpbet",
+            "Content": "helpbet content"
         },
         {
             "Id": 5,
-            "Title": "Minecraft",
-            "Content": "minecraft content",
             "ThumbUrl": "images/projects/minecraft.png",
-            "ThumbAlt": "test"
+            "ThumbAlt": "test",
+            "Title": "Minecraft",
+            "Content": "minecraft content"
         }
     ]
 }

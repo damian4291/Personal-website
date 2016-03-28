@@ -9,13 +9,22 @@ Live demo at: http://damian-zawadzinski.pl
 #### How to use ####
 
 1. Clone repository  
-    `git clone https://github.com/damian4291/Personal-website.git`
-
+``` html
+git clone https://github.com/damian4291/Personal-website.git
+```
 2. Go to cloned repo directory  
-    `cd Personal-website`
-
+``` html
+cd Personal-website
+```
 3. Install NPM packages  
-    `npm install`
-
+``` html
+npm install
+```
 4. Install bower components  
-    `bower install`
+``` html
+bower install
+```
+5. Run gulp server
+``` html
+gulp serve
+```
