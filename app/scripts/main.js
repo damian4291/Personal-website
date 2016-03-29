@@ -11,6 +11,15 @@
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     };
 
+    // Helper checking for mobile devices
+    Handlebars.registerHelper("ifMobile", function(options) {
+        if ( typeof window.ontouchstart === "object" ) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+
     // Render handlebars templates via AJAX
     function getTemplateAjax(path, callback) {
         var source, template;

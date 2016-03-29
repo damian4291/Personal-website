@@ -2,45 +2,91 @@
     "projects": [
         {
             "Id": 0,
+            "Title": "Baptcare",
             "ThumbUrl": "images/projects/baptcare.png",
             "ThumbAlt": "test",
-            "Title": "Baptcare",
-            "Content": "baptcare content"
+            "Modal": [
+                {
+                    "LiveUrl": "https://www.baptcare.org.au/",
+                    "ImgUrl": "images/projects/baptcare-full.png",
+                    "MobileImgUrl": "images/projects/baptcare-full-mobile.png",
+                    "ImgAlt": "full size image of baptcare",
+                    "Content": "image"
+                }
+            ]
         },
         {
             "Id": 1,
-            "ThumbUrl": "images/projects/tibiaots.png",
-            "ThumbAlt": "test",
             "Title": "Tibia OTS",
-            "Content": "tibia content"
+            "ThumbUrl": "images/projects/tibiaots.png",
+            "ThumbAlt": "tibia ots thumbnail",
+            "Modal": [
+                {
+                    "LiveUrl": "http://damian-zawadzinski.pl/demo/tibia",
+                    "ImgUrl": "images/projects/tibiaots-full.png",
+                    "MobileImgUrl": "images/projects/tibiaots-full-mobile.png",
+                    "ImgAlt": "full size image of tibia ots",
+                    "Content": "Tibia ots"
+                }
+            ]
         },
         {
             "Id": 2,
-            "ThumbUrl": "images/projects/hltv.png",
-            "ThumbAlt": "test",
             "Title": "HLTV.org redesign",
-            "Content": "hltv content"
+            "ThumbUrl": "images/projects/hltv.png",
+            "ThumbAlt": "hltv redesign thumbnail",
+            "Modal": [
+                {
+                    "LiveUrl": "http://damian-zawadzinski.pl/demo/hltv",
+                    "ImgUrl": "images/projects/hltv-full.png",
+                    "MobileImgUrl": "images/projects/hltv-full-mobile.png",
+                    "ImgAlt": "full size image of hltv redesign",
+                    "Content": "hltv content"
+                }
+            ]
         },
         {
             "Id": 3,
-            "ThumbUrl": "images/projects/violetrix.png",
-            "ThumbAlt": "test",
             "Title": "Violetrix",
-            "Content": "violetrix content"
+            "ThumbUrl": "images/projects/violetrix.png",
+            "ThumbAlt": "violetrix thumbnail",
+            "Modal": [
+                {
+                    "ImgUrl": "images/projects/violetrix-full.png",
+                    "MobileImgUrl": "images/projects/violetrix-full-mobile.png",
+                    "ImgAlt": "full size image of tibia ots",
+                    "Content": "violetrix content"
+                }
+            ]
         },
         {
             "Id": 4,
-            "ThumbUrl": "images/projects/helpbet.png",
-            "ThumbAlt": "test",
             "Title": "Helpbet",
-            "Content": "helpbet content"
+            "ThumbUrl": "images/projects/helpbet.png",
+            "ThumbAlt": "helpbet thumbnail",
+            "Modal": [
+                {
+                    "ImgUrl": "images/projects/helpbet-full.png",
+                    "MobileImgUrl": "images/projects/helpbet-full-mobile.png",
+                    "ImgAlt": "full size image of helpbet",
+                    "Content": "helpbet content"
+                }
+            ]
         },
         {
             "Id": 5,
-            "ThumbUrl": "images/projects/minecraft.png",
-            "ThumbAlt": "test",
             "Title": "Minecraft",
-            "Content": "minecraft content"
+            "ThumbUrl": "images/projects/minecraft.png",
+            "ThumbAlt": "minecraft thumbnail",
+            "Modal": [
+                {
+                    "LiveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
+                    "ImgUrl": "images/projects/minecraft-full.png",
+                    "MobileImgUrl": "images/projects/minecraft-full-mobile.png",
+                    "ImgAlt": "full size image of minecraft",
+                    "Content": "minecraft content"
+                }
+            ]
         }
     ]
 }

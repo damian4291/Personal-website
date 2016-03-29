@@ -3,6 +3,7 @@
 // endbower
 @import "variables";
 @import "bootstrap/imports";
+@import "bootstrap/grid";
 
 @font-face {
   font-family: 'Roboto';
@@ -718,57 +719,106 @@ textarea {
     &.out {
         animation: fadeOut .25s;
     }
+}
 
-    .modal__heading {
-        padding: 1.25em 0;
-        @include clearfix();
+.modal__container {
+    padding-bottom: 1em;
+}
+
+.modal__heading {
+    padding: 1.25em 0;
+    @include clearfix();
+}
+
+.modal__title {
+    color: $modal-title-color;
+    padding: .25em .5em .25em .25em;
+    background-color: $modal-title-background-color;
+    width: calc(100% - 47px);
+    height: 42px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    float: left;
+
+    &.has-live {
+        width: calc(100% - 94px);
+    }
+}
+
+.modal__content {
+    color: $modal-content-color;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+.modal__image {
+    display: block;
+
+    .modal__content + & {
+        margin-top: 1.25em;
+    }
+}
+
+.see__live {
+    background-color: $modal-live-button-background-color;
+    color: $modal-close-button-color;
+    float: left;
+    font-size: 26px;
+    padding-left:  8px;
+    padding-right: 8px;
+    margin-left: 5px;
+    display: inline-block;
+    height: 42px;
+    line-height: 46px;
+    transition: .1s all linear;
+
+    span {
+        display: inline-block;
+        font-size: 18px;
+        line-height: 42px;
+        margin-left: 5px;
+        vertical-align: top;
     }
 
-    .modal__title {
-        color: $modal-title-color;
-        padding: .25em .5em .25em .25em;
-        background-color: $modal-title-background-color;
-        width: calc(100% - 2em);
-        font-size: 1.5em;
-        font-weight: bold;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        float: left;
+    i {
+        line-height: 25px;
     }
 
-    .modal__content {
-        color: $modal-content-color;
-        font-size: 1.1em;
-        line-height: 1.5;
+    &:hover,
+    &:focus {
+        color: $modal-close-button-color-hover;
+        background-color: $modal-live-button-background-color-hover;
+    }
+}
+
+.close__button {
+    background-color: $modal-close-button-background-color;
+    color: $modal-close-button-color;
+    padding-left:  8px;
+    padding-right: 8px;
+    margin-left: 5px;
+    float: left;
+    display: block;
+    font-size: 33px;
+    height: 42px;
+    transition: .1s all linear;
+
+    i {
+        line-height: 25px;
     }
 
-    .close__button {
-        background-color: $modal-close-button-background-color;
-        color: $modal-close-button-color;
-        padding: .25em;
-        float: right;
-        display: block;
-        font-size: 2.1em;
-        height: 42px;
-        transition: .1s all linear;
-
-        i {
-            height: 30px;
-            line-height: 25px;
-            vertical-align: top;
-        }
-
-        &:hover {
-            color: $modal-close-button-color-hover;
-            background-color: $modal-close-button-background-color-hover;
-        }
-
-        &:focus {
-            outline: 0;
-        }
+    &:hover,
+    &:focus {
+        color: $modal-close-button-color-hover;
+        background-color: $modal-close-button-background-color-hover;
     }
 
+    &:focus {
+        outline: 0;
+    }
 }
 
 #contact__section {
@@ -1136,6 +1186,24 @@ textarea {
             margin-top: 0;
         }
     }
+
+    .modal__container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .modal__title {
+        width: calc(100% - 47px);
+
+        &.has-live {
+            width: calc(100% - 243px);
+        }
+    }
+
+    .see__live {
+        padding-left:  12px;
+        padding-right: 12px;
+    }
 }
 
 @media screen and (min-width: 48em) and (max-width: 61.9375em) {
@@ -1210,16 +1278,8 @@ textarea {
         }
     }
 
-    .modal {
-
-        .modal__container {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .modal__content {
-            font-size: 1.25em;
-        }
+    .modal__content {
+        font-size: 1.25em;
     }
 }
 
@@ -1269,6 +1329,5 @@ textarea {
 }
 
 // Boostrap imports
-@import "bootstrap/grid";
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";

@@ -2,16 +2,38 @@
 <div id="modal-{{ Id }}" class="modal">
     <div class="modal__container container">
         <div class="modal__heading">
-            <div class="modal__title">
+            {{!-- Add class to element if live link exists --}}
+            {{#each Modal}}
+            <div {{#if LiveUrl.length }}class="modal__title has-live" {{else}} class="modal__title" {{/if}}>
+            {{/each}}
                 {{ Title }}
             </div>
+            {{!-- Render different image for mobile and desktop --}}
+            {{#each Modal}}
+                {{#if LiveUrl.length }}
+                    <a class="see__live" href="{{ LiveUrl }}" target="_blank">
+                        <i class="fa fa-external-link"></i>
+                        <span class="hidden-xs">Zobacz na żywo</span>
+                    </a>
+                {{/if}}
+            {{/each}}
             <a href="#" class="close__button">
                 <i class="fa fa-times"></i>
             </a>
         </div>
-        <div class="modal__content">
-            {{ Content }}
-        </div>
+        {{#each Modal}}
+            {{#if Content.length }}
+                <div class="modal__content">
+                    {{ Content }}
+                </div>
+            {{/if}}
+            {{!-- Render different image for mobile and desktop --}}
+            {{#ifMobile}}
+                <img  class="modal__image" src="{{ MobileImgUrl }}" alt="{{ FullImgAlt }}" />
+            {{else}}
+                <img class="modal__image" src="{{ ImgUrl }}" alt="{{ FullImgAlt }}" />
+            {{/ifMobile}}
+        {{/each}}
     </div>
 </div>
 {{/projects}}
