@@ -1,92 +1,74 @@
 {
     "projects": [
         {
-            "Id": 0,
             "Title": "Baptcare",
             "ThumbUrl": "images/projects/baptcare.png",
             "ThumbAlt": "test",
-            "Modal": [
-                {
-                    "LiveUrl": "https://www.baptcare.org.au/",
-                    "ImgUrl": "images/projects/baptcare-full.png",
-                    "MobileImgUrl": "images/projects/baptcare-full-mobile.png",
-                    "ImgAlt": "full size image of baptcare",
-                    "Content": "image"
-                }
-            ]
+            "Modal": {
+                "LiveUrl": "https://www.baptcare.org.au/",
+                "ImgUrl": "images/projects/baptcare-full.png",
+                "MobileImgUrl": "images/projects/baptcare-full-mobile.png",
+                "ImgAlt": "full size image of baptcare",
+                "Content": ""
+            }
         },
         {
-            "Id": 1,
             "Title": "Tibia OTS",
             "ThumbUrl": "images/projects/tibiaots.png",
             "ThumbAlt": "tibia ots thumbnail",
-            "Modal": [
-                {
-                    "LiveUrl": "http://damian-zawadzinski.pl/demo/tibia",
-                    "ImgUrl": "images/projects/tibiaots-full.png",
-                    "MobileImgUrl": "images/projects/tibiaots-full-mobile.png",
-                    "ImgAlt": "full size image of tibia ots",
-                    "Content": "Tibia ots"
-                }
-            ]
+            "Modal": {
+                "LiveUrl": "http://damian-zawadzinski.pl/demo/tibia",
+                "ImgUrl": "images/projects/tibiaots-full.png",
+                "MobileImgUrl": "images/projects/tibiaots-full-mobile.png",
+                "ImgAlt": "full size image of tibia ots",
+                "Content": ""
+            }
         },
         {
-            "Id": 2,
             "Title": "HLTV.org redesign",
             "ThumbUrl": "images/projects/hltv.png",
             "ThumbAlt": "hltv redesign thumbnail",
-            "Modal": [
-                {
-                    "LiveUrl": "http://damian-zawadzinski.pl/demo/hltv",
-                    "ImgUrl": "images/projects/hltv-full.png",
-                    "MobileImgUrl": "images/projects/hltv-full-mobile.png",
-                    "ImgAlt": "full size image of hltv redesign",
-                    "Content": "hltv content"
-                }
-            ]
+            "Modal": {
+                "LiveUrl": "http://damian-zawadzinski.pl/demo/hltv",
+                "ImgUrl": "images/projects/hltv-full.png",
+                "MobileImgUrl": "images/projects/hltv-full-mobile.png",
+                "ImgAlt": "full size image of hltv redesign",
+                "Content": ""
+            }
         },
         {
-            "Id": 3,
             "Title": "Violetrix",
             "ThumbUrl": "images/projects/violetrix.png",
             "ThumbAlt": "violetrix thumbnail",
-            "Modal": [
-                {
-                    "ImgUrl": "images/projects/violetrix-full.png",
-                    "MobileImgUrl": "images/projects/violetrix-full-mobile.png",
-                    "ImgAlt": "full size image of tibia ots",
-                    "Content": "violetrix content"
-                }
-            ]
+            "Modal": {
+                "ImgUrl": "images/projects/violetrix-full.png",
+                "MobileImgUrl": "images/projects/violetrix-full-mobile.png",
+                "ImgAlt": "full size image of tibia ots",
+                "Content": ""
+            }
         },
         {
-            "Id": 4,
             "Title": "Helpbet",
             "ThumbUrl": "images/projects/helpbet.png",
             "ThumbAlt": "helpbet thumbnail",
-            "Modal": [
-                {
-                    "ImgUrl": "images/projects/helpbet-full.png",
-                    "MobileImgUrl": "images/projects/helpbet-full-mobile.png",
-                    "ImgAlt": "full size image of helpbet",
-                    "Content": "helpbet content"
-                }
-            ]
+            "Modal": {
+                "ImgUrl": "images/projects/helpbet-full.png",
+                "MobileImgUrl": "images/projects/helpbet-full-mobile.png",
+                "ImgAlt": "full size image of helpbet",
+                "Content": ""
+            }
         },
         {
-            "Id": 5,
             "Title": "Minecraft",
             "ThumbUrl": "images/projects/minecraft.png",
             "ThumbAlt": "minecraft thumbnail",
-            "Modal": [
-                {
-                    "LiveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
-                    "ImgUrl": "images/projects/minecraft-full.png",
-                    "MobileImgUrl": "images/projects/minecraft-full-mobile.png",
-                    "ImgAlt": "full size image of minecraft",
-                    "Content": "minecraft content"
-                }
-            ]
+            "Modal": {
+                "LiveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
+                "ImgUrl": "images/projects/minecraft-full.png",
+                "MobileImgUrl": "images/projects/minecraft-full-mobile.png",
+                "ImgAlt": "full size image of minecraft",
+                "Content": ""
+            }
         }
     ]
 }

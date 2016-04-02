@@ -11,12 +11,16 @@
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     };
 
-    // Helper checking for mobile devices
-    Handlebars.registerHelper("ifMobile", function(options) {
-        if ( typeof window.ontouchstart === "object" ) {
-            return options.fn(this);
+    Handlebars.registerHelper('imgModal', function() {
+        var dekstop_img = Handlebars.escapeExpression(this.Modal.ImgUrl),
+            mobile_img = Handlebars.escapeExpression(this.Modal.MobileImgUrl),
+            img_alt = Handlebars.escapeExpression(this.Modal.ImgAlt);
+
+        // Check if mobile (touch) device and return different image
+        if ( typeof window.ontouchstart === 'object' ) {
+            return new Handlebars.SafeString('<img  class="modal__image" src="' + mobile_img + '" alt="' + img_alt + '" />');
         } else {
-            return options.inverse(this);
+            return new Handlebars.SafeString('<img  class="modal__image" src="' + dekstop_img + '" alt="' + img_alt + '" />');
         }
     });
 
@@ -59,8 +63,6 @@
                 formValid = true;
 
             e.preventDefault();
-
-            $('.error--message').remove();
 
             self.find('.form__control').each(function() {
                 var elem = $(this);

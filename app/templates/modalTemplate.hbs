@@ -1,39 +1,28 @@
 {{#projects}}
-<div id="modal-{{ Id }}" class="modal">
+<div id="modal-{{ @index }}" class="modal">
     <div class="modal__container container">
         <div class="modal__heading">
             {{!-- Add class to element if live link exists --}}
-            {{#each Modal}}
-            <div {{#if LiveUrl.length }}class="modal__title has-live" {{else}} class="modal__title" {{/if}}>
-            {{/each}}
+            <div {{#if Modal.LiveUrl.length }} class="modal__title has-live" {{else}} class="modal__title" {{/if}}>
                 {{ Title }}
             </div>
-            {{!-- Render different image for mobile and desktop --}}
-            {{#each Modal}}
-                {{#if LiveUrl.length }}
-                    <a class="see__live" href="{{ LiveUrl }}" target="_blank">
-                        <i class="fa fa-external-link"></i>
-                        <span class="hidden-xs">Zobacz na żywo</span>
-                    </a>
-                {{/if}}
-            {{/each}}
+            {{#if Modal.LiveUrl.length }}
+                <a class="see__live" href="{{ Modal.LiveUrl }}" target="_blank">
+                    <i class="fa fa-external-link"></i>
+                    <span class="hidden-xs">Zobacz na żywo</span>
+                </a>
+            {{/if}}
             <a href="#" class="close__button">
                 <i class="fa fa-times"></i>
             </a>
         </div>
-        {{#each Modal}}
-            {{#if Content.length }}
-                <div class="modal__content">
-                    {{ Content }}
-                </div>
-            {{/if}}
-            {{!-- Render different image for mobile and desktop --}}
-            {{#ifMobile}}
-                <img  class="modal__image" src="{{ MobileImgUrl }}" alt="{{ FullImgAlt }}" />
-            {{else}}
-                <img class="modal__image" src="{{ ImgUrl }}" alt="{{ FullImgAlt }}" />
-            {{/ifMobile}}
-        {{/each}}
+        {{#if Modal.Content.length }}
+            <div class="modal__content">
+                {{ Modal.Content }}
+            </div>
+        {{/if}}
+        {{!-- Render different image for mobile and desktop --}}
+        {{ imgModal }}
     </div>
 </div>
 {{/projects}}
