@@ -39,6 +39,12 @@ gulp.task('templates', () => {
     .pipe(reload({stream: true}));
 });
 
+gulp.task('json', () => {
+  return gulp.src('app/*.json')
+    .pipe($.jsonminify())
+    .pipe(gulp.dest('dist'));
+});
+
 function lint(files, options) {
   return () => {
     return gulp.src(files)
@@ -48,6 +54,7 @@ function lint(files, options) {
       .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
   };
 }
+
 const testLintOptions = {
   env: {
     mocha: true
@@ -97,7 +104,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts', 'templates'], () => {
+gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -111,7 +118,9 @@ gulp.task('serve', ['styles', 'scripts', 'fonts', 'templates'], () => {
 
   gulp.watch([
     'app/*.html',
+    'app/*.json',
     'app/images/**/*',
+    'app/templates/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 

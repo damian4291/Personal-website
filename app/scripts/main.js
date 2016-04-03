@@ -12,9 +12,9 @@
     };
 
     Handlebars.registerHelper('imgModal', function() {
-        var dekstop_img = Handlebars.escapeExpression(this.Modal.ImgUrl),
-            mobile_img = Handlebars.escapeExpression(this.Modal.MobileImgUrl),
-            img_alt = Handlebars.escapeExpression(this.Modal.ImgAlt);
+        var dekstop_img = Handlebars.escapeExpression(this.modal.imgUrl),
+            mobile_img = Handlebars.escapeExpression(this.modal.mobileImgUrl),
+            img_alt = Handlebars.escapeExpression(this.modal.imgAlt);
 
         // Check if mobile (touch) device and return different image
         if ( typeof window.ontouchstart === 'object' ) {
@@ -48,6 +48,7 @@
     function renderDataVisualsTemplate(data) {
         renderHandlebarsTemplate('templates/projectTemplate.hbs', '#projects__items', data);
         renderHandlebarsTemplate('templates/modalTemplate.hbs', '#projects__modals', data);
+        renderHandlebarsTemplate('templates/contactTemplate.hbs', '.info__column', data);
     }
 
     // Grab data

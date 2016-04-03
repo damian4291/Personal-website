@@ -1,0 +1,9 @@
+<h3>Damian Zawadziński</h3>
+<ul class="contact__links">
+    {{#each links}}
+        <li>
+            <i class="contact__icon fa fa-fw {{ icon }}"></i>
+            <a href="{{ link.href }}" {{#if link._blank}}target="_blank"{{/if}}>{{ title }}</a>
+        </li>
+    {{/each}}
+</ul>

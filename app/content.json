@@ -1,73 +1,99 @@
 {
+    "links": [
+        {
+            "icon": "fa-envelope-o",
+            "title": "kontakt@damian-zawadzinski.pl",
+            "link": {
+                "href": "mailto://kontakt@damian-zawadzinski.pl",
+                "_blank": false
+            }
+        },
+        {
+            "icon": "fa-linkedin",
+            "title": "/damianzawadzinski",
+            "link": {
+                "href": "https://pl.linkedin.com/in/damianzawadzinski",
+                "_blank": true
+            }
+        },
+        {
+            "icon": "fa-github",
+            "title": "/damian4291",
+            "link": {
+                "href": "https://github.com/damian4291",
+                "_blank": true
+            }
+        }
+    ],
     "projects": [
         {
-            "Title": "Baptcare",
-            "ThumbUrl": "images/projects/baptcare.png",
-            "ThumbAlt": "test",
-            "Modal": {
-                "LiveUrl": "https://www.baptcare.org.au/",
-                "ImgUrl": "images/projects/baptcare-full.png",
-                "MobileImgUrl": "images/projects/baptcare-full-mobile.png",
-                "ImgAlt": "full size image of baptcare",
-                "Content": ""
+            "title": "Baptcare",
+            "thumbUrl": "images/projects/baptcare.png",
+            "thumbAlt": "test",
+            "modal": {
+                "liveUrl": "https://www.baptcare.org.au/",
+                "imgUrl": "images/projects/baptcare-full.png",
+                "mobileimgUrl": "images/projects/baptcare-full-mobile.png",
+                "imgAlt": "full size image of baptcare",
+                "content": ""
             }
         },
         {
-            "Title": "Tibia OTS",
-            "ThumbUrl": "images/projects/tibiaots.png",
-            "ThumbAlt": "tibia ots thumbnail",
-            "Modal": {
-                "LiveUrl": "http://damian-zawadzinski.pl/demo/tibia",
-                "ImgUrl": "images/projects/tibiaots-full.png",
-                "MobileImgUrl": "images/projects/tibiaots-full-mobile.png",
-                "ImgAlt": "full size image of tibia ots",
-                "Content": ""
+            "title": "Tibia OTS",
+            "thumbUrl": "images/projects/tibiaots.png",
+            "thumbAlt": "tibia ots thumbnail",
+            "modal": {
+                "liveUrl": "http://damian-zawadzinski.pl/demo/tibia",
+                "imgUrl": "images/projects/tibiaots-full.png",
+                "mobileimgUrl": "images/projects/tibiaots-full-mobile.png",
+                "imgAlt": "full size image of tibia ots",
+                "content": ""
             }
         },
         {
-            "Title": "HLTV.org redesign",
-            "ThumbUrl": "images/projects/hltv.png",
-            "ThumbAlt": "hltv redesign thumbnail",
-            "Modal": {
-                "LiveUrl": "http://damian-zawadzinski.pl/demo/hltv",
-                "ImgUrl": "images/projects/hltv-full.png",
-                "MobileImgUrl": "images/projects/hltv-full-mobile.png",
-                "ImgAlt": "full size image of hltv redesign",
-                "Content": ""
+            "title": "HLTV.org redesign",
+            "thumbUrl": "images/projects/hltv.png",
+            "thumbAlt": "hltv redesign thumbnail",
+            "modal": {
+                "liveUrl": "http://damian-zawadzinski.pl/demo/hltv",
+                "imgUrl": "images/projects/hltv-full.png",
+                "mobileimgUrl": "images/projects/hltv-full-mobile.png",
+                "imgAlt": "full size image of hltv redesign",
+                "content": ""
             }
         },
         {
-            "Title": "Violetrix",
-            "ThumbUrl": "images/projects/violetrix.png",
-            "ThumbAlt": "violetrix thumbnail",
-            "Modal": {
-                "ImgUrl": "images/projects/violetrix-full.png",
-                "MobileImgUrl": "images/projects/violetrix-full-mobile.png",
-                "ImgAlt": "full size image of tibia ots",
-                "Content": ""
+            "title": "Violetrix",
+            "thumbUrl": "images/projects/violetrix.png",
+            "thumbAlt": "violetrix thumbnail",
+            "modal": {
+                "imgUrl": "images/projects/violetrix-full.png",
+                "mobileimgUrl": "images/projects/violetrix-full-mobile.png",
+                "imgAlt": "full size image of tibia ots",
+                "content": ""
             }
         },
         {
-            "Title": "Helpbet",
-            "ThumbUrl": "images/projects/helpbet.png",
-            "ThumbAlt": "helpbet thumbnail",
-            "Modal": {
-                "ImgUrl": "images/projects/helpbet-full.png",
-                "MobileImgUrl": "images/projects/helpbet-full-mobile.png",
-                "ImgAlt": "full size image of helpbet",
-                "Content": ""
+            "title": "Helpbet",
+            "thumbUrl": "images/projects/helpbet.png",
+            "thumbAlt": "helpbet thumbnail",
+            "modal": {
+                "imgUrl": "images/projects/helpbet-full.png",
+                "mobileimgUrl": "images/projects/helpbet-full-mobile.png",
+                "imgAlt": "full size image of helpbet",
+                "content": ""
             }
         },
         {
-            "Title": "Minecraft",
-            "ThumbUrl": "images/projects/minecraft.png",
-            "ThumbAlt": "minecraft thumbnail",
-            "Modal": {
-                "LiveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
-                "ImgUrl": "images/projects/minecraft-full.png",
-                "MobileImgUrl": "images/projects/minecraft-full-mobile.png",
-                "ImgAlt": "full size image of minecraft",
-                "Content": ""
+            "title": "Minecraft",
+            "thumbUrl": "images/projects/minecraft.png",
+            "thumbAlt": "minecraft thumbnail",
+            "modal": {
+                "liveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
+                "imgUrl": "images/projects/minecraft-full.png",
+                "mobileimgUrl": "images/projects/minecraft-full-mobile.png",
+                "imgAlt": "full size image of minecraft",
+                "content": ""
             }
         }
     ]
