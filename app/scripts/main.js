@@ -46,20 +46,23 @@
 
     // Render compiled handlebars templates
     function renderDataVisualsTemplate(data) {
+        renderHandlebarsTemplate('templates/menuListTemplate.hbs', '.main__navigation', data);
+        renderHandlebarsTemplate('templates/welcomeTemplate.hbs', '#welcome__section', data);
         renderHandlebarsTemplate('templates/projectTemplate.hbs', '#projects__items', data);
         renderHandlebarsTemplate('templates/modalTemplate.hbs', '#projects__modals', data);
         renderHandlebarsTemplate('templates/contactTemplate.hbs', '.info__column', data);
+        renderHandlebarsTemplate('templates/contactFormTemplate.hbs', '.form__column', data);
     }
 
     // Grab data
     function retriveData() {
-        var dataSource = window.location.pathname + 'content.json';
+        var dataSource = window.location.pathname + 'content-pl.json';
         $.getJSON(dataSource, renderDataVisualsTemplate);
     }
 
     // Contact form ajax submittion
     function contactFormSubmission() {
-        $('#contact__form').submit(function(e) {
+        $(document).on('submit', '#contact__form', function(e) {
             var self = $(this),
                 formValid = true;
 

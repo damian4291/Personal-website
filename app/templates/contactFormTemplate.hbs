@@ -1,0 +1,30 @@
+<form method="POST" id="contact__form" action="http://formspree.io/kontakt@damian-zawadzinski.pl">
+    <div class="form__group">
+        <label for="authorname">
+            Imię <span class="asteriks" title="To pole jest wymagane">*</span>
+        </label>
+        <input id="authorname"  class="form__control" type="text" name="author" placeholder="Pańska godność">
+    </div>
+    <div class="form__group">
+        <label for="emailaddress">
+            Email <span class="asteriks" title="To pole jest wymagane">*</span>
+        </label>
+        <input id="emailaddress" class="form__control" type="email" name="_replyto" placeholder="Adres email do korespondencji zwrotnej">
+    </div>
+    <div class="form__group">
+        <label for="titlemessage">
+            Tytuł <span class="asteriks" title="To pole jest wymagane">*</span>
+        </label>
+        <input id="titlemessage"  class="form__control" type="text" name="_subject" placeholder="Krótkie podsumowanie wiadomości">
+    </div>
+    <div class="form__group">
+        <label for="contentmessage">
+            Treść <span class="asteriks" title="To pole jest wymagane">*</span>
+        </label>
+        <textarea id="contentmessage" class="form__control" name="message"  rows="6"></textarea>
+    </div>
+    <div class="form__buttons">
+        <input type="text" name="_gotcha" style="display:none">
+        <button type="submit" class="button">Wyślij wiadomość<i class="fa fa-angle-right right"></i></button>
+    </div>
+</form>

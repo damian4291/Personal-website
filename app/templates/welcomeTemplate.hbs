@@ -1,0 +1,21 @@
+{{#about}}
+<div class="container">
+    <div class="row">
+        <img class="welcome__image" src="{{ image.src }}" alt="{{ image.alt }}">
+        <div class="welcome__message">
+            <h2 class="welcome__heading"><span class="sr-only">Damian Zawadziński</span></h2>
+            <div class="welcome__description">
+                <span class="divider--right">{{ yearsOld }}</span>Szczecin, Zachodniopomorskie
+                <div class="inner">
+                    {{ desc }}
+                </div>
+            </div>
+        </div>
+
+        <a class="arrow_scroll--down scroll--link" href="#work__section">
+            <i class="fa fa-chevron-down"></i>
+            <span class="sr-only">{{ arrowSr }}</span>
+        </a>
+    </div>
+</div>
+{{/about}}
