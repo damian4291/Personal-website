@@ -76,7 +76,7 @@
 
                     self.find('.button')
                         .addClass('button--error')
-                        .html('Proszę wypełnić wszystkie pola<i class="fa fa-pencil right"></i>');
+                        .html('Please fill out all fields<i class="fa fa-pencil right"></i>');
                 }
             });
 
@@ -95,14 +95,14 @@
                             .prop('disabled', true)
                             .removeClass('button--error')
                             .addClass('button--loading')
-                            .html('Wysyłanie wiadomości<i class="fa fa-spinner fa-spin right"></i>');
+                            .html('Sending message<i class="fa fa-spinner fa-spin right"></i>');
                     },
                     success: function(data) {
 
                         self.find('.button')
                             .removeClass('button--loading')
                             .addClass('button--success')
-                            .html('Wiadomość została wysłana<i class="fa fa-check right"></i>');
+                            .html('Message has been sent<i class="fa fa-check right"></i>');
 
                         self.find('.form__control, textarea')
                             .addClass('success');
@@ -129,7 +129,7 @@
                         self.find('.button')
                             .removeClass('button--loading')
                             .addClass('button--error')
-                            .html('Coś poszło nie tak, spróbuj ponownie<i class="fa fa-bug right"></i>');
+                            .html('Something went wrong, try again<i class="fa fa-bug right"></i>');
 
                         window.setTimeout(function() {
                             // Reset form
@@ -141,7 +141,7 @@
                             self.find('.button')
                                 .prop('disabled', false)
                                 .removeClass('button--error')
-                                .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
+                                .html('Send message<i class="fa fa-angle-right right"></i>');
 
                         }, 3000);
 

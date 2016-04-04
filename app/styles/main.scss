@@ -528,6 +528,7 @@ textarea {
 
     .inner {
         padding-top: .75em;
+        max-width: 21.5em;
     }
 }
 
@@ -1196,7 +1197,7 @@ textarea {
         width: calc(100% - 47px);
 
         &.has-live {
-            width: calc(100% - 243px);
+            width: calc(100% - 175px);
         }
     }
 
