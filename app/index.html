@@ -57,12 +57,44 @@
                 <div class="row">
                     <a class="header__logo scroll--link" href="#top"><span class="sr-only">Zawadziński</span></a>
                     <a class="landscape--trigger" href="#"><i class="fa fa-chevron-down"></i>MENU</a>
-                    <nav class="main__navigation" role="navigation"></nav>
+                    <nav class="main__navigation" role="navigation">
+                        <ul class="menu__list click__effect">
+                            <li class="menu__item">
+                                <a class="scroll--link" href="#welcome__section">O mnie</a>
+                            </li>
+                            <li class="menu__item">
+                                <a class="scroll--link" href="#work__section">Realizacje</a>
+                            </li>
+                            <li class="menu__item">
+                                <a class="scroll--link" href="#contact__section">Kontakt</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </header>
         <main class="main__container">
-            <section id="welcome__section" class="section__container"></section>
+            <section id="welcome__section" class="section__container">
+                <div class="container">
+                    <div class="row">
+                        <img class="welcome__image" src="images/twarz.png" alt="Model z Mediolanu">
+                        <div class="welcome__message">
+                            <h2 class="welcome__heading"><span class="sr-only">Damian Zawadziński</span></h2>
+                            <div class="welcome__description">
+                                <span class="divider--right">21 lat</span>Szczecin, Zachodniopomorskie
+                                <div class="inner">
+                                    Zajmuję się tworzeniem stron i aplikacji internetowych, dbam o detale na które mało kto zwraca uwagę.
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="arrow_scroll--down scroll--link" href="#work__section">
+                            <i class="fa fa-chevron-down"></i>
+                            <span class="sr-only">Przewiń w doł</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
             <section id="work__section" class="section__container">
                 <div class="container">
                     <h2 class="section__heading">
@@ -79,7 +111,38 @@
                     </h2>
                     <div class="row">
                         <div class="col-sm-12 col-md-5 info__column"></div>
-                        <div class="col-sm-12 col-md-7 form__column"></div>
+                        <div class="col-sm-12 col-md-7 form__column">
+                            <form method="POST" id="contact__form" action="http://formspree.io/kontakt@damian-zawadzinski.pl">
+                                <div class="form__group">
+                                    <div class="form__group">
+                                        <label for="authorname">
+                                            Imię <span class="asteriks" title="To pole jest wymagane">*</span>
+                                        </label>
+                                        <input id="authorname"  class="form__control" type="text" name="author" placeholder="Pańska godność">
+                                    </div>
+                                    <label for="emailaddress">
+                                        Email <span class="asteriks" title="To pole jest wymagane">*</span>
+                                    </label>
+                                    <input id="emailaddress" class="form__control" type="email" name="_replyto" placeholder="Adres email do korespondencji zwrotnej">
+                                </div>
+                                <div class="form__group">
+                                    <label for="titlemessage">
+                                        Tytuł <span class="asteriks" title="To pole jest wymagane">*</span>
+                                    </label>
+                                    <input id="titlemessage"  class="form__control" type="text" name="_subject" placeholder="Krótkie podsumowanie wiadomości">
+                                </div>
+                                <div class="form__group">
+                                    <label for="contentmessage">
+                                        Treść <span class="asteriks" title="To pole jest wymagane">*</span>
+                                    </label>
+                                    <textarea id="contentmessage" class="form__control" name="message"  rows="6"></textarea>
+                                </div>
+                                <div class="form__buttons">
+                                    <input type="text" name="_gotcha" style="display:none">
+                                    <button type="submit" class="button">Wyślij wiadomość<i class="fa fa-angle-right right"></i></button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </section>
