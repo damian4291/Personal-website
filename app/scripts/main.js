@@ -13,7 +13,7 @@
 
     Handlebars.registerHelper('imgModal', function() {
         var dekstop_img = Handlebars.escapeExpression(this.modal.imgUrl),
-            mobile_img = Handlebars.escapeExpression(this.modal.mobileImgUrl),
+            mobile_img = Handlebars.escapeExpression(this.modal.mobileimgUrl),
             img_alt = Handlebars.escapeExpression(this.modal.imgAlt);
 
         // Check if mobile (touch) device and return different image
