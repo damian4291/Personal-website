@@ -22,7 +22,11 @@
             </div>
         {{/if}}
         {{!-- Render different image for mobile and desktop --}}
-        {{ imgModal }}
+        <picture class="modal__image">
+            <source media="(min-width: 48em)" srcset="{{ modal.imgUrl }}">
+            <source srcset="{{ modal.mobileimgUrl }}">
+            <img src="{{ modal.mobileimgUrl }}" alt="{{ modal.imgAlt }}">
+        </picture>
     </div>
 </div>
 {{/projects}}

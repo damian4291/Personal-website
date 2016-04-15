@@ -11,19 +11,6 @@
         isWebkit:   'WebkitAppearance' in document.documentElement.style
     };
 
-    Handlebars.registerHelper('imgModal', function() {
-        var dekstop_img = Handlebars.escapeExpression(this.modal.imgUrl),
-            mobile_img = Handlebars.escapeExpression(this.modal.mobileimgUrl),
-            img_alt = Handlebars.escapeExpression(this.modal.imgAlt);
-
-        // Check if mobile (touch) device and return different image
-        if ( typeof window.ontouchstart === 'object' ) {
-            return new Handlebars.SafeString('<img  class="modal__image" src="' + mobile_img + '" alt="' + img_alt + '" />');
-        } else {
-            return new Handlebars.SafeString('<img  class="modal__image" src="' + dekstop_img + '" alt="' + img_alt + '" />');
-        }
-    });
-
     // Render handlebars templates via AJAX
     function getTemplateAjax(path, callback) {
         var source, template;
