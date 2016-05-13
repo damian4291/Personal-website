@@ -13,8 +13,8 @@
 
     Handlebars.registerHelper('imgModal', function() {
         var dekstop_img = Handlebars.escapeExpression(this.modal.imgUrl),
-            mobile_img = Handlebars.escapeExpression(this.modal.mobileimgUrl),
-            img_alt = Handlebars.escapeExpression(this.modal.imgAlt);
+            mobile_img  = Handlebars.escapeExpression(this.modal.mobileimgUrl),
+            img_alt     = Handlebars.escapeExpression(this.modal.imgAlt);
 
         // Check if mobile (touch) device and return different image
         if ( typeof window.ontouchstart === 'object' ) {
@@ -24,7 +24,6 @@
         }
     });
 
-    // Render handlebars templates via AJAX
     function getTemplateAjax(path, callback) {
         var source, template;
         $.ajax({
@@ -37,7 +36,6 @@
         });
     }
 
-    // Function to render compiled handlebars templates
     function renderHandlebarsTemplate(withTemplate, inElement, withData) {
         getTemplateAjax(withTemplate, function(template) {
             $(inElement).html(template(withData));
@@ -60,7 +58,8 @@
     // Contact form ajax submittion
     function contactFormSubmission() {
         $('#contact__form').submit(function(e) {
-            var self = $(this),
+            var self      = $(this),
+                button    = self.find('.button'),
                 formValid = true;
 
             e.preventDefault();
@@ -74,11 +73,16 @@
                     formValid = false;
                     elem.addClass('error');
 
-                    self.find('.button')
+                    button
                         .addClass('button--error')
                         .html('Please fill out all fields<i class="fa fa-pencil right"></i>');
                 }
             });
+
+            // On submission error focus first invalid input
+            if (!formValid) {
+                self.find('.form__control.error:first').focus();
+            }
 
             if (formValid) {
                 $.ajax({
@@ -91,7 +95,7 @@
                         // Lock all inputs before send
                         self.find('.form__control, textarea').prop('disabled', true);
 
-                        self.find('.button')
+                        button
                             .prop('disabled', true)
                             .removeClass('button--error')
                             .addClass('button--loading')
@@ -99,7 +103,7 @@
                     },
                     success: function(data) {
 
-                        self.find('.button')
+                        button
                             .removeClass('button--loading')
                             .addClass('button--success')
                             .html('Message has been sent<i class="fa fa-check right"></i>');
@@ -107,8 +111,9 @@
                         self.find('.form__control, textarea')
                             .addClass('success');
 
-                            // After 3 seconds reset for to the initial version
+                            // After 3 seconds reset for to the initial state
                             window.setTimeout(function() {
+
                                 // Reset form
                                 self[0].reset();
 
@@ -117,33 +122,38 @@
                                     .removeClass('success')
                                     .prop('disabled', false);
 
-                                self.find('.button')
+                                button
                                     .prop('disabled', false)
                                     .removeClass('button--success')
-                                    .html('Wyślij wiadomość<i class="fa fa-angle-right right"></i>');
+                                    .html('Send a message<i class="fa fa-angle-right right"></i>');
 
                             }, 3500);
                     },
                     error: function(err) {
 
-                        self.find('.button')
+                        button
                             .removeClass('button--loading')
                             .addClass('button--error')
                             .html('Something went wrong, try again<i class="fa fa-bug right"></i>');
+
+                        self.find('.form__control, textarea')
+                            .addClass('error');
 
                         window.setTimeout(function() {
                             // Reset form
                             self[0].reset();
 
                             // Unlock all inputs
-                            self.find('.form__control, textarea').prop('disabled', false);
+                            self.find('.form__control, textarea')
+                                .removeClass('error')
+                                .prop('disabled', false);
 
-                            self.find('.button')
+                            button
                                 .prop('disabled', false)
                                 .removeClass('button--error')
                                 .html('Send message<i class="fa fa-angle-right right"></i>');
 
-                        }, 3000);
+                        }, 3500);
 
                     }
                 });
@@ -240,7 +250,8 @@
     function mainNav() {
         $('.menu__item').each(function() {
             var elem        = $(this),
-                elemLink    = elem.children('a');
+                elemLink    = elem.children('a'),
+                dropdownElem;
 
             // Check if element has dropdown menu
             if ( elem.children('.dropdown__menu').length ) {
@@ -257,7 +268,7 @@
                 // Create toggler for first level dropdown.
                 toggleElem(elemLink, elem, '.menu__item', false);
 
-                var dropdownElem = elem.find('.sub--menu__item');
+                dropdownElem = elem.find('.sub--menu__item');
                 dropdownElem.each(function() {
                     var dropElem = $(this),
                         dropLink = dropElem.children('a');
@@ -299,7 +310,7 @@
     // Class toggler for mobile landscape view of main navigation
     function landscapeMenu() {
         var trigger = $('.landscape--trigger'),
-            nav = $('.main__navigation');
+            nav     = $('.main__navigation');
 
         trigger.click(function(e) {
             e.preventDefault();

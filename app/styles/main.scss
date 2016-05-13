@@ -211,6 +211,11 @@ textarea {
         &::-webkit-input-placeholder { color: lighten(red, 30%) }
         &::-moz-placeholder { color: lighten(red, 30%) }
         &:-ms-input-placeholder { color: lighten(red, 30%)}
+        &:focus {
+            color: lighten(red, 12%);
+            border-color: lighten(red, 33%);
+            background-color: lighten(red, 46%);
+        }
     }
 
     &.success {
@@ -1247,6 +1252,7 @@ textarea {
     .form__column {
         margin-top: 0;
         padding-top: 0;
+        padding-left: 1.25em;
         border-top: 0;
         border-left: .0625em solid $form-column-border-color;
     }
