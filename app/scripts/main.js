@@ -12,16 +12,12 @@
     };
 
     Handlebars.registerHelper('imgModal', function() {
-        var dekstop_img = Handlebars.escapeExpression(this.modal.imgUrl),
-            mobile_img  = Handlebars.escapeExpression(this.modal.mobileimgUrl),
-            img_alt     = Handlebars.escapeExpression(this.modal.imgAlt);
+        var dekstopImg = Handlebars.escapeExpression(this.modal.imgUrl),
+            mobileImg  = Handlebars.escapeExpression(this.modal.mobileimgUrl),
+            imgAlt     = Handlebars.escapeExpression(this.modal.imgAlt),
+            imgSize    = typeof window.ontouchstart === 'object' ? mobileImg : dekstopImg;
 
-        // Check if mobile (touch) device and return different image
-        if ( typeof window.ontouchstart === 'object' ) {
-            return new Handlebars.SafeString('<img  class="modal__image" src="' + mobile_img + '" alt="' + img_alt + '" />');
-        } else {
-            return new Handlebars.SafeString('<img  class="modal__image" src="' + dekstop_img + '" alt="' + img_alt + '" />');
-        }
+            return new Handlebars.SafeString('<img  class="modal__image" data-src="' + imgSize + '" alt="' + imgAlt + '" />');
     });
 
     function getTemplateAjax(path, callback) {
@@ -391,9 +387,8 @@
 
     function backToTop(element) {
         function fadeElem() {
-            var screenScroll = $(window).scrollTop(),
-                sectionHeight = $('#welcome__section').outerHeight();
-
+            var screenScroll    = $(window).scrollTop(),
+                sectionHeight   = $('#welcome__section').outerHeight();
 
             // Toggle class for element if its not mobile device and scroll top of screen is in half of second section.
             if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight / 2 ) {
@@ -427,8 +422,10 @@
 
         // Click element to trigger modal
         $(document).on('click', '.work__box', function(e) {
-            var modalId = $(this).attr('href'),
-                close = $(modalId).find('.close__button');
+            var modalId     = $(this).attr('href'),
+                modalImg    = $(modalId).find('.modal__image'),
+                close       = $(modalId).find('.close__button'),
+                spinner     = $(modalId).find('.spinner');
 
             function closeModal() {
                 body.removeClass('overflow-hidden');
@@ -458,6 +455,18 @@
                 body.addClass('overflow-hidden');
                 $(modalId).addClass('active in').one('animationend webkitAnimationEnd mozAnimationEnd', function() {
                     $(this).removeClass('in');
+
+                    // Lazy loading for modal image
+                    if( !modalImg.hasClass('loaded') ) {
+                        modalImg.attr('src', modalImg.data('src'))
+                        .on('load', function() {
+                            $(this)
+                                .addClass('loaded')
+                                .removeAttr('data-src');
+
+                            spinner.remove();
+                        });
+                    }
                 });
             }
 
