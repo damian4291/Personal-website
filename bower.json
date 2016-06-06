@@ -7,14 +7,6 @@
     "jquery": "~2.2.1",
     "handlebars": "^4.0.5"
   },
-  "overrides": {
-    "font-awesome": {
-      "main": [
-        "scss/font-awesome.scss",
-        "fonts/*"
-      ]
-    }
-  },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5"

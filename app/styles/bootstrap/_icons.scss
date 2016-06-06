@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'icomoon';
+    src:
+        url('../fonts/icomoon.ttf') format('truetype'),
+        url('../fonts/icomoon.woff') format('woff'),
+        url('../fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 icomoon;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-fw {
+    width: 1.28571429em;
+    text-align: center;
+}
+
+.fa-spin {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+.fa-envelope-o:before {
+    content: $fa-envelope-o;
+}
+.fa-check:before {
+    content: $fa-check;
+}
+.fa-times:before {
+    content: $fa-times;
+}
+.fa-pencil:before {
+    content: $fa-pencil;
+}
+.fa-chevron-right:before {
+    content: $fa-chevron-right;
+}
+.fa-arrow-up:before {
+    content: $fa-arrow-up;
+}
+.fa-arrow-down:before {
+    content: $fa-arrow-down;
+}
+.fa-chevron-top:before {
+    content: $fa-chevron-top;
+}
+.fa-chevron-down:before {
+    content: $fa-chevron-down;
+}
+.fa-external-link:before {
+    content: $fa-external-link;
+}
+.fa-github:before {
+    content: $fa-github;
+}
+.fa-linkedin:before {
+    content: $fa-linkedin;
+}
+.fa-angle-left:before {
+    content: $fa-angle-left;
+}
+.fa-angle-right:before {
+    content: $fa-angle-right;
+}
+.fa-angle-top:before {
+    content: $fa-angle-top;
+}
+.fa-angle-down:before {
+    content: $fa-angle-down;
+}
+.fa-spinner:before {
+    content: $fa-spinner;
+}
