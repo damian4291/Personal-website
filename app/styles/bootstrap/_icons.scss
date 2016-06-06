@@ -38,54 +38,93 @@
     }
 }
 
-.fa-envelope-o:before {
-    content: $fa-envelope-o;
+.fa-envelope-o {
+    &:before {
+        content: $fa-envelope-o;
+    }
 }
-.fa-check:before {
-    content: $fa-check;
+.fa-check {
+    &:before {
+        content: $fa-check;
+    }
 }
-.fa-times:before {
-    content: $fa-times;
+.fa-times {
+    &:before {
+        content: $fa-times;
+    }
 }
-.fa-pencil:before {
-    content: $fa-pencil;
+.fa-pencil {
+    &:before {
+        content: $fa-pencil;
+    }
 }
-.fa-chevron-right:before {
-    content: $fa-chevron-right;
+.fa-chevron-right {
+    &:before {
+        content: $fa-chevron-right;
+    }
 }
-.fa-arrow-up:before {
-    content: $fa-arrow-up;
+.fa-arrow-up {
+    &:before {
+        content: $fa-arrow-up;
+    }
 }
-.fa-arrow-down:before {
-    content: $fa-arrow-down;
+.fa-arrow-down {
+    &:before {
+        content: $fa-arrow-down;
+    }
 }
-.fa-chevron-top:before {
-    content: $fa-chevron-top;
+.fa-chevron-top {
+    &:before {
+        content: $fa-chevron-top;
+    }
 }
-.fa-chevron-down:before {
-    content: $fa-chevron-down;
+.fa-chevron-down {
+    &:before {
+        content: $fa-chevron-down;
+    }
 }
-.fa-external-link:before {
-    content: $fa-external-link;
+.fa-external-link {
+    &:before {
+        content: $fa-external-link;
+    }
 }
-.fa-github:before {
-    content: $fa-github;
+.fa-github {
+    &:before {
+        content: $fa-github;
+    }
 }
-.fa-linkedin:before {
-    content: $fa-linkedin;
+.fa-hand-o-left {
+    &:before {
+        content: $fa-hand-o-left;
+    }
 }
-.fa-angle-left:before {
-    content: $fa-angle-left;
+.fa-linkedin {
+    &:before {
+        content: $fa-linkedin;
+    }
 }
-.fa-angle-right:before {
-    content: $fa-angle-right;
+.fa-angle-left {
+    &:before {
+        content: $fa-angle-left;
+    }
 }
-.fa-angle-top:before {
-    content: $fa-angle-top;
+.fa-angle-right {
+    &:before {
+        content: $fa-angle-right;
+    }
 }
-.fa-angle-down:before {
-    content: $fa-angle-down;
+.fa-angle-top {
+    &:before {
+        content: $fa-angle-top;
+    }
 }
-.fa-spinner:before {
-    content: $fa-spinner;
+.fa-angle-down {
+    &:before {
+        content: $fa-angle-down;
+    }
+}
+.fa-spinner {
+    &:before {
+        content: $fa-spinner;
+    }
 }

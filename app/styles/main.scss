@@ -794,6 +794,12 @@ textarea {
 
 .modal__image {
     display: block;
+    opacity: 1;
+    transition: opacity 0.3s;
+
+    &[data-src] {
+        opacity: 0;
+    }
 
     .modal__content + & {
         margin-top: 1.25em;
@@ -1325,15 +1331,6 @@ textarea {
 
     .modal__content {
         font-size: 1.25em;
-    }
-
-    .modal__image {
-        opacity: 1;
-        transition: opacity 0.3s;
-
-        &[data-src] {
-            opacity: 0;
-        }
     }
 }
 
