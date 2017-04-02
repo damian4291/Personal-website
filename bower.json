@@ -1,10 +1,8 @@
 {
-  "name": "sajt",
+  "name": "Damian Zawadzinski - Portfolio",
   "private": true,
   "dependencies": {
-    "font-awesome": "~4.5.0",
     "modernizr": "~2.8.1",
-    "jquery": "~2.2.1",
     "handlebars": "^4.0.5"
   },
   "devDependencies": {

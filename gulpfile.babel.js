@@ -17,7 +17,7 @@ gulp.task('styles', () => {
       precision: 10,
       includePaths: ['.']
     }).on('error', $.sass.logError))
-    .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'IE <= 10']}))
+    .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'IE >= 10']}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
@@ -65,12 +65,21 @@ gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles', 'scripts'], () => {
-  return gulp.src('app/*.html')
-    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cssnano()))
-    .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
-    .pipe(gulp.dest('dist'));
+    return gulp.src('app/*.html')
+        .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+        .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
+        .pipe($.if(/\.css$/, $.cssnano({safe: true, autoprefixer: false})))
+        .pipe($.if(/\.html$/, $.htmlmin({
+            collapseWhitespace: true,
+            minifyCSS: true,
+            minifyJS: {compress: {drop_console: true}},
+            processConditionalComments: true,
+            removeComments: true,
+            removeEmptyAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
+        })))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('images', () => {
@@ -119,6 +128,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   gulp.watch([
     'app/*.html',
     'app/*.json',
+    'app/scripts/**/*.js',
     'app/images/**/*',
     'app/templates/**/*',
     '.tmp/fonts/**/*'

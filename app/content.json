@@ -27,6 +27,42 @@
     ],
     "projects": [
         {
+            "title": "NSW Edu: Cluster planning",
+            "thumbUrl": "images/projects/nsw-edu.png",
+            "thumbAlt": "test",
+            "modal": {
+                "liveUrl": "http://damian-zawadzinski.pl/demo/nsw-edu",
+                "imgUrl": "images/projects/nsw-edu-full.png",
+                "mobileimgUrl": "images/projects/nsw-edu-full.png",
+                "imgAlt": "full size image of NSW Education",
+                "content": "Work for Squiz Australia. Coded design of additional page for NSW Department of Edutation 'Cluster planning'"
+            }
+        },
+        {
+            "title": "New RLSS Homepage",
+            "thumbUrl": "images/projects/rlss.png",
+            "thumbAlt": "test",
+            "modal": {
+                "liveUrl": "http://www.royallifesaving.com.au",
+                "imgUrl": "images/projects/rlss-full.png",
+                "mobileimgUrl": "images/projects/rlss-full-mobile.png",
+                "imgAlt": "full size image of RLSS",
+                "content": "Another project on which I worked for Squiz Australia. This new look of RLSS homepage. Also my task was to make whole site full responsive, that wasn't easy because site was created 5 years ago."
+            }
+        },
+        {
+            "title": "ESPL",
+            "thumbUrl": "images/projects/espl.png",
+            "thumbAlt": "test",
+            "modal": {
+                "liveUrl": "http://damian-zawadzinski.pl/demo/espl",
+                "imgUrl": "images/projects/espl-full.png",
+                "mobileimgUrl": "images/projects/espl-full-mobile.png",
+                "imgAlt": "full size image of ESPL",
+                "content": "One of the projects on which I worked for Squiz Australia. I was responsible for cut-up coding and implementation to Squiz Matrix CMS. Website is not live yet, my 'live preview' shows only what I have created."
+            }
+        },
+        {
             "title": "Baptcare",
             "thumbUrl": "images/projects/baptcare.png",
             "thumbAlt": "test",

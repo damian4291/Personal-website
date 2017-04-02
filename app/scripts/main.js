@@ -1,526 +1,570 @@
-(function($, window, document) {
+const GLOBALS = {
+    mobile:     '(max-width: 47.9375em)', /* max 767px */
+    landscape:  '(max-width: 47.9375em) and (max-height: 23.4375em)', /* max 767px & 375px */
+    tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
+    minTablet:  '(min-width: 48em)', /* min 768px */
+    desktop:    '(min-width: 62em)', /* min 992px */
+    isWebkit:   'WebkitAppearance' in document.documentElement.style
+}
 
-    'use strict';
+const ajaxRequest = (method, url, callback) => {
+    const XHR = new XMLHttpRequest();
 
-    var globals = {
-        mobile:     '(max-width: 47.9375em)', /* max 767px */
-        landscape:  '(max-width: 47.9375em) and (max-height: 23.4375em)', /* max 767px & 375px */
-        tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
-        minTablet:  '(min-width: 48em)', /* min 768px */
-        desktop:    '(min-width: 62em)', /* min 992px */
-        isWebkit:   'WebkitAppearance' in document.documentElement.style
-    };
+    XHR.open(method, url);
+    XHR.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+            callback(this.response);
+        } else {
+            new Error(`XHR:: ${this.statusText}`);
+        }
+    }
 
-    Handlebars.registerHelper('imgModal', function() {
-        var dekstopImg = Handlebars.escapeExpression(this.modal.imgUrl),
-            mobileImg  = Handlebars.escapeExpression(this.modal.mobileimgUrl),
-            imgAlt     = Handlebars.escapeExpression(this.modal.imgAlt),
-            imgSize    = typeof window.ontouchstart === 'object' ? mobileImg : dekstopImg;
+    XHR.onerror = (err) => new Error(`XHR:: ${err}`);
+    XHR.send();
+}
 
-            return new Handlebars.SafeString('<img  class="modal__image" data-src="' + imgSize + '" alt="' + imgAlt + '" />');
-    });
+Handlebars.registerHelper('imgModal', function() {
+    const dekstopImg = Handlebars.escapeExpression(this.modal.imgUrl);
+    const mobileImg  = Handlebars.escapeExpression(this.modal.mobileimgUrl);
+    const imgAlt     = Handlebars.escapeExpression(this.modal.imgAlt);
+    const imgSize    = typeof window.ontouchstart === 'object' ? mobileImg : dekstopImg;
 
-    function getTemplateAjax(path, callback) {
-        var source, template;
-        $.ajax({
-            url: path,
-            success: function(data) {
-                source = data;
-                template = Handlebars.compile(source);
-                if (callback) callback(template);
+    return new Handlebars.SafeString(`<img  class="modal__image" data-src="${imgSize}" alt="${imgAlt}" />`);
+});
+
+function updateYear(selector) {
+    var fullDate = new Date(),
+        actualYear = fullDate.getFullYear();
+
+    document.querySelector(selector).textContent = actualYear;
+}
+
+class HandleBarsTemplates {
+    constructor(settings = {}) {
+        this.settings = settings;
+        this.source = settings.dataUrl;
+        this.retriveData();
+    }
+
+    retriveData() {
+        ajaxRequest('GET', this.source, (data) => {
+            let jsonData = JSON.parse(data);
+            this.renderDataTemplates(jsonData);
+        });
+    }
+
+    renderDataTemplates(data) {
+        this.compileTemplate('templates/projectTemplate.hbs', '#projects__items', data);
+        this.compileTemplate('templates/contactTemplate.hbs', '.info__column', data);
+        this.compileTemplate('templates/modalTemplate.hbs', '#projects__modals', data, () => new ProjectModal());
+    }
+
+    compileTemplate(withTemplate, inElement, withData, callback) {
+        ajaxRequest('GET', withTemplate, (response) => {
+            const template = Handlebars.compile(response);
+            const templateTarget = document.querySelector(inElement);
+
+            templateTarget.innerHTML = template(withData);
+            if (callback && typeof callback === 'function') callback();
+        })
+    }
+}
+
+class ContactForm {
+    constructor() {
+        this.form = document.getElementById('contact__form');
+        this.formActionUrl = '//formspree.io/kontakt@damian-zawadzinski.pl';
+        this.formFields = this.form.querySelectorAll('.form__control');
+        this.emailField = document.getElementById('emailaddress');
+        this.submitButton = this.form.querySelector('.button');
+        this.formValid = true;
+
+        this.MESSAGES = {
+            default: 'Send a message<i class="fa fa-angle-right right"></i>',
+            error: 'Something went wrong, try again<i class="fa fa-bug right"></i>',
+            required: 'Please fill out all fields<i class="fa fa-pencil right"></i>',
+            wrongEmail: 'Please enter correct email address format<i class="fa fa-pencil right"></i>',
+            sending: 'Sending message<i class="fa fa-spinner fa-spin right"></i>',
+            sent: 'Message has been sent<i class="fa fa-check right"></i>'
+        }
+
+        this.formSubmitHandler = this.formSubmitHandler.bind(this);
+
+        this.attachListeners();
+    }
+
+    attachListeners() {
+        this.form.addEventListener('submit', this.formSubmitHandler);
+    }
+
+    formSubmitHandler(evt) {
+        evt.preventDefault();
+        this.formValid = true;
+
+        this.checkFieldsValidation();
+        this.validationFormActions();
+
+        if (this.formValid) this.sendData();
+    }
+
+    checkFieldsValidation() {
+        for (let i = 0; i < this.formFields.length; i++) {
+            this.formFields[i].classList.remove('error');
+
+            if (this.formFields[i].value.length === 0) {
+                this.formFields[i].classList.add('error');
+                this.formValid = false;
+            }
+        }
+    }
+
+    validationFormActions() {
+        if (!this.formValid) {
+            document.querySelector('.form__control.error').focus();
+
+            this.submitButton.classList.add('button--error');
+            this.submitButton.innerHTML = this.MESSAGES.required;
+
+            window.setTimeout( () => {
+                this.submitButton.classList.remove('button--error');
+                this.submitButton.innerHTML = this.MESSAGES.default;
+            }, 3500);
+
+        } else {
+
+            if( !this.emailValidation(this.emailField.value) ) {
+                this.formValid = false;
+                this.emailField.classList.add('error');
+                this.emailField.focus();
+
+                this.submitButton.classList.add('button--error');
+                this.submitButton.innerHTML = this.MESSAGES.wrongEmail;
+
+                window.setTimeout( () => {
+                    this.submitButton.classList.remove('button--error');
+                    this.submitButton.innerHTML = this.MESSAGES.default;
+                }, 3500);
+            }
+
+        }
+    }
+
+    emailValidation(emailAddress) {
+        const pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+        return pattern.test(emailAddress);
+    }
+
+    formObjData(form) {
+        let dataObj = {};
+
+        for (let i = 0; i < form.elements.length; i++) {
+            if (form.elements[i].value === '') continue;
+
+            switch (form.elements[i].nodeName) {
+                case 'INPUT':
+                case 'TEXTAREA':
+                case 'BUTTON':
+                    dataObj[form.elements[i].name] = form.elements[i].value
+                break;
+            }
+        }
+
+        return JSON.stringify(dataObj);
+    }
+
+    beforeDataSend() {
+        for (let i = 0; i < this.formFields.length; i++) {
+            this.formFields[i].disabled = true;
+        }
+
+        this.submitButton.disabled = true;
+        this.submitButton.classList.remove('button--error');
+        this.submitButton.classList.add('button--loading');
+        this.submitButton.innerHTML = this.MESSAGES.sending;
+    }
+
+    successDataSend() {
+        this.submitButton.classList.remove('button--loading');
+        this.submitButton.classList.add('button--success');
+        this.submitButton.innerHTML = this.MESSAGES.sent;
+
+        for (let i = 0; i < this.formFields.length; i++) {
+            this.formFields[i].classList.add('success');
+        }
+
+        window.setTimeout( () => {
+            for (let i = 0; i < this.formFields.length; i++) {
+                this.formFields[i].classList.remove('success');
+                this.formFields[i].disabled = false;
+            }
+
+            this.form.reset();
+            this.submitButton.disabled = false;
+            this.submitButton.classList.remove('button--success');
+            this.submitButton.innerHTML = this.MESSAGES.default;
+        }, 3500);
+    }
+
+    errorDataSend() {
+        this.submitButton.classList.remove('button--loading');
+        this.submitButton.classList.add('button--error');
+        this.submitButton.innerHTML = this.MESSAGES.error;
+
+        for (let i = 0; i < this.formFields.length; i++) {
+            this.formFields[i].classList.add('error');
+        }
+
+        window.setTimeout( () => {
+            for (let i = 0; i < this.formFields.length; i++) {
+                this.formFields[i].classList.remove('error');
+                this.formFields[i].disabled = false;
+            }
+
+            this.form.reset();
+            this.submitButton.disabled = false;
+            this.submitButton.classList.remove('button--error');
+            this.submitButton.innerHTML = this.MESSAGES.default;
+        }, 3500);
+    }
+
+    sendData() {
+        this.beforeDataSend();
+        const data = this.formObjData(this.form);
+        const XHR = new XMLHttpRequest();
+
+        XHR.open('POST', this.formActionUrl);
+        XHR.setRequestHeader('Accept', 'application/json; charset=utf-8');
+        XHR.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+        XHR.onloadend = (response) => {
+            if (response.target.status >= 200 && response.target.status < 400) {
+                this.successDataSend();
+            } else {
+                this.errorDataSend();
+            }
+        }
+
+        XHR.send(data);
+    }
+}
+
+class MainNavigation {
+    constructor() {
+        this.header = document.querySelector('.header__container');
+        this.navigation = document.querySelector('.main__navigation');
+        this.navItems = document.querySelectorAll('.menu__item');
+        this.landscapeTrigger = document.querySelector('.landscape--trigger');
+
+        this.dropShadowHandler = this.dropShadowHandler.bind(this);
+        this.triggerHandler = this.triggerHandler.bind(this);
+        this.outsideClickHandler = this.outsideClickHandler.bind(this);
+
+        this.addDropDownAnchor();
+        this.dropShadowHandler();
+        this.attachListeners();
+    }
+
+    attachListeners() {
+        this.landscapeTrigger.addEventListener('click', this.triggerHandler);
+
+        document.addEventListener('scroll', () => {
+            this.dropShadowHandler();
+
+            if ( this.navigation.classList.contains('open') && Modernizr.mq(GLOBALS.landscape) ) {
+                this.navigation.classList.remove('open');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if ( this.navigation.classList.contains('open') && !Modernizr.mq(GLOBALS.landscape) ) {
+                this.navigation.classList.remove('open');
             }
         });
     }
 
-    function renderHandlebarsTemplate(withTemplate, inElement, withData) {
-        getTemplateAjax(withTemplate, function(template) {
-            $(inElement).html(template(withData));
-        });
-    }
+    menuListToggleVisibility(trigger, element, listElemClass, multiple = false) {
+        trigger.addEventListener('click', (evt) => {
+            evt.preventDefault();
 
-    // Render compiled handlebars templates
-    function renderDataVisualsTemplate(data) {
-        renderHandlebarsTemplate('templates/projectTemplate.hbs', '#projects__items', data);
-        renderHandlebarsTemplate('templates/modalTemplate.hbs', '#projects__modals', data);
-        renderHandlebarsTemplate('templates/contactTemplate.hbs', '.info__column', data);
-    }
+            if ( element.classList.contains('expanded') ) {
+                trigger.setAttribute('aria-expanded', true)
+            } else {
+                trigger.setAttribute('aria-expanded', false)
+            }
 
-    // Grab data
-    function retriveData() {
-        var dataSource = window.location.pathname + 'content.json';
-        $.getJSON(dataSource, renderDataVisualsTemplate);
-    }
+            if (!multiple) {
+                let listElems = documents.querySelectorAll(listElemClass);
 
-    // Contact form ajax submittion
-    function contactFormSubmission() {
-        $('#contact__form').submit(function(e) {
-            var self        = $(this),
-                button      = self.find('.button'),
-                emailButton = self.find('#emailaddress'),
-                formValid   = true;
-
-            e.preventDefault();
-
-            function isValidEmailAddress(emailAddress) {
-                var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-                return pattern.test(emailAddress);
-            };
-
-            self.find('.form__control').each(function() {
-                var elem = $(this);
-
-                elem.removeClass('error');
-
-                if ( elem.val().length == 0 ) {
-                    formValid = false;
-                    elem.addClass('error');
+                for (let i; i < listElems.length; i++) {
+                    listElems[i].classList.remove('expanded');
                 }
-            });
-
-            if (!formValid) {
-                // On submission error focus first invalid input
-                self.find('.form__control.error:first').focus();
-
-                button
-                    .addClass('button--error')
-                    .html('Please fill out all fields<i class="fa fa-pencil right"></i>');
 
             } else {
-
-                if( !isValidEmailAddress(emailButton.val()) ) {
-                    formValid = false;
-                    emailButton.addClass('error').focus();
-
-                    button
-                        .addClass('button--error')
-                        .html('Please enter correct format of an email address<i class="fa fa-pencil right"></i>');
-                }
+                element.classList.toggle('expanded');
             }
+        });
+    }
 
-            if (formValid) {
-                $.ajax({
-                    url: '//formspree.io/kontakt@damian-zawadzinski.pl',
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    beforeSend: function() {
+    addDropDownAnchor() {
+        for (let i = 0; i < this.navItems.length; i++) {
+            const navItem = this.navItems[i];
+            const navItemLink = navItem.getElementsByTagName('a')[0];
 
-                        // Lock all inputs before send
-                        self.find('.form__control, textarea').prop('disabled', true);
+            if (navItem.querySelector('.dropdown__menu') != null) {
+                navItemLink.appendChild('<i class="fa fa-chevron-right dropdown--icon right small"></i>');
+                navItemLink.setAttribute('role', 'button');
+                navItemLink.setAttribute('aria-haspopup', true);
+                navItemLink.setAttribute('aria-expanded', false);
 
-                        button
-                            .prop('disabled', true)
-                            .removeClass('button--error')
-                            .addClass('button--loading')
-                            .html('Sending message<i class="fa fa-spinner fa-spin right"></i>');
-                    },
-                    success: function(data) {
+                menuListToggleVisibility(navItemLink, navItem, '.menu__item', false);
 
-                        button
-                            .removeClass('button--loading')
-                            .addClass('button--success')
-                            .html('Message has been sent<i class="fa fa-check right"></i>');
+                const dropdownList = navItem.querySelector('.dropdown__menu');
+                const subNavItems = dropdownList.querySelectorAll('.sub--menu__item');
 
-                        self.find('.form__control, textarea')
-                            .addClass('success');
+                for (let i = 0; i < subNavItems.length; i++) {
+                    const subNavItem = subNavItems[i];
+                    const subNavLink = subNavItem.getElementsByTagName('a')[0];
 
-                            // After 3 seconds reset for to the initial state
-                            window.setTimeout(function() {
-
-                                // Reset form
-                                self[0].reset();
-
-                                // Unlock all inputs
-                                self.find('.form__control, textarea')
-                                    .removeClass('success')
-                                    .prop('disabled', false);
-
-                                button
-                                    .prop('disabled', false)
-                                    .removeClass('button--success')
-                                    .html('Send a message<i class="fa fa-angle-right right"></i>');
-
-                            }, 3500);
-                    },
-                    error: function(err) {
-
-                        button
-                            .removeClass('button--loading')
-                            .addClass('button--error')
-                            .html('Something went wrong, try again<i class="fa fa-bug right"></i>');
-
-                        self.find('.form__control, textarea')
-                            .addClass('error');
-
-                        window.setTimeout(function() {
-                            // Reset form
-                            self[0].reset();
-
-                            // Unlock all inputs
-                            self.find('.form__control, textarea')
-                                .removeClass('error')
-                                .prop('disabled', false);
-
-                            button
-                                .prop('disabled', false)
-                                .removeClass('button--error')
-                                .html('Send message<i class="fa fa-angle-right right"></i>');
-
-                        }, 3500);
-
+                    if (subNavItem.querySelector('.sub--dropdown__menu') != null) {
+                        subNavLink.appendChild('<i class="fa fa-chevron-right dropdown--icon right small"></i>');
+                        toggleElem(subNavLink, subNavItem, '.sub--menu__item', true);
                     }
-                });
-            }
-        });
-    }
-
-    // Material UI click style effect
-    function clickEffect(element, delay, centered) {
-        var circle, d, x, y, removeElem;
-
-        $(element).click(function(e) {
-            var elem = $(this);
-
-            // Check if there is existing element
-            if(elem.find('.clicked').length === 0) {
-                elem.append('<span class="clicked" />');
-            }
-
-            circle = elem.find('.clicked');
-            circle.removeClass('clicked--animate');
-
-            // Set equal height & width using largest value of element height/width
-            if( !circle.height() && !circle.width() ) {
-                d = Math.max( elem.outerWidth(), elem.outerHeight() );
-                circle.css({
-                    height: d,
-                    width: d
-                });
-            }
-
-            if (centered === true) {
-                // Set centered position (e.g. for circle/square buttons)
-                x = elem.outerWidth() / -2;
-                y = elem.outerHeight() / -2;
-
-                // Apply cursor position to the element
-                circle
-                    .addClass('clicked--animate')
-                    .css({
-                        marginLeft: x,
-                        marginTop: y,
-                        top: '50%',
-                        left: '50%'
-                    });
-            } else {
-                // Define cursor click position
-                x = e.pageX - elem.offset().left - circle.width() / 2;
-                y = e.pageY - elem.offset().top - circle.height() / 2;
-
-                // Apply cursor position to the element
-                circle
-                    .addClass('clicked--animate')
-                    .css({
-                        top: y,
-                        left: x
-                    });
-            }
-
-            // Renew timeout for clickable link.
-            clearTimeout(removeElem);
-
-            // Remove last clicked link after timeout.
-            removeElem = setTimeout(function() {
-                elem.find('.clicked').remove();
-            }, delay);
-
-            // Remove element from former link.
-            $(element).not(this).find('.clicked').remove();
-        });
-    }
-
-    // Class toggler for navigation
-    function toggleElem(trigger, element, listElem, multiple) {
-        // On click toggle class for list element
-        trigger.click(function(e) {
-            e.preventDefault();
-            element.toggleClass('expanded');
-
-            if ( element.hasClass('expanded') ) {
-                trigger.attr('aria-expanded', true);
-            } else {
-                trigger.attr('aria-expanded', false);
-            }
-
-            // Prevent toggling more than one dropdown
-            if ( multiple === false ) {
-                $(listElem).not(element).removeClass('expanded');
-            }
-        });
-    }
-
-    // Main navigation construction
-    function mainNav() {
-        $('.menu__item').each(function() {
-            var elem        = $(this),
-                elemLink    = elem.children('a'),
-                dropdownElem;
-
-            // Check if element has dropdown menu
-            if ( elem.children('.dropdown__menu').length ) {
-
-                // Append icon to the end of list element if child dropdown exists and apply ARIA tags
-                elemLink
-                    .append('<i class="fa fa-chevron-right dropdown--icon right small" />')
-                    .attr({
-                        'role': 'button',
-                        'aria-haspopup': true,
-                        'aria-expanded': false
-                    });
-
-                // Create toggler for first level dropdown.
-                toggleElem(elemLink, elem, '.menu__item', false);
-
-                dropdownElem = elem.find('.sub--menu__item');
-                dropdownElem.each(function() {
-                    var dropElem = $(this),
-                        dropLink = dropElem.children('a');
-
-                    // Check if element has dropdown menu
-                    if ( dropElem.children('.sub--dropdown__menu').length ) {
-
-                        dropLink.append('<i class="fa fa-chevron-right dropdown--icon right small" />');
-
-                        // Create toggler for first level dropdown.
-                        toggleElem(dropLink, dropElem, '.sub--menu__item', true);
-                    }
-                });
-            }
-        });
-
-        // Close dropdown by clicking outside of element
-        $(document).on('click', function(e) {
-            if ( $('.menu__item').hasClass('expanded') && !$(e.target).is('.menu__item *') ) {
-                $('.menu__item').removeClass('expanded');
-            }
-        });
-
-        function dropShadow() {
-            if( $(window).scrollTop() + $('.header__container').height() >= $('#work__section').offset().top ) {
-                $('.header__container').addClass('shadow');
-            } else {
-                $('.header__container').removeClass('shadow');
-            }
-        }
-
-        // Initialize
-        dropShadow();
-
-        // Update on scroll
-        $(window).on('scroll', dropShadow);
-    }
-
-    // Class toggler for mobile landscape view of main navigation
-    function landscapeMenu() {
-        var trigger = $('.landscape--trigger'),
-            nav     = $('.main__navigation');
-
-        trigger.click(function(e) {
-            e.preventDefault();
-            $('.main__navigation').toggleClass('open');
-        });
-
-        $(window).on('resize', function() {
-            if( nav.hasClass('open') && !Modernizr.mq(globals.landscape) ) {
-                nav.removeClass('open');
-            }
-        });
-
-        $(window).on('scroll', function() {
-            if( nav.hasClass('open') && Modernizr.mq(globals.landscape) ) {
-                nav.removeClass('open');
-            }
-        });
-    }
-
-    // Smooth scroll to section via href target
-    function scrollToSection(element, delay) {
-        $(element).click(function(e) {
-            var elem            = $(this),
-                target          = $(this).attr('href'),
-                headerHeight    = $('.header__container').outerHeight(),
-                body            = (globals.isWebkit) ? $('body') : $('html');
-
-            e.preventDefault();
-
-            // Unfocus clicked link
-            elem.blur();
-
-            // Prevent double click which destroys animate scroll
-            if( !elem.data('clicked') ) {
-                // trigger animation if window scroll top position isn't equal element offset top
-                if( $(window).scrollTop() + headerHeight !== $(target).offset().top) {
-
-                    // animated scroll to the second content section with header offset
-                    body.stop(true, true).animate({
-                        scrollTop: $(target).offset().top - headerHeight
-                    }, delay);
-
                 }
-
-                // Mark to ignore next click
-                elem.data('clicked', true);
-
-                // Unmark after 1,5 second
-                setTimeout(function() {
-                    elem.removeData('clicked');
-                }, 1500);
             }
+        }
+    }
 
-            // Stop the animation if the user scrolls manually (only during the animation)
-            body.on('scroll wheel', function() {
-                $(this).stop();
-                elem.removeData('clicked');
+    dropShadowHandler() {
+        const workSection = document.querySelector('#work__section');
+
+        if (window.scrollY + this.header.offsetHeight > workSection.offsetTop) {
+            this.header.classList.add('shadow');
+        } else {
+            this.header.classList.remove('shadow');
+        }
+    }
+
+    triggerHandler(evt) {
+        evt.preventDefault();
+        this.navigation.classList.toggle('open');
+    }
+
+    outsideClickHandler(evt) {
+        const navItem = document.querySelector(this.navItemClass);
+        const isActive = document.querySelector(`${this.navItemClass}.expanded`).length != null;
+
+        if ( isActive && e.target != document.querySelector(`${this.navItemClass} *`) ) {
+            navItem.classList.remove('expanded');
+        }
+    }
+}
+
+class ScrollToSection {
+    constructor(settings = {}) {
+        this.settings = settings;
+        this.clickTargets = document.querySelectorAll(settings.element);
+        this.delay = settings.delay;
+        this.handleClick = this.handleClick.bind(this);
+
+        this.attachListeners();
+    }
+
+    attachListeners() {
+        for (let i = 0; i < this.clickTargets.length; i++) {
+            this.clickTargets[i].addEventListener('click', this.handleClick);
+        }
+    }
+
+    animateScrollAction(destination) {
+        const start = window.pageYOffset;
+        const startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+
+        const headerHeight = document.querySelector('.header__container').offsetHeight;
+        const documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+        const destinationOffset = document.querySelector(destination).offsetTop - headerHeight;
+        const destinationOffsetToScroll = Math.round(documentHeight - destinationOffset < windowHeight ? documentHeight - windowHeight : destinationOffset);
+
+        const animateScrollAction = () => {
+            const now = 'now' in window.performance ? performance.now() : new Date().getTime();
+            const time = Math.min(1, ((now - startTime) / this.delay));
+            const timeFunction = time < 0.5 ? 4 * time * time * time : (time - 1) * (2 * time - 2) * (2 * time - 2) + 1;
+
+            window.scroll(0, Math.ceil((timeFunction * (destinationOffsetToScroll - start)) + start));
+
+            if (window.pageYOffset === destinationOffsetToScroll || window.pageYOffset === 0) return;
+
+            requestAnimationFrame(animateScrollAction);
+        }
+
+        animateScrollAction();
+    }
+
+    handleClick(evt) {
+        evt.preventDefault();
+        const target = (evt.target.href == undefined) ? evt.target.parentNode : evt.target;
+
+        target.blur();
+        this.animateScrollAction( target.getAttribute('href') );
+    }
+}
+
+class BackToTop {
+    constructor(elementClass = '.top--scroller') {
+        this.scrollButton = document.querySelector(elementClass);
+        this.welcomeSection = document.getElementById('welcome__section');
+
+        this.actionHandler = this.actionHandler.bind(this);
+
+        this.actionHandler();
+        this.attachListeners();
+    }
+
+    attachListeners() {
+        document.addEventListener('scroll', this.actionHandler);
+        document.addEventListener('resize', this.actionHandler);
+    }
+
+    actionHandler() {
+        const sectionHeight = this.welcomeSection.offsetHeight;
+
+        if ( Modernizr.mq(GLOBALS.desktop) &&  window.scrollY >= sectionHeight / 2) {
+            this.scrollButton.classList.add('visible');
+        } else if ( this.scrollButton.classList.contains('visible') ) {
+            this.scrollButton.classList.remove('visible');
+        }
+    }
+}
+
+class ProjectModal {
+    constructor() {
+        this.workSection = document.getElementById('work__section');
+        this.workBoxes = this.workSection.querySelectorAll('.work__box');
+
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.modalActionsIn = this.modalActionsIn.bind(this);
+        this.modalActionsOut = this.modalActionsOut.bind(this);
+
+        this.attachListeners();
+    }
+
+    attachListeners() {
+        for (let i = 0; i < this.workBoxes.length; i++) {
+            const workBox = this.workBoxes[i];
+            const modalId = workBox.getAttribute('href').substring(1);
+            const modalTarget = document.getElementById(modalId);
+            const modalImg = modalTarget.querySelector('.modal__image');
+            const modalClose = modalTarget.querySelector('.close__button');
+            const modalSpinner = modalTarget.querySelector('.spinner');
+
+            workBox.addEventListener('click', (evt) => {
+                this.showModal(modalTarget, modalImg, modalClose, modalSpinner, evt);
             });
+
+            modalClose.addEventListener('click', (evt) => {
+                this.closeModal(modalTarget, evt);
+            });
+        }
+    }
+
+    modalActionsIn(modalTarget, modalImg, modalSpinner) {
+        modalTarget.classList.remove('in');
+
+        if( !modalImg.classList.contains('loaded') ) {
+            modalImg.src = modalImg.getAttribute('data-src')
+            modalImg.onload = function() {
+                this.classList.add('loaded')
+                this.removeAttribute('data-src');
+                modalSpinner.parentNode.removeChild(modalSpinner);
+            }
+        }
+    }
+
+    modalActionsOut(modalTarget) {
+        modalTarget.classList.remove('active');
+        modalTarget.classList.remove('out');
+    }
+
+    showModal(modalTarget, modalImg, modalClose, modalSpinner, evt) {
+        let self = this;
+
+        evt.preventDefault();
+
+        document.body.classList.add('overflow-hidden');
+        modalTarget.classList.add('active');
+        modalTarget.classList.add('in');
+
+        modalTarget.addEventListener('animationend', function handler(evt) {
+            evt.currentTarget.removeEventListener(evt.type, handler);
+            self.modalActionsIn(modalTarget, modalImg, modalSpinner);
+        });
+
+        document.addEventListener('keyup', function handler(evt) {
+            if ( evt.keyCode == 27 && modalTarget.classList.contains('active') ) {
+                evt.currentTarget.removeEventListener(evt.type, handler);
+                self.closeModal(modalTarget, evt);
+            }
         });
     }
 
-    function backToTop(element) {
-        function fadeElem() {
-            var screenScroll    = $(window).scrollTop(),
-                sectionHeight   = $('#welcome__section').outerHeight();
+    closeModal(modalTarget, evt) {
+        document.body.classList.remove('overflow-hidden');
+        modalTarget.classList.add('out');
 
-            // Toggle class for element if its not mobile device and scroll top of screen is in half of second section.
-            if ( Modernizr.mq(globals.desktop) && screenScroll >= sectionHeight / 2 ) {
-                $(element).addClass('visible');
+        evt.preventDefault();
+        var self = this;
 
-            } else {
-                $(element).removeClass('visible');
-            }
-        }
-
-        // Initialize function
-        fadeElem();
-
-        // Update element on scroll
-        $(document).on('scroll', fadeElem);
-
-        // Check if resolution is not mobile
-        $(window).on('resize', fadeElem);
-    }
-
-    // Auto generate currect year for copyright
-    function updateYear(element) {
-        var fullDate = new Date(),
-            actualYear = fullDate.getFullYear();
-
-        $(element).text(actualYear);
-    }
-
-    function simpleModal() {
-        var body = $('body');
-
-        // Click element to trigger modal
-        $(document).on('click', '.work__box', function(e) {
-            var modalId     = $(this).attr('href'),
-                modalImg    = $(modalId).find('.modal__image'),
-                close       = $(modalId).find('.close__button'),
-                spinner     = $(modalId).find('.spinner');
-
-            function closeModal() {
-                body.removeClass('overflow-hidden');
-                $(modalId).addClass('out').one('animationend webkitAnimationEnd mozAnimationEnd', function() {
-                    $(this).removeClass('active out');
-                });;
-            }
-
-            // Unfocus modal trigger element
-            $(this).blur();
-
-            // Close modal
-            close.on('click', function(e) {
-                closeModal(modalId);
-                e.preventDefault();
-            });
-
-            // Close modal by pressing ESC key
-            $(document).keyup(function(e) {
-                if ( e.keyCode == 27 && $(modalId).hasClass('active') ) {
-                    closeModal(modalId);
-                }
-            });
-
-            // Check if target element exists
-            if( $(modalId).length ) {
-                body.addClass('overflow-hidden');
-                $(modalId).addClass('active in').one('animationend webkitAnimationEnd mozAnimationEnd', function() {
-                    $(this).removeClass('in');
-
-                    // Lazy loading for modal image
-                    if( !modalImg.hasClass('loaded') ) {
-                        modalImg.attr('src', modalImg.data('src'))
-                        .on('load', function() {
-                            $(this)
-                                .addClass('loaded')
-                                .removeAttr('data-src');
-
-                            spinner.remove();
-                        });
-                    }
-                });
-            }
-
-            e.preventDefault();
+        modalTarget.addEventListener('animationend', function handler(evt) {
+            evt.currentTarget.removeEventListener(evt.type, handler);
+            self.modalActionsOut(modalTarget);
         });
     }
+}
 
-    function mobileHorizontalWork() {
-        var container = $('#work__section'),
-            row = container.find('.row'),
-            hint = $('.scroll__reminder');
+class MobileHorizontalWork {
+    constructor() {
+        this.workSection = document.getElementById('work__section');
+        this.sectionRow = document.getElementById('projects__items');
+        this.hintLabel = this.workSection.querySelector('.scroll__reminder');
 
-        function scrollHint() {
-            if( row.scrollLeft() > 100 && Modernizr.mq(globals.mobile) ) {
-                hint.fadeOut();
-            } else {
-                hint.fadeIn();
-            }
-        }
+        this.scrollHintHandler = this.scrollHintHandler.bind(this);
+        this.setPropertiesHandler = this.setPropertiesHandler.bind(this);
 
-        // Update function o scroll
-        row.on('scroll', scrollHint);
-
-        function setProperties() {
-            if( Modernizr.mq(globals.mobile) ) {
-
-                hint.fadeIn();
-                container.addClass('mobile__view');
-
-            } else {
-                hint.fadeOut();
-                container.removeClass('mobile__view');
-            }
-        }
-
-        // Initialize function
-        setProperties();
-
-        // Update element on resize
-        $(window).on('resize', setProperties);
+        this.setPropertiesHandler();
+        this.attachListeners();
     }
 
-    // When DOM is ready...
-    $(function() {
-        retriveData();
-        contactFormSubmission();
-        clickEffect('.click__effect a, .button', 600, false);
-        mainNav();
-        landscapeMenu();
-        scrollToSection('.scroll--link', 650);
-        updateYear('.copyright__year');
-        backToTop('.top--scroller');
-        simpleModal();
-        mobileHorizontalWork();
-    });
+    attachListeners() {
+        this.sectionRow.addEventListener('scroll', this.scrollHintHandler);
+        window.addEventListener('resize', this.setPropertiesHandler);
+    }
 
-}(window.jQuery, window, document));
+    scrollHintHandler() {
+        if( this.sectionRow.scrollLeft > 100 && Modernizr.mq(GLOBALS.mobile) ) {
+            this.hintLabel.classList.add('hidden');
+        } else {
+            this.hintLabel.classList.remove('hidden');
+        }
+    }
+
+    setPropertiesHandler() {
+        if (Modernizr.mq(GLOBALS.mobile)) {
+            this.workSection.classList.add('mobile__view');
+            this.hintLabel.classList.remove('hidden');
+        } else {
+            this.workSection.classList.remove('mobile__view');
+            this.hintLabel.classList.add('hidden');
+        }
+    }
+}
+
+new ContactForm();
+new HandleBarsTemplates({ dataUrl: '//damian-zawadzinski.pl/content.json' });
+new MainNavigation();
+new MobileHorizontalWork();
+new BackToTop();
+new ScrollToSection({ element: '.scroll--link', delay: 500 });
+
+updateYear('.copyright__year');
