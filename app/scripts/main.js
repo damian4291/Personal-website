@@ -4,7 +4,9 @@ const GLOBALS = {
     tablet:     '(min-width: 48em) and (max-width: 61.9375em)', /*  min 768px & max 991px */
     minTablet:  '(min-width: 48em)', /* min 768px */
     desktop:    '(min-width: 62em)', /* min 992px */
-    isWebkit:   'WebkitAppearance' in document.documentElement.style
+    isWebkit:   'WebkitAppearance' in document.documentElement.style,
+    dataUrl:    '//damian-zawadzinski.pl/content.json',
+    fetchedData: null
 }
 
 const ajaxRequest = (method, url, callback) => {
@@ -23,6 +25,18 @@ const ajaxRequest = (method, url, callback) => {
     XHR.send();
 }
 
+const listenerOnce = (element, event, callback) => {
+    element.addEventListener(event, function handler(evt) {
+        evt.currentTarget.removeEventListener(evt.type, handler);
+        callback();
+    });
+}
+
+const updateYear = (selector) => {
+    const actualYear = new Date().getFullYear();
+    document.querySelector(selector).textContent = actualYear;
+}
+
 Handlebars.registerHelper('imgModal', function() {
     const dekstopImg = Handlebars.escapeExpression(this.modal.imgUrl);
     const mobileImg  = Handlebars.escapeExpression(this.modal.mobileimgUrl);
@@ -32,31 +46,16 @@ Handlebars.registerHelper('imgModal', function() {
     return new Handlebars.SafeString(`<img  class="modal__image" data-src="${imgSize}" alt="${imgAlt}" />`);
 });
 
-function updateYear(selector) {
-    var fullDate = new Date(),
-        actualYear = fullDate.getFullYear();
-
-    document.querySelector(selector).textContent = actualYear;
-}
-
 class HandleBarsTemplates {
     constructor(settings = {}) {
         this.settings = settings;
         this.source = settings.dataUrl;
-        this.retriveData();
-    }
-
-    retriveData() {
-        ajaxRequest('GET', this.source, (data) => {
-            let jsonData = JSON.parse(data);
-            this.renderDataTemplates(jsonData);
-        });
+        this.renderDataTemplates(settings.dataUrl);
     }
 
     renderDataTemplates(data) {
-        this.compileTemplate('templates/projectTemplate.hbs', '#projects__items', data);
+        this.compileTemplate('templates/projectTemplate.hbs', '#projects__items', data, () => new HistoryProjectModal() );
         this.compileTemplate('templates/contactTemplate.hbs', '.info__column', data);
-        this.compileTemplate('templates/modalTemplate.hbs', '#projects__modals', data, () => new ProjectModal());
     }
 
     compileTemplate(withTemplate, inElement, withData, callback) {
@@ -66,7 +65,7 @@ class HandleBarsTemplates {
 
             templateTarget.innerHTML = template(withData);
             if (callback && typeof callback === 'function') callback();
-        })
+        });
     }
 }
 
@@ -78,6 +77,7 @@ class ContactForm {
         this.emailField = document.getElementById('emailaddress');
         this.submitButton = this.form.querySelector('.button');
         this.formValid = true;
+        this.timeToReset = 3500;
 
         this.MESSAGES = {
             default: 'Send a message<i class="fa fa-angle-right right"></i>',
@@ -128,7 +128,7 @@ class ContactForm {
             window.setTimeout( () => {
                 this.submitButton.classList.remove('button--error');
                 this.submitButton.innerHTML = this.MESSAGES.default;
-            }, 3500);
+            }, this.timeToReset);
 
         } else {
 
@@ -143,7 +143,7 @@ class ContactForm {
                 window.setTimeout( () => {
                     this.submitButton.classList.remove('button--error');
                     this.submitButton.innerHTML = this.MESSAGES.default;
-                }, 3500);
+                }, this.timeToReset);
             }
 
         }
@@ -151,7 +151,6 @@ class ContactForm {
 
     emailValidation(emailAddress) {
         const pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-
         return pattern.test(emailAddress);
     }
 
@@ -203,7 +202,7 @@ class ContactForm {
             this.submitButton.disabled = false;
             this.submitButton.classList.remove('button--success');
             this.submitButton.innerHTML = this.MESSAGES.default;
-        }, 3500);
+        }, this.timeToReset);
     }
 
     errorDataSend() {
@@ -225,7 +224,7 @@ class ContactForm {
             this.submitButton.disabled = false;
             this.submitButton.classList.remove('button--error');
             this.submitButton.innerHTML = this.MESSAGES.default;
-        }, 3500);
+        }, this.timeToReset);
     }
 
     sendData() {
@@ -437,89 +436,126 @@ class BackToTop {
     }
 }
 
-class ProjectModal {
+class HistoryProjectModal {
     constructor() {
+        this.modal = document.getElementById('modal');
+        this.heading = this.modal.querySelector('.modal__title');
+        this.liveLink = this.modal.querySelector('.see__live');
+        this.image = this.modal.querySelector('.modal__image');
+        this.content = this.modal.querySelector('.modal__content');
+        this.closeButton = this.modal.querySelector('.close__button');
+
         this.workSection = document.getElementById('work__section');
         this.workBoxes = this.workSection.querySelectorAll('.work__box');
 
-        this.showModal = this.showModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.stateChangeHandler = this.stateChangeHandler.bind(this);
+        this.projectClickHandler = this.projectClickHandler.bind(this);
+        this.closeClickHandler = this.closeClickHandler.bind(this);
+        this.closeKeyPressHandler = this.closeKeyPressHandler.bind(this);
         this.modalActionsIn = this.modalActionsIn.bind(this);
         this.modalActionsOut = this.modalActionsOut.bind(this);
 
         this.attachListeners();
+        this.initCheck();
     }
 
     attachListeners() {
-        for (let i = 0; i < this.workBoxes.length; i++) {
-            const workBox = this.workBoxes[i];
-            const modalId = workBox.getAttribute('href').substring(1);
-            const modalTarget = document.getElementById(modalId);
-            const modalImg = modalTarget.querySelector('.modal__image');
-            const modalClose = modalTarget.querySelector('.close__button');
-            const modalSpinner = modalTarget.querySelector('.spinner');
+        this.closeButton.addEventListener('click', this.closeClickHandler);
+        window.addEventListener('popstate', this.stateChangeHandler);
 
-            workBox.addEventListener('click', (evt) => {
-                this.showModal(modalTarget, modalImg, modalClose, modalSpinner, evt);
-            });
-
-            modalClose.addEventListener('click', (evt) => {
-                this.closeModal(modalTarget, evt);
-            });
+        for (var i = 0; i < this.workBoxes.length; i++) {
+            this.workBoxes[i].addEventListener('click', this.projectClickHandler);
         }
     }
 
-    modalActionsIn(modalTarget, modalImg, modalSpinner) {
-        modalTarget.classList.remove('in');
+    initCheck() {
+        const modalId = window.location.hash.slice(1);
+        const selectorTarget = `.work__box[data-id="${modalId}"]`;
 
-        if( !modalImg.classList.contains('loaded') ) {
-            modalImg.src = modalImg.getAttribute('data-src')
-            modalImg.onload = function() {
-                this.classList.add('loaded')
-                this.removeAttribute('data-src');
-                modalSpinner.parentNode.removeChild(modalSpinner);
-            }
+        if (window.location.hash.length !== 0 && this.workSection.querySelector(selectorTarget) !== null) {
+            this.workSection.querySelector(selectorTarget).click();
         }
     }
 
-    modalActionsOut(modalTarget) {
-        modalTarget.classList.remove('active');
-        modalTarget.classList.remove('out');
-    }
-
-    showModal(modalTarget, modalImg, modalClose, modalSpinner, evt) {
-        let self = this;
-
+    projectClickHandler(evt, elem) {
         evt.preventDefault();
+
+        const target = (evt.target.tagName !== 'A') ? evt.target.parentNode : evt.target;
+        const modalId = target.getAttribute('data-id');
+        const modalData = GLOBALS.fetchedData.projects[modalId].modal;
+
+        history.pushState(modalData, null, target.href);
+        this.fillModalTemplate(modalId, modalData);
 
         document.body.classList.add('overflow-hidden');
-        modalTarget.classList.add('active');
-        modalTarget.classList.add('in');
+        this.modal.classList.add('active');
+        this.modal.classList.add('in');
 
-        modalTarget.addEventListener('animationend', function handler(evt) {
-            evt.currentTarget.removeEventListener(evt.type, handler);
-            self.modalActionsIn(modalTarget, modalImg, modalSpinner);
-        });
-
-        document.addEventListener('keyup', function handler(evt) {
-            if ( evt.keyCode == 27 && modalTarget.classList.contains('active') ) {
-                evt.currentTarget.removeEventListener(evt.type, handler);
-                self.closeModal(modalTarget, evt);
-            }
-        });
+        listenerOnce(this.modal, 'animationend', this.modalActionsIn);
+        document.addEventListener('keyup', this.closeKeyPressHandler);
+    }
+     
+    closeKeyPressHandler(evt) {
+        if ( evt.keyCode == 27 && this.modal.classList.contains('active') ) {
+            this.closeClickHandler(evt);
+        }
     }
 
-    closeModal(modalTarget, evt) {
-        document.body.classList.remove('overflow-hidden');
-        modalTarget.classList.add('out');
-
+    closeClickHandler(evt) {
         evt.preventDefault();
-        var self = this;
 
-        modalTarget.addEventListener('animationend', function handler(evt) {
-            evt.currentTarget.removeEventListener(evt.type, handler);
-            self.modalActionsOut(modalTarget);
-        });
+        document.body.classList.remove('overflow-hidden');
+        this.modal.classList.add('out');
+
+        history.pushState(null, null, window.location.origin);
+
+        listenerOnce(this.modal, 'animationend', this.modalActionsOut);
+        document.removeEventListener('keyup', this.closeKeyPressHandler);
+    }
+
+    modalActionsIn() {
+        this.modal.classList.remove('in');
+    }
+
+    modalActionsOut() {
+        this.modal.classList.remove('active');
+        this.modal.classList.remove('out');
+    }
+
+    stateChangeHandler(evt) {
+        if (evt.state !== null) {
+            const modalId = window.location.hash.slice(1);
+            this.fillModalTemplate(modalId, evt.state);
+
+            document.body.classList.add('overflow-hidden');
+            this.modal.classList.add('active');
+            this.modal.classList.add('in');
+
+            listenerOnce(this.modal, 'animationend', () => this.modalActionsIn() );
+        } else {
+            if ( this.modal.classList.contains('active') ) this.closeButton.click();
+        }
+    }
+
+    fillModalTemplate(id, data) {
+        if (id !== this.modal.getAttribute('data-id')) {
+            const imgUrl = (GLOBALS.desktop) ? data.imgUrl : data.mobileimgUrl;
+
+            this.heading.textContent = data.title;
+            this.image.src = imgUrl;
+            this.image.alt = data.imgAlt;
+            this.content.innerHTML = data.content;
+            this.modal.setAttribute('data-id', id);
+
+            if (data.liveUrl === undefined) {
+                this.heading.classList.remove('has-live');
+                this.liveLink.style.display = 'none';
+            } else {
+                this.heading.classList.add('has-live');
+                this.liveLink.removeAttribute('style');
+                this.liveLink.href = data.liveUrl;
+            }
+        }
     }
 }
 
@@ -561,10 +597,14 @@ class MobileHorizontalWork {
 }
 
 new ContactForm();
-new HandleBarsTemplates({ dataUrl: '//damian-zawadzinski.pl/content.json' });
 new MainNavigation();
 new MobileHorizontalWork();
 new BackToTop();
 new ScrollToSection({ element: '.scroll--link', delay: 500 });
 
 updateYear('.copyright__year');
+
+ajaxRequest('GET', GLOBALS.dataUrl, (response) => {
+    GLOBALS.fetchedData = JSON.parse(response);
+    new HandleBarsTemplates({ dataUrl: GLOBALS.fetchedData });
+});

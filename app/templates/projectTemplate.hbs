@@ -1,10 +1,12 @@
 {{#projects}}
-    <div class="col-sm-6 col-md-4">
-        <a href="#modal-{{ @index }}" class="work__box">
-            <img src="{{ thumbUrl }}" alt="{{ thumbAlt }}">
-            <div class="work__content">
-                {{ title }}
-            </div>
-        </a>
-    </div>
+    {{#each this}}
+        <div class="col-sm-6 col-md-4">
+            <a href="#{{ @key }}" class="work__box" data-id="{{ @key }}">
+                <img src="{{ thumbUrl }}" alt="{{ thumbAlt }}">
+                <div class="work__content">
+                    {{ title }}
+                </div>
+            </a>
+        </div>
+    {{/each}}
 {{/projects}}

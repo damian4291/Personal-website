@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="pl">
+<html class="no-js" lang="en">
     <head>
         <title>Damian Zawadziński :: Portfolio</title>
         <meta charset="utf-8">
@@ -81,7 +81,7 @@
                         <div class="welcome__message">
                             <h2 class="welcome__heading"><span class="sr-only">Damian Zawadziński</span></h2>
                             <div class="welcome__description">
-                                <span class="divider--right">21 years old</span>Szczecin, Poland
+                                <span class="divider--right">22 years old</span>Szczecin, Poland
                                 <div class="inner">
                                     I am developing websites and web applications.
                                     I care about details and love what I am doing.
@@ -102,7 +102,17 @@
                         <span>Projects</span>
                         <div class="scroll__reminder hidden"><i class="fa fa-hand-o-left left"></i>Slide to the left</div>
                     </h2>
-                    <div id="projects__items" class="row"></div>
+                    <div id="projects__items" class="row">
+                        <div class="spinner">
+                            <div class="spinner__inner">
+                                <div class="rect1"></div>
+                                <div class="rect2"></div>
+                                <div class="rect3"></div>
+                                <div class="rect4"></div>
+                                <div class="rect5"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section id="contact__section" class="section__container">
@@ -157,7 +167,22 @@
                 </div>
             </div>
         </footer>
-        <div id="projects__modals"></div>
+        <div id="modal" class="modal">
+            <div class="modal__container container">
+                <div class="modal__heading">
+                    <div class="modal__title"></div>
+                    <a class="see__live" href="" target="_blank" style="display:none">
+                        <i class="fa fa-external-link"></i>
+                        <span class="hidden-xs">See live</span>
+                    </a>
+                    <a href="#" class="close__button">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="modal__content"></div>
+                <img class="modal__image">
+            </div>
+        </div>
         <a href="#top" class="scroll--link top--scroller button button-transparent">
             <i class="fa fa-arrow-up"></i>
             <span class="sr-only">Go back to top</span>
