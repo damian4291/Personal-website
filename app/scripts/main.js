@@ -5,6 +5,7 @@ const GLOBALS = {
     minTablet:  '(min-width: 48em)', /* min 768px */
     desktop:    '(min-width: 62em)', /* min 992px */
     isWebkit:   'WebkitAppearance' in document.documentElement.style,
+    email:      'kontakt@damian-zawadzinski.pl',
     dataUrl:    '//damian-zawadzinski.pl/content.json',
     fetchedData: null
 }
@@ -72,7 +73,7 @@ class HandleBarsTemplates {
 class ContactForm {
     constructor() {
         this.form = document.getElementById('contact__form');
-        this.formActionUrl = '//formspree.io/kontakt@damian-zawadzinski.pl';
+        this.formActionUrl = `//formspree.io/${GLOBALS.email}`;
         this.formFields = this.form.querySelectorAll('.form__control');
         this.emailField = document.getElementById('emailaddress');
         this.submitButton = this.form.querySelector('.button');

@@ -29,7 +29,7 @@
         "nsw-edu-cluster-planning": {
             "title": "NSW Edu: Cluster planning",
             "thumbUrl": "images/projects/nsw-edu.png",
-            "thumbAlt": "test",
+            "thumbAlt": "NSW Edu thumbnail",
             "modal": {
                 "title": "NSW Edu: Cluster planning",
                 "liveUrl": "http://damian-zawadzinski.pl/demo/nsw-edu",
@@ -42,7 +42,7 @@
         "rlss-new-homepage": {
             "title": "New RLSS Homepage",
             "thumbUrl": "images/projects/rlss.png",
-            "thumbAlt": "test",
+            "thumbAlt": "RLSS thumbnail",
             "modal": {
                 "title": "New RLSS Homepage",
                 "liveUrl": "http://www.royallifesaving.com.au",
@@ -55,7 +55,7 @@
         "espl-website": {
             "title": "ESPL",
             "thumbUrl": "images/projects/espl.png",
-            "thumbAlt": "test",
+            "thumbAlt": "ESPL Thumbnail",
             "modal": {
                 "title": "ESPL",
                 "liveUrl": "http://damian-zawadzinski.pl/demo/espl",
@@ -65,10 +65,22 @@
                 "content": "One of the projects on which I worked for Squiz Australia. I was responsible for cut-up coding and implementation to Squiz Matrix CMS. Website is not live yet, my 'live preview' shows only what I have created."
             }
         },
+        "squiz-makelab-board": {
+            "title": "Squiz Makelab Devs Platform",
+            "thumbUrl": "images/projects/makelab.png",
+            "thumbAlt": "Squiz Makelab thumbnail",
+            "modal": {
+                "title": "Squiz Makelab Devs Platform",
+                "imgUrl": "images/projects/makelab-full.png",
+                "mobileimgUrl": "images/projects/makelab-full-mobile.png",
+                "imgAlt": "full size image of makelab platform",
+                "content": "Internal project for Squiz Poland, where clients are able to choose developers based on their skills. Design created and coded by me, built using React.js and Squiz Matrix CMS. For obvious reasons I can't show live version of platfom :)"
+            }            
+        },
         "baptcare-new-design": {
             "title": "Baptcare",
             "thumbUrl": "images/projects/baptcare.png",
-            "thumbAlt": "test",
+            "thumbAlt": "Baptcare thumbnail",
             "modal": {
                 "title": "Baptcare",
                 "liveUrl": "https://www.baptcare.org.au/",
@@ -81,7 +93,7 @@
         "tibia-ots-template": {
             "title": "Tibia OTS",
             "thumbUrl": "images/projects/tibiaots.png",
-            "thumbAlt": "tibia ots thumbnail",
+            "thumbAlt": "Tibia OTS thumbnail",
             "modal": {
                 "title": "Tibia OTS",
                 "liveUrl": "http://damian-zawadzinski.pl/demo/tibia",
@@ -94,7 +106,7 @@
         "hltv-redesign-suggestion": {
             "title": "HLTV.org redesign",
             "thumbUrl": "images/projects/hltv.png",
-            "thumbAlt": "hltv redesign thumbnail",
+            "thumbAlt": "HLTV.org redesign thumbnail",
             "modal": {
                 "title": "HLTV.org redesign",
                 "liveUrl": "http://damian-zawadzinski.pl/demo/hltv",
@@ -107,7 +119,7 @@
         "violetrix-forum-template": {
             "title": "Violetrix",
             "thumbUrl": "images/projects/violetrix.png",
-            "thumbAlt": "violetrix thumbnail",
+            "thumbAlt": "Violetrix thumbnail",
             "modal": {
                 "title": "Violetrix",
                 "imgUrl": "images/projects/violetrix-full.png",
@@ -119,7 +131,7 @@
         "helpbet-drupal-template": {
             "title": "Helpbet",
             "thumbUrl": "images/projects/helpbet.png",
-            "thumbAlt": "helpbet thumbnail",
+            "thumbAlt": "HelpBet thumbnail",
             "modal": {
                 "title": "Helpbet",
                 "imgUrl": "images/projects/helpbet-full.png",
@@ -131,7 +143,7 @@
         "minecraft-static-template": {
             "title": "Minecraft",
             "thumbUrl": "images/projects/minecraft.png",
-            "thumbAlt": "minecraft thumbnail",
+            "thumbAlt": "Minecraft thumbnail",
             "modal": {
                 "title": "Minecraft",
                 "liveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
