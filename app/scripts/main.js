@@ -552,6 +552,7 @@ class HistoryProjectModal {
 
         this.image.src = imgUrl;
         this.image.alt = data.imgAlt;
+        this.image.classList.remove('loaded');
 
         this.image.onload = () => {
             let spinner = this.modal.querySelector('.spinner');
