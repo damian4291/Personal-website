@@ -534,29 +534,56 @@ class HistoryProjectModal {
 
             listenerOnce(this.modal, 'animationend', () => this.modalActionsIn() );
         } else {
+            
             if ( this.modal.classList.contains('active') ) this.closeButton.click();
         }
     }
 
     fillModalTemplate(id, data) {
-        if (id !== this.modal.getAttribute('data-id')) {
-            const imgUrl = (GLOBALS.desktop) ? data.imgUrl : data.mobileimgUrl;
+        if ( id === this.modal.getAttribute('data-id') ) return;
 
-            this.heading.textContent = data.title;
-            this.image.src = imgUrl;
-            this.image.alt = data.imgAlt;
-            this.content.innerHTML = data.content;
-            this.modal.setAttribute('data-id', id);
+        const imgUrl = (GLOBALS.desktop) ? data.imgUrl : data.mobileimgUrl;
 
-            if (data.liveUrl === undefined) {
-                this.heading.classList.remove('has-live');
-                this.liveLink.style.display = 'none';
-            } else {
-                this.heading.classList.add('has-live');
-                this.liveLink.removeAttribute('style');
-                this.liveLink.href = data.liveUrl;
-            }
+        this.heading.textContent = data.title;
+        this.content.innerHTML = data.content;
+        this.modal.setAttribute('data-id', id);
+
+        this.imageSpinner(this.image, 'beforebegin');
+
+        this.image.src = imgUrl;
+        this.image.alt = data.imgAlt;
+
+        this.image.onload = () => {
+            let spinner = this.modal.querySelector('.spinner');
+            spinner.parentNode.removeChild(spinner);
+            this.image.classList.add('loaded');
+        };
+
+        if (data.liveUrl === undefined) {
+            this.heading.classList.remove('has-live');
+            this.liveLink.style.display = 'none';
+        } else {
+            this.heading.classList.add('has-live');
+            this.liveLink.removeAttribute('style');
+            this.liveLink.href = data.liveUrl;
         }
+    }
+
+    imageSpinner(target, position) {
+        const spinner = `
+            <div class="spinner white">
+                <div class="spinner__inner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </div>
+        `;
+
+        if (target !== undefined) 
+            target.insertAdjacentHTML(position, spinner);
     }
 }
 

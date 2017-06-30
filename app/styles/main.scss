@@ -69,17 +69,17 @@ textarea {
 }
 
 .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -65px;
-    margin-left: -33px;
+    margin-bottom: 3rem;
+
+    .modal__content + & {
+        margin-top: 1.75rem;
+    }
 }
 
 .spinner__inner {
     margin: 0 auto;
-    width: 66px;
-    height: 70px;
+    width: 4.125em;
+    height: 4.375em;
 }
 
 .spinner__inner > div {
@@ -95,6 +95,8 @@ textarea {
     &.rect3 {animation-delay: -0.8s }
     &.rect4 {animation-delay: -0.7s }
     &.rect5 {animation-delay: -0.6s }
+
+    .white & { background-color: #fff }
 }
 
 
@@ -815,11 +817,13 @@ textarea {
 
 .modal__image {
     display: block;
-    opacity: 1;
+    opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s;
 
-    &[data-src] {
-        opacity: 0;
+    &.loaded {
+        opacity: 1;
+        visibility: visible;
     }
 
     .modal__content + & {
