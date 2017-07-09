@@ -38,15 +38,6 @@ const updateYear = (selector) => {
     document.querySelector(selector).textContent = actualYear;
 }
 
-Handlebars.registerHelper('imgModal', function() {
-    const dekstopImg = Handlebars.escapeExpression(this.modal.imgUrl);
-    const mobileImg  = Handlebars.escapeExpression(this.modal.mobileimgUrl);
-    const imgAlt     = Handlebars.escapeExpression(this.modal.imgAlt);
-    const imgSize    = typeof window.ontouchstart === 'object' ? mobileImg : dekstopImg;
-
-    return new Handlebars.SafeString(`<img  class="modal__image" data-src="${imgSize}" alt="${imgAlt}" />`);
-});
-
 class HandleBarsTemplates {
     constructor(settings = {}) {
         this.settings = settings;
@@ -495,7 +486,7 @@ class HistoryProjectModal {
         listenerOnce(this.modal, 'animationend', this.modalActionsIn);
         document.addEventListener('keyup', this.closeKeyPressHandler);
     }
-     
+
     closeKeyPressHandler(evt) {
         if ( evt.keyCode == 27 && this.modal.classList.contains('active') ) {
             this.closeClickHandler(evt);
@@ -534,7 +525,7 @@ class HistoryProjectModal {
 
             listenerOnce(this.modal, 'animationend', () => this.modalActionsIn() );
         } else {
-            
+
             if ( this.modal.classList.contains('active') ) this.closeButton.click();
         }
     }
@@ -583,7 +574,7 @@ class HistoryProjectModal {
             </div>
         `;
 
-        if (target !== undefined) 
+        if (target !== undefined)
             target.insertAdjacentHTML(position, spinner);
     }
 }
