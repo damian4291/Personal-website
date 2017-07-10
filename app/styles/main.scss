@@ -1196,9 +1196,9 @@ textarea {
     }
 
     #welcome__section {
-        background: url('../images/welcome-background.svg') repeat-y center / 98% fixed $welcome-section-background;
-        background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
-        background: url('../images/welcome-background.svg') repeat-y center / 98% fixed, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
+        background: url('../images/welcome-background.png') repeat-y center / 98%, $welcome-section-background;
+        background: url('../images/welcome-background.png') repeat-y center / 98%, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
+        background: url('../images/welcome-background.png') repeat-y center / 98%, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
         margin-top: $dekstop-header-height;
 
         > .container {
