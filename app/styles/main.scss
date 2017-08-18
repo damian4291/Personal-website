@@ -813,6 +813,12 @@ textarea {
     color: $modal-content-color;
     font-size: 1.1em;
     line-height: 1.5;
+
+    a,
+    a:hover,
+    a:focus {
+        color: #46ede8;
+    }
 }
 
 .modal__image {
@@ -1200,6 +1206,7 @@ textarea {
         background: url('../images/welcome-background.png') repeat-y center / 98%, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
         background: url('../images/welcome-background.png') repeat-y center / 98%, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
         margin-top: $dekstop-header-height;
+        will-change: transform;
 
         > .container {
             .row {
