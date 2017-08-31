@@ -2,9 +2,9 @@
     "links": [
         {
             "icon": "fa-envelope-o",
-            "title": "kontakt@damian-zawadzinski.pl",
+            "title": "contact@dzawadzinski.com",
             "link": {
-                "href": "mailto://kontakt@damian-zawadzinski.pl",
+                "href": "mailto://contact@dzawadzinski.com",
                 "_blank": false
             }
         },

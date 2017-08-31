@@ -5,8 +5,8 @@ const GLOBALS = {
     minTablet:  '(min-width: 48em)', /* min 768px */
     desktop:    '(min-width: 62em)', /* min 992px */
     isWebkit:   'WebkitAppearance' in document.documentElement.style,
-    email:      'kontakt@damian-zawadzinski.pl',
-    dataUrl:    '//damian-zawadzinski.pl/content.json',
+    email:      'contact@dzawadzinski.com',
+    dataUrl:    '//dzawadzinski.com/content.json',
     fetchedData: null
 }
 
