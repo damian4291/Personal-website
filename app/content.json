@@ -26,6 +26,19 @@
         }
     ],
     "projects": {
+        "act-reveniue-office": {
+            "title": "ACT Revenue Office",
+            "thumbUrl": "images/projects/revenue.png",
+            "thumbAlt": "ACT revenue office thumbnail",
+            "modal": {
+                "title": "ACT Goverment Revenue Office",
+                "liveUrl": "http://damian-zawadzinski.pl/demo/revenue",
+                "imgUrl": "images/projects/revenue-full.jpg",
+                "mobileimgUrl": "images/projects/revenue-full.jpg",
+                "imgAlt": "full size image of ACT Revenue Office",
+                "content": "Another work for Squiz Australia. Coded design + implementation to Squiz Matrix CMS. <br> Official live site might be little bit different than initial project but it can be seen <a href='https://www.revenue.act.gov.au'>here</a>"
+            }
+        },
         "nsw-edu-cluster-planning": {
             "title": "NSW Edu: Cluster planning",
             "thumbUrl": "images/projects/nsw-edu.png",
