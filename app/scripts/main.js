@@ -620,7 +620,7 @@ new ContactForm();
 new MainNavigation();
 new MobileHorizontalWork();
 new BackToTop();
-new ScrollToSection({ element: '.scroll--link', delay: 500 });
+new ScrollToSection({ element: '.scroll__link', delay: 500 });
 
 updateYear('.copyright__year');
 

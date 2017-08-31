@@ -130,3 +130,31 @@
     right: percentage(($columns / $grid-columns));
   }
 }
+
+// Generate the xlarge columns
+@mixin make-xlg-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+  @media (min-width: $screen-xlg-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-xlg-column-offset($columns) {
+  @media (min-width: $screen-xlg-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-xlg-column-push($columns) {
+  @media (min-width: $screen-xlg-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-xlg-column-pull($columns) {
+  @media (min-width: $screen-xlg-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}

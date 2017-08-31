@@ -9,6 +9,9 @@ $global-font-type: 'Roboto', 'Helvetica Neue', Helvetica, Arial, Sans-serif;
 $global-page-background-color: #fff;
 $global-page-min-width: 20em;
 
+$global-selection-color: lighten(#181620, 15%);
+$global-selection-bg: #46ede8;
+
 $divider-color: #46ede8;
 
 // Z-index
@@ -133,8 +136,7 @@ $button-background-color: transparent;
 $button-background-color-hover: lighten(#a6a6a6, 30%);
 $button-border-color: darken(#fff, 25%);
 
-// icons
-
+// Icons
 $fa-envelope-o: "\f003";
 $fa-check: "\f00c";
 $fa-times: "\f00d";

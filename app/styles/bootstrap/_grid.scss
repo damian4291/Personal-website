@@ -10,6 +10,9 @@
   @media (min-width: $screen-lg-min) {
     width: $container-lg;
   }
+  @media (min-width: $screen-xlg-min) {
+    width: $container-xlg;
+  }
 }
 
 .container-fluid {
@@ -35,3 +38,8 @@
 @media (min-width: $screen-lg-min) {
   @include make-grid(lg);
 }
+
+@media (min-width: $screen-xlg-min) {
+  @include make-grid(xlg);
+}
+

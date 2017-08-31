@@ -57,6 +57,16 @@ a {
     }
 }
 
+::-moz-selection { 
+    color: $global-selection-color;
+    background: $global-selection-bg; 
+}
+
+::selection { 
+    color: $global-selection-color;
+    background: $global-selection-bg; 
+}
+
 img {
     width: 100%;
     height: auto;
@@ -131,7 +141,7 @@ textarea {
     margin-right: .5em;
 }
 
-.scroll--link:not(.header__logo) {
+.scroll__link:not(.header__logo) {
     &:after {
         content: "";
         display: block;
@@ -359,71 +369,70 @@ textarea {
         margin-top: .4em;
         margin-bottom: .4em;
 
-        > a {
-            display: block;
-            padding: .2em .75em;
-            text-transform: uppercase;
-            color: $mobile-menu-list-link-color;
-            font-size: 1em;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            transition: .1s box-shadow linear, .15s color linear, background-color .2s linear;
-
-            [class*="fa-"] {
-                color: $mobile-menu-list-link-icon-color;
-                margin-right: 0.35em;
-                display: none;
-                transition: .15s color linear;
-
-                &.right {
-                    margin-left: .75em;
-                    margin-right: 0;
-                    display: inline-block;
-                }
-
-                &.small {
-                    font-size: .65em;
-                    vertical-align: middle;
-                    margin-top: -.275em;
-                }
-            }
-
-            .dropdown--icon {
-                transition: transform .15s linear, color .15s linear;
-
-            }
-
-            &:hover,
-            &:focus {
-                color: $mobile-menu-list-link-color-hover;
-                outline: 0;
-                [class*="fa-"] { color: $mobile-menu-list-link-icon-color-hover }
-            }
-        }
-
-        &.expanded {
-            > a {
-                transition: .15s color linear, background-color .2s linear;
-                color: $mobile-menu-list-link-color-active;
-                &:hover { box-shadow: none }
-
-                [class*="fa-"] {
-                    color: $mobile-menu-list-link-icon-color-active;
-                }
-
-                .dropdown--icon {
-                    transform: rotate(90deg);
-                }
-            }
-
-            .dropdown__menu {
-                transition: opacity .25s linear;
-                display: block;
-            }
-        }
-
         &:last-child { border-right: 0 }
+    }
+}
+
+.menu__link {
+    display: block;
+    padding: .2em .75em;
+    text-transform: uppercase;
+    color: $mobile-menu-list-link-color;
+    font-size: 1em;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    transition: .1s box-shadow linear, .15s color linear, background-color .2s linear;
+
+    [class*="fa-"] {
+        color: $mobile-menu-list-link-icon-color;
+        margin-right: 0.35em;
+        display: none;
+        transition: .15s color linear;
+
+        &.right {
+            margin-left: .75em;
+            margin-right: 0;
+            display: inline-block;
+        }
+
+        &.small {
+            font-size: .65em;
+            vertical-align: middle;
+            margin-top: -.275em;
+        }
+    }
+
+    .dropdown--icon {
+        transition: transform .15s linear, color .15s linear;
+
+    }
+
+    &:hover,
+    &:focus {
+        color: $mobile-menu-list-link-color-hover;
+        outline: 0;
+        [class*="fa-"] { color: $mobile-menu-list-link-icon-color-hover }
+    }
+
+    .expanded & {
+        transition: .15s color linear, background-color .2s linear;
+        color: $mobile-menu-list-link-color-active;
+        &:hover { box-shadow: none }
+
+        [class*="fa-"] {
+            color: $mobile-menu-list-link-icon-color-active;
+        }
+
+        .dropdown--icon {
+            transform: rotate(90deg);
+        }
+
+        .dropdown__menu {
+            transition: opacity .25s linear;
+            display: block;
+        }
     }
 }
 
@@ -1096,53 +1105,42 @@ textarea {
         margin-right: 0;
         display: block;
         width: auto;
+
         > li {
             position: relative;
             border-right: 0;
             margin-top: 0;
             margin-bottom: 0;
-            > a {
-                color: $menu-list-link-color;
-                padding: 1em;
+        }
+    }
 
-                [class*="fa-"] {
-                    color: $menu-list-link-icon-color;
-                    display: inline-block;
-                    &.small {
-                        margin-top: -.155em;
-                    }
-                }
+    .menu__link {
+        padding: 1em;
 
-                &:hover,
-                &:focus {
-                    background: -webkit-linear-gradient(to bottom, rgba(190, 221, 244, 0) 0%, rgba(181, 230, 244, 0) 35%, rgba(164, 246, 243, 0.1) 100%);
-                    background: linear-gradient(to bottom, rgba(190, 221, 244, 0) 0%, rgba(181, 230, 244, 0) 35%, rgba(164, 246, 243, 0.1) 100%);
-                    color: $menu-list-link-color-hover;
-                    box-shadow: inset 0 -0.2em 0 0 $menu-list-link-border-bottom-hover;
-
-                    [class*="fa-"] {
-                        color: $menu-list-link-icon-color-hover;
-                    }
-                }
+        [class*="fa-"] {
+            color: $menu-list-link-icon-color;
+            display: inline-block;
+            &.small {
+                margin-top: -.155em;
             }
+        }
 
-            &.expanded {
-                background-color: $menu-list-background-active;
+        &:hover,
+        &:focus {
+            background: -webkit-linear-gradient(to bottom, rgba(190, 221, 244, 0) 0%, rgba(181, 230, 244, 0) 35%, rgba(164, 246, 243, 0.1) 100%);
+            background: linear-gradient(to bottom, rgba(190, 221, 244, 0) 0%, rgba(181, 230, 244, 0) 35%, rgba(164, 246, 243, 0.1) 100%);
+            color: $menu-list-link-color-hover;
+            box-shadow: inset 0 -0.2em 0 0 $menu-list-link-border-bottom-hover;
 
-                > a {
-                    color: $menu-list-link-color-active;
+            [class*="fa-"] { color: $menu-list-link-icon-color-hover }
+        } 
 
-                    [class*="fa-"] {
-                        color: $menu-list-link-icon-color-active;
-                    }
-
-                    &:hover {
-                        background: transparent;
-                    }
-                }
-
-                .dropdown__menu { display: block }
-            }
+        .expanded & {
+            color: $menu-list-link-color-active;
+            
+            [class*="fa-"] { color: $menu-list-link-icon-color-active }
+            &:hover { background: transparent }
+            .dropdown__menu { display: block }
         }
     }
 
