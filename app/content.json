@@ -1,7 +1,7 @@
 {
     "links": [
         {
-            "icon": "fa-envelope-o",
+            "icon": "envelope-o",
             "title": "contact@dzawadzinski.com",
             "link": {
                 "href": "mailto://contact@dzawadzinski.com",
@@ -9,7 +9,7 @@
             }
         },
         {
-            "icon": "fa-linkedin",
+            "icon": "linkedin",
             "title": "/damianzawadzinski",
             "link": {
                 "href": "https://pl.linkedin.com/in/damianzawadzinski",
@@ -17,7 +17,7 @@
             }
         },
         {
-            "icon": "fa-github",
+            "icon": "github",
             "title": "/damian4291",
             "link": {
                 "href": "https://github.com/damian4291",

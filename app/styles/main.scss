@@ -182,7 +182,7 @@ textarea {
     transition: all .15s linear;
     user-select: none;
 
-    .icon {
+    [data-icon] {
 
         &.left {
             margin-right: .5em;
@@ -967,10 +967,9 @@ textarea {
     padding-left: .3em;
     padding-right: .3em;
 
-    &.fa-github:before { margin-left: 3px }
-    &.fa-linkedin:before { margin-left: 2px }
-    &.fa-envelope-o:before { margin-left: 1px }
-
+    &[data-icon="github"]:before { margin-left: 3px }
+    &[data-icon="linkedin"]:before { margin-left: 2px }
+    &[data-icon="envelope-o"]:before { margin-left: 1px }
 }
 
 .footer__container {

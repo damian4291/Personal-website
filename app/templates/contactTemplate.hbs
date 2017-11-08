@@ -2,9 +2,7 @@
 <ul class="contact__links">
     {{#each links}}
         <li>
-            <span class="icon contact__icon">
-                <span class="icon__image icon--equal" data-icon="{{ icon }}" aria-hidden="true"></span>
-            </span>
+            <span class="contact__icon icon__image icon--equal" data-icon="{{ icon }}" aria-hidden="true"></span>
             <a href="{{ link.href }}" {{#if link._blank}}target="_blank"{{/if}}>{{ title }}</a>
         </li>
     {{/each}}

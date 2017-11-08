@@ -80,12 +80,12 @@ class ContactForm {
         this.timeToReset = 3500;
 
         this.MESSAGES = {
-            default: 'Send a message<i class="fa fa-angle-right right"></i>',
-            error: 'Something went wrong, try again<i class="fa fa-bug right"></i>',
-            required: 'Please fill out all fields<i class="fa fa-pencil right"></i>',
-            wrongEmail: 'Please enter correct email address format<i class="fa fa-pencil right"></i>',
-            sending: 'Sending message<i class="fa fa-spinner fa-spin right"></i>',
-            sent: 'Message has been sent<i class="fa fa-check right"></i>'
+            default: 'Send a message<span class="icon__image right" data-icon="angle-right" aria-hidden="true"></span>',
+            error: 'Something went wrong, try again<span class="icon__image right" data-icon="bug" aria-hidden="true"></span>',
+            required: 'Please fill out all fields<span class="icon__image right" data-icon="pencil" aria-hidden="true"></span>',
+            wrongEmail: 'Please enter correct email address format<span class="icon__image right" data-icon="pencil" aria-hidden="true"></span>',
+            sending: 'Sending message<span class="icon__image icon--spin right" data-icon="spinner" aria-hidden="true"></span>',
+            sent: 'Message has been sent<span class="icon__image fa-check right" data-icon="check" aria-hidden="true"></span>'
         }
 
         this.formSubmitHandler = this.formSubmitHandler.bind(this);

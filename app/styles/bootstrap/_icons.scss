@@ -17,7 +17,8 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon--equal {
+.icon--equal:before {
+    display: block;
     width: 1.28571429em;
     text-align: center;
 }
@@ -31,7 +32,7 @@
     100% { transform: rotate(359deg) }
 }
 
-[data-icon="envelope"]:before       { content: $icon-envelope-o }
+[data-icon="envelope-o"]:before       { content: $icon-envelope-o }
 [data-icon="check"]:before          { content: $icon-check }
 [data-icon="cross"]:before          { content: $icon-cross }
 [data-icon="pencil"]:before         { content: $icon-pencil }
