@@ -6,8 +6,7 @@ const GLOBALS = {
     desktop:    '(min-width: 62em)', /* min 992px */
     isWebkit:   'WebkitAppearance' in document.documentElement.style,
     email:      'contact@dzawadzinski.com',
-    dataUrl:    '//dzawadzinski.com/content.json',
-    fetchedData: null
+    dataUrl:    '//dzawadzinski.com/content.json'
 }
 
 const ajaxRequest = (method, url, callback) => {
@@ -474,7 +473,8 @@ class HistoryProjectModal {
 
         const target = (evt.target.tagName !== 'A') ? evt.target.parentNode : evt.target;
         const modalId = target.getAttribute('data-id');
-        const modalData = GLOBALS.fetchedData.projects[modalId].modal;
+        const projectObj = JSON.parse( localStorage.getItem('webContent') );
+        const modalData = projectObj.projects[modalId].modal;
 
         history.pushState(modalData, null, target.href);
         this.fillModalTemplate(modalId, modalData);
@@ -624,7 +624,11 @@ new ScrollToSection({ element: '.scroll__link', delay: 500 });
 
 updateYear('.copyright__year');
 
-ajaxRequest('GET', GLOBALS.dataUrl, (response) => {
-    GLOBALS.fetchedData = JSON.parse(response);
-    new HandleBarsTemplates({ dataUrl: GLOBALS.fetchedData });
+ajaxRequest('GET', GLOBALS.dataUrl, (dataResponse) => {
+    new HandleBarsTemplates({ dataUrl: JSON.parse(dataResponse) });
+    const getLocalData = localStorage.getItem('webContent');
+
+    if (!getLocalData || (dataResponse !== getLocalData) ) {
+        localStorage.setItem('webContent', dataResponse);
+    }
 });
