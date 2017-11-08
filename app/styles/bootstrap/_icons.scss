@@ -8,7 +8,7 @@
     font-style: normal;
 }
 
-.fa {
+[data-icon] {
     display: inline-block;
     font: normal normal normal 14px/1 icomoon;
     font-size: inherit;
@@ -17,114 +17,35 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.fa-fw {
+.icon--equal {
     width: 1.28571429em;
     text-align: center;
 }
 
-.fa-spin {
-    -webkit-animation: fa-spin 2s infinite linear;
-    animation: fa-spin 2s infinite linear;
+.icon--spin {
+    animation: icon-spin 2s infinite linear;
 }
 
-@keyframes fa-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+@keyframes icon-spin {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(359deg) }
 }
 
-.fa-envelope-o {
-    &:before {
-        content: $fa-envelope-o;
-    }
-}
-.fa-check {
-    &:before {
-        content: $fa-check;
-    }
-}
-.fa-times {
-    &:before {
-        content: $fa-times;
-    }
-}
-.fa-pencil {
-    &:before {
-        content: $fa-pencil;
-    }
-}
-.fa-chevron-right {
-    &:before {
-        content: $fa-chevron-right;
-    }
-}
-.fa-arrow-up {
-    &:before {
-        content: $fa-arrow-up;
-    }
-}
-.fa-arrow-down {
-    &:before {
-        content: $fa-arrow-down;
-    }
-}
-.fa-chevron-top {
-    &:before {
-        content: $fa-chevron-top;
-    }
-}
-.fa-chevron-down {
-    &:before {
-        content: $fa-chevron-down;
-    }
-}
-.fa-external-link {
-    &:before {
-        content: $fa-external-link;
-    }
-}
-.fa-github {
-    &:before {
-        content: $fa-github;
-    }
-}
-.fa-hand-o-left {
-    &:before {
-        content: $fa-hand-o-left;
-    }
-}
-.fa-linkedin {
-    &:before {
-        content: $fa-linkedin;
-    }
-}
-.fa-angle-left {
-    &:before {
-        content: $fa-angle-left;
-    }
-}
-.fa-angle-right {
-    &:before {
-        content: $fa-angle-right;
-    }
-}
-.fa-angle-top {
-    &:before {
-        content: $fa-angle-top;
-    }
-}
-.fa-angle-down {
-    &:before {
-        content: $fa-angle-down;
-    }
-}
-.fa-spinner {
-    &:before {
-        content: $fa-spinner;
-    }
-}
+[data-icon="envelope"]:before       { content: $icon-envelope-o }
+[data-icon="check"]:before          { content: $icon-check }
+[data-icon="cross"]:before          { content: $icon-cross }
+[data-icon="pencil"]:before         { content: $icon-pencil }
+[data-icon="chevron-right"]:before  { content: $icon-chevron-right }
+[data-icon="arrow-up"]:before       { content: $icon-arrow-up }
+[data-icon="arrow-down"]:before     { content: $icon-arrow-down }
+[data-icon="chevron-top"]:before    { content: $icon-chevron-top }
+[data-icon="chevron-down"]:before   { content: $icon-chevron-down }
+[data-icon="external-link"]:before  { content: $icon-external-link }
+[data-icon="github"]:before         { content: $icon-github }
+[data-icon="hand-o-left"]:before    { content: $icon-hand-o-left }
+[data-icon="linkedin"]:before       { content: $icon-linkedin }
+[data-icon="angle-left"]:before     { content: $icon-angle-left }
+[data-icon="angle-right"]:before    { content: $icon-angle-right }
+[data-icon="angle-top"]:before      { content: $icon-angle-top }
+[data-icon="angle-down"]:before     { content: $icon-angle-down }
+[data-icon="spinner"]:before        { content: $icon-spinner }

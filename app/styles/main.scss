@@ -165,6 +165,8 @@ textarea {
         opacity: .15;
         transition: 0s
     }
+
+    [data-icon] { pointer-events: none }
 }
 
 .button {
@@ -180,7 +182,7 @@ textarea {
     transition: all .15s linear;
     user-select: none;
 
-    i[class*="fa-"] {
+    .icon {
 
         &.left {
             margin-right: .5em;
@@ -526,7 +528,7 @@ textarea {
     color: $page-heading-color;
     margin-top: 0;
     margin-bottom: .8em;
-    span {
+    > span {
         display: inline-block;
         border-bottom: .2em solid $page-heading-border-bottom-color;
         padding-bottom: .2em;
@@ -576,6 +578,10 @@ textarea {
             vertical-align: middle;
         }
     }
+}
+
+.welcome__background {
+    display: none;
 }
 
 .welcome__heading {
@@ -722,6 +728,7 @@ textarea {
     transition: .15s opacity linear, .15s visibility linear;
 
     .left {
+        display: inline-block;
         margin-right: .45em;
         animation: scroll-left 2s infinite;
     }
@@ -860,7 +867,7 @@ textarea {
     line-height: 46px;
     transition: .1s all linear;
 
-    span {
+    .hidden-xs {
         display: inline-block;
         font-size: 18px;
         line-height: 42px;
@@ -868,7 +875,7 @@ textarea {
         vertical-align: top;
     }
 
-    i {
+    [data-icon] {
         line-height: 25px;
     }
 
@@ -1215,6 +1222,7 @@ textarea {
     }
 
     .welcome__background {
+        display: block;
         position: absolute;
         width: calc(100% - 1.5rem);
         height: 100vh;

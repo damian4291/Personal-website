@@ -51,7 +51,10 @@
             <div class="container">
                 <div class="row">
                     <a class="header__logo scroll__link" href="#top"><span class="sr-only">Zawadziński</span></a>
-                    <a class="landscape--trigger" href="#"><i class="fa fa-chevron-down"></i>MENU</a>
+                    <a class="landscape--trigger" href="#">
+                        <span class="icon__image" data-icon="chevron-down" aria-hidden="true"></span>
+                        <span class="sr-only">MENU</span>
+                    </a>
                     <nav class="main__navigation" role="navigation">
                         <ul class="menu__list click__effect">
                             <li class="menu__item">
@@ -84,9 +87,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <a class="arrow_scroll--down scroll__link" href="#work__section">
-                            <i class="fa fa-chevron-down"></i>
+                            <span class="icon__image" data-icon="chevron-down" aria-hidden="true"></span>
                             <span class="sr-only">Go to the next section</span>
                         </a>
                     </div>
@@ -96,7 +98,10 @@
                 <div class="container">
                     <h2 class="section__heading">
                         <span>Projects</span>
-                        <div class="scroll__reminder hidden"><i class="fa fa-hand-o-left left"></i>Slide to the left</div>
+                        <div class="scroll__reminder hidden">
+                            <span class="icon__image left" data-icon="hand-o-left" aria-hidden="true"></span>
+                            Slide to the left
+                        </div>
                     </h2>
                     <div id="projects__items" class="row">
                         <div class="spinner">
@@ -142,11 +147,16 @@
                                     <label for="contentmessage">
                                         Msg <span class="asteriks" title="To pole jest wymagane">*</span>
                                     </label>
-                                    <textarea id="contentmessage" class="form__control" name="message"  rows="6"></textarea>
+                                    <textarea id="contentmessage" class="form__control" name="message" rows="6"></textarea>
                                 </div>
                                 <div class="form__buttons">
                                     <input type="text" name="_gotcha" style="display:none">
-                                    <button type="submit" class="button">Send a message<i class="fa fa-angle-right right"></i></button>
+                                    <button type="submit" class="button">Send a message
+                                        <span class="icon">
+                                            <span class="icon__image" data-icon="angle-right" aria-hidden="true"></span>
+                                            <span class="icon__label sr-only">Arrow right</span>
+                                        </span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -168,12 +178,17 @@
                 <div class="modal__heading">
                     <div class="modal__title"></div>
                     <a class="see__live" href="" target="_blank" style="display:none">
-                        <i class="fa fa-external-link"></i>
+                        <span class="icon">
+                            <span class="icon__image" data-icon="external-link" aria-hidden="true"></span>
+                            <span class="icon__label sr-only">External link</span>
+                        </span>
                         <span class="hidden-xs">See live</span>
                     </a>
                     <a href="#" class="close__button">
-
-                        <i class="fa fa-times"></i>
+                        <span class="icon">
+                            <span class="icon__image" data-icon="cross" aria-hidden="true"></span>
+                            <span class="icon__label sr-only">Close modal</span>
+                        </span>
                     </a>
                 </div>
                 <div class="modal__content"></div>
@@ -181,7 +196,7 @@
             </div>
         </div>
         <a href="#top" class="scroll__link top--scroller button button--transparent">
-            <i class="fa fa-arrow-up"></i>
+            <span class="icon__image" data-icon="arrow-up" aria-hidden="true"></span>
             <span class="sr-only">Go back to top</span>
         </a>
 
