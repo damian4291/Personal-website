@@ -118,14 +118,15 @@ textarea {
 }
 
 .sr-only {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
 }
 
 .nojs--message {
@@ -210,7 +211,7 @@ textarea {
     }
 }
 
-.button-transparent {
+.button--transparent {
 
     &:hover,
     &:focus {
@@ -1200,16 +1201,34 @@ textarea {
     }
 
     #welcome__section {
-        background: url('../images/welcome-background.png') repeat-y center / 98%, $welcome-section-background;
-        background: url('../images/welcome-background.png') repeat-y center / 98%, -webkit-linear-gradient(to top, $welcome-section-background 0% $header-color 80%);
-        background: url('../images/welcome-background.png') repeat-y center / 98%, linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
+        position: relative;
+        background: $welcome-section-background;
+        background: linear-gradient(to top, $welcome-section-background 0%, $header-color 80%);
         margin-top: $dekstop-header-height;
-        will-change: transform;
+        overflow: hidden;
 
         > .container {
             .row {
                 flex-direction: row;
             }
+        }
+    }
+
+    .welcome__background {
+        position: absolute;
+        width: calc(100% - 1.5rem);
+        height: 100vh;
+        top: -2rem;
+        right: 1rem;
+        bottom: 0;
+        left: .5rem;
+        opacity: 0;
+        transform: translateY(-1rem);
+        transition: .5s opacity ease-in;
+        object-fit: cover;
+
+        .bg--loaded & { 
+            opacity: 1;
         }
     }
 

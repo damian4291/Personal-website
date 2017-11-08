@@ -37,6 +37,15 @@ const updateYear = (selector) => {
     document.querySelector(selector).textContent = actualYear;
 }
 
+const showWelcomeBackground = () => {
+    const welcomeSection = document.getElementById('welcome__section');
+    const welcomeBackground = welcomeSection.querySelector('.welcome__background');
+
+    welcomeBackground.src = welcomeBackground.getAttribute('data-url');
+    welcomeBackground.removeAttribute('data-url');
+    welcomeBackground.onload = () => welcomeSection.classList.add('bg--loaded');
+}
+
 class HandleBarsTemplates {
     constructor(settings = {}) {
         this.settings = settings;
@@ -307,7 +316,7 @@ class MainNavigation {
                 navItemLink.setAttribute('aria-haspopup', true);
                 navItemLink.setAttribute('aria-expanded', false);
 
-                menuListToggleVisibility(navItemLink, navItem, '.menu__item', false);
+                this.menuListToggleVisibility(navItemLink, navItem, '.menu__item', false);
 
                 const dropdownList = navItem.querySelector('.dropdown__menu');
                 const subNavItems = dropdownList.querySelectorAll('.sub--menu__item');
@@ -318,7 +327,7 @@ class MainNavigation {
 
                     if (subNavItem.querySelector('.sub--dropdown__menu') != null) {
                         subNavLink.appendChild('<i class="fa fa-chevron-right dropdown--icon right small"></i>');
-                        toggleElem(subNavLink, subNavItem, '.sub--menu__item', true);
+                        this.menuListToggleVisibility(subNavLink, subNavItem, '.sub--menu__item', true);
                     }
                 }
             }
@@ -326,7 +335,7 @@ class MainNavigation {
     }
 
     dropShadowHandler() {
-        const workSection = document.querySelector('#work__section');
+        const workSection = document.getElementById('work__section');
 
         if (window.scrollY + this.header.offsetHeight > workSection.offsetTop) {
             this.header.classList.add('shadow');
@@ -616,13 +625,16 @@ class MobileHorizontalWork {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    updateYear('.copyright__year');
+    showWelcomeBackground();
+});
+
 new ContactForm();
 new MainNavigation();
 new MobileHorizontalWork();
 new BackToTop();
 new ScrollToSection({ element: '.scroll__link', delay: 500 });
-
-updateYear('.copyright__year');
 
 ajaxRequest('GET', GLOBALS.dataUrl, (dataResponse) => {
     new HandleBarsTemplates({ dataUrl: JSON.parse(dataResponse) });
