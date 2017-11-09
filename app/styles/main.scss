@@ -567,6 +567,7 @@ textarea {
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
         display: table;
         width: 100%;
+        @include clearfix;
 
         > .container {
             display: table-cell;
