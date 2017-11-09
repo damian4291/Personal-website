@@ -295,7 +295,6 @@ textarea {
 
 .form__group {
     margin-bottom: .65em;
-    @include clearfix();
 
     label {
         color: darken(#a6a6a6, 20%);
@@ -325,7 +324,6 @@ textarea {
     left: 0;
     right: 0;
     z-index: $header-zindex;
-    @include clearfix();
 
     &.shadow {
         box-shadow: 0 .2em .25em 0px rgba(0, 0, 0, 0.25);
@@ -364,16 +362,14 @@ textarea {
     padding: 0;
     display: flex;
     justify-content: center;
-    @include clearfix();
+}
 
-    > li {
-        float: left;
-        border-right: .0625em solid $mobile-menu-list-separator-color;
-        margin-top: .4em;
-        margin-bottom: .4em;
+.menu__item {
+    border-right: .0625em solid $mobile-menu-list-separator-color;
+    margin-top: .4em;
+    margin-bottom: .4em;
 
-        &:last-child { border-right: 0 }
-    }
+    &:last-child { border-right: 0 }
 }
 
 .menu__link {
@@ -539,7 +535,6 @@ textarea {
     padding-top: 1em;
     padding-bottom: 1em;
     position: relative;
-    @include clearfix();
 
     &:first-child {
         padding-top: 2em;
@@ -672,7 +667,7 @@ textarea {
 
             &:hover {
                 color: #46ede8;
-                box-shadow:: inset .3em 0 0 #46ede8;
+                box-shadow: inset .3em 0 0 #46ede8;
                 background: -webkit-linear-gradient(to left, rgba(190, 221, 244, 0) 0% rgba(164, 246, 243, 0.08) 100%);
                 background: linear-gradient(to left, rgba(190, 221, 244, 0) 0%, rgba(164, 246, 243, 0.08) 100%);
             }
@@ -820,7 +815,7 @@ textarea {
 
 .modal__heading {
     padding: 1.25em 0;
-    @include clearfix();
+    display: flex;
 }
 
 .modal__title {
@@ -834,7 +829,6 @@ textarea {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    float: left;
 
     &.has-live {
         width: calc(100% - 94px);
@@ -872,18 +866,15 @@ textarea {
 .see__live {
     background-color: $modal-live-button-background-color;
     color: $modal-close-button-color;
-    float: left;
     font-size: 26px;
     padding-left:  8px;
     padding-right: 8px;
     margin-left: 5px;
-    display: inline-block;
     height: 42px;
     line-height: 46px;
     transition: .1s all linear;
 
     .hidden-xs {
-        display: inline-block;
         font-size: 18px;
         line-height: 42px;
         margin-left: 5px;
@@ -907,7 +898,6 @@ textarea {
     padding-left:  8px;
     padding-right: 8px;
     margin-left: 5px;
-    float: left;
     display: block;
     font-size: 33px;
     height: 42px;
@@ -1125,15 +1115,14 @@ textarea {
     .menu__list {
         margin-left: 0;
         margin-right: 0;
-        display: block;
         width: auto;
+    }
 
-        > li {
-            position: relative;
-            border-right: 0;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+    .menu__item {
+        position: relative;
+        border-right: 0;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .menu__link {
@@ -1260,8 +1249,8 @@ textarea {
     }
 
     .form__group {
+        display: flex;
         label {
-            float: left;
             text-align: right;
             margin-right: 1em;
             min-width: 3.5em;
@@ -1274,7 +1263,6 @@ textarea {
     }
 
     .form__control {
-        float: left;
         width: calc(100% - 4.5em);
     }
 
