@@ -28,7 +28,7 @@ const ajaxRequest = (method, url, callback) => {
 const listenerOnce = (element, event, callback) => {
     element.addEventListener(event, function handler(evt) {
         evt.currentTarget.removeEventListener(evt.type, handler);
-        callback();
+        if (callback && typeof callback === 'function') callback();
     });
 }
 
@@ -36,6 +36,9 @@ const updateYear = (selector) => {
     const actualYear = new Date().getFullYear();
     document.querySelector(selector).textContent = actualYear;
 }
+
+const icon = (iconName, className) => 
+    `<span class="icon__image ${className}" data-icon="${iconName}" aria-hidden="true"></span>`;
 
 const showWelcomeBackground = () => {
     const welcomeSection = document.getElementById('welcome__section');
@@ -80,12 +83,12 @@ class ContactForm {
         this.timeToReset = 3500;
 
         this.MESSAGES = {
-            default: 'Send a message<span class="icon__image right" data-icon="angle-right" aria-hidden="true"></span>',
-            error: 'Something went wrong, try again<span class="icon__image right" data-icon="bug" aria-hidden="true"></span>',
-            required: 'Please fill out all fields<span class="icon__image right" data-icon="pencil" aria-hidden="true"></span>',
-            wrongEmail: 'Please enter correct email address format<span class="icon__image right" data-icon="pencil" aria-hidden="true"></span>',
-            sending: 'Sending message<span class="icon__image icon--spin right" data-icon="spinner" aria-hidden="true"></span>',
-            sent: 'Message has been sent<span class="icon__image fa-check right" data-icon="check" aria-hidden="true"></span>'
+            default:    'Send a message'                            + icon('angle-right', 'right'),
+            error:      'Something went wrong, try again'           + icon('bug', 'right'),
+            required:   'Please fill out all fields'                + icon('pencil', 'right'),
+            wrongEmail: 'Please enter correct email address format' + icon('pencil', 'right'),
+            sending:    'Sending message'                           + icon('spinner', 'icon--spin right'),
+            sent:       'Message has been sent'                     + icon('check', 'right')
         }
 
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
