@@ -314,7 +314,7 @@ class MainNavigation {
             const navItemLink = navItem.getElementsByTagName('a')[0];
 
             if (navItem.querySelector('.dropdown__menu') != null) {
-                navItemLink.appendChild('<i class="fa fa-chevron-right dropdown--icon right small"></i>');
+                navItemLink.appendChild( icon('chevron-right', 'dropdown--icon right small') );
                 navItemLink.setAttribute('role', 'button');
                 navItemLink.setAttribute('aria-haspopup', true);
                 navItemLink.setAttribute('aria-expanded', false);
@@ -329,7 +329,7 @@ class MainNavigation {
                     const subNavLink = subNavItem.getElementsByTagName('a')[0];
 
                     if (subNavItem.querySelector('.sub--dropdown__menu') != null) {
-                        subNavLink.appendChild('<i class="fa fa-chevron-right dropdown--icon right small"></i>');
+                        subNavLink.appendChild( icon('chevron-right', 'dropdown--icon right small') );
                         this.menuListToggleVisibility(subNavLink, subNavItem, '.sub--menu__item', true);
                     }
                 }
@@ -380,7 +380,7 @@ class ScrollToSection {
 
     animateScrollAction(destination) {
         const start = window.pageYOffset;
-        const startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+        const startTime = performance.now();
 
         const headerHeight = document.querySelector('.header__container').offsetHeight;
         const documentHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
@@ -389,7 +389,7 @@ class ScrollToSection {
         const destinationOffsetToScroll = Math.round(documentHeight - destinationOffset < windowHeight ? documentHeight - windowHeight : destinationOffset);
 
         const animateScrollAction = () => {
-            const now = 'now' in window.performance ? performance.now() : new Date().getTime();
+            const now = performance.now();
             const time = Math.min(1, ((now - startTime) / this.delay));
             const timeFunction = time < 0.5 ? 4 * time * time * time : (time - 1) * (2 * time - 2) * (2 * time - 2) + 1;
 
