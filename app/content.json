@@ -26,6 +26,19 @@
         }
     ],
     "projects": {
+        "gastro-pizza": {
+            "title": "Gastro Pizza Szczecin",
+            "thumbUrl": "images/projects/gastro-pizza.png",
+            "thumbAlt": "Gastro Pizza thumbnail",
+            "modal": {
+                "title": "Gastro Pizza Szczecin",
+                "liveUrl": "http://damian-zawadzinski.pl/demo/gastro-pizza",
+                "imgUrl": "images/projects/gastro-pizza-full.jpg",
+                "mobileimgUrl": "images/projects/gastro-pizza-full.jpg",
+                "imgAlt": "full size image of Gaatro Pizza",
+                "content": "Refreshed website look of local pizzeria Gastro Pizza located in my town."
+            }
+        },
         "act-reveniue-office": {
             "title": "ACT Revenue Office",
             "thumbUrl": "images/projects/revenue.png",
@@ -36,7 +49,7 @@
                 "imgUrl": "images/projects/revenue-full.jpg",
                 "mobileimgUrl": "images/projects/revenue-full.jpg",
                 "imgAlt": "full size image of ACT Revenue Office",
-                "content": "Another work for Squiz Australia. Coded design + implementation to Squiz Matrix CMS. <br> Official live site might be little bit different than initial project but it can be seen <a href='https://www.revenue.act.gov.au'>here</a>"
+                "content": "Work for Squiz Australia. Coded design + implementation to Squiz Matrix CMS. <br> Official live site might be little bit different than initial project but it can be seen <a href='https://www.revenue.act.gov.au'>here</a>"
             }
         },
         "nsw-edu-cluster-planning": {
@@ -62,7 +75,7 @@
                 "imgUrl": "images/projects/rlss-full.png",
                 "mobileimgUrl": "images/projects/rlss-full-mobile.png",
                 "imgAlt": "full size image of RLSS",
-                "content": "Another project on which I worked for Squiz Australia. This new look of RLSS homepage. Also my task was to make whole site full responsive, that wasn't easy because site was created 5 years ago."
+                "content": "Project for Squiz Australia. This new look of RLSS homepage. Also my task was to make whole site full responsive, that wasn't easy because site was created 5 years ago."
             }
         }, 
         "espl-website": {
@@ -138,7 +151,7 @@
                 "imgUrl": "images/projects/violetrix-full.png",
                 "mobileimgUrl": "images/projects/violetrix-full-mobile.png",
                 "imgAlt": "full size image of tibia ots",
-                "content": ""
+                "content": "Forum template based on phpBB modified by Przemo created by me back in 2014."
             }
         },
         "helpbet-drupal-template": {
@@ -150,7 +163,7 @@
                 "imgUrl": "images/projects/helpbet-full.png",
                 "mobileimgUrl": "images/projects/helpbet-full-mobile.png",
                 "imgAlt": "full size image of helpbet",
-                "content": ""
+                "content": "Forum templated based on Simple Machines Forum (SMF)"
             }
         },
         "minecraft-static-template": {
@@ -163,7 +176,7 @@
                 "imgUrl": "images/projects/minecraft-full.png",
                 "mobileimgUrl": "images/projects/minecraft-full-mobile.png",
                 "imgAlt": "full size image of minecraft",
-                "content": ""
+                "content": "Simple Minecraft static template, created by me for one of my friends."
             }
         }
     }
