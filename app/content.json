@@ -100,7 +100,7 @@
                 "imgUrl": "images/projects/makelab-full.png",
                 "mobileimgUrl": "images/projects/makelab-full-mobile.png",
                 "imgAlt": "full size image of makelab platform",
-                "content": "Internal project for Squiz Poland, where clients are able to choose developers based on their skills. Design created and coded by me, built using React.js and Squiz Matrix CMS. For obvious reasons I can't show live version of platfom :)"
+                "content": "Internal project for Squiz Poland, where clients are able to choose developers based on their skills. Design created and coded by me, built using React.js and Squiz Matrix CMS. For obvious reasons I can't show live version of platform :)"
             }            
         },
         "baptcare-new-design": {
