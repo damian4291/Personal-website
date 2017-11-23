@@ -32,9 +32,9 @@
             "thumbAlt": "Gastro Pizza thumbnail",
             "modal": {
                 "title": "Gastro Pizza Szczecin",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/gastro-pizza",
-                "imgUrl": "images/projects/gastro-pizza-full.jpg",
-                "mobileimgUrl": "images/projects/gastro-pizza-full.jpg",
+                "liveUrl": "http://gastropizzaszczecin.pl",
+                "imgUrl": "images/projects/gastro-pizza-full.png",
+                "mobileimgUrl": "images/projects/gastro-pizza-full.png",
                 "imgAlt": "full size image of Gaatro Pizza",
                 "content": "Refreshed website look of local pizzeria Gastro Pizza located in my town."
             }
@@ -45,7 +45,7 @@
             "thumbAlt": "ACT revenue office thumbnail",
             "modal": {
                 "title": "ACT Goverment Revenue Office",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/revenue",
+                "liveUrl": "http://dzawadzinski.com/demo/revenue",
                 "imgUrl": "images/projects/revenue-full.jpg",
                 "mobileimgUrl": "images/projects/revenue-full.jpg",
                 "imgAlt": "full size image of ACT Revenue Office",
@@ -58,7 +58,7 @@
             "thumbAlt": "NSW Edu thumbnail",
             "modal": {
                 "title": "NSW Edu: Cluster planning",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/nsw-edu",
+                "liveUrl": "http://dzawadzinski.com/demo/nsw-edu",
                 "imgUrl": "images/projects/nsw-edu-full.png",
                 "mobileimgUrl": "images/projects/nsw-edu-full.png",
                 "imgAlt": "full size image of NSW Education",
@@ -84,7 +84,7 @@
             "thumbAlt": "ESPL Thumbnail",
             "modal": {
                 "title": "ESPL",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/espl",
+                "liveUrl": "http://dzawadzinski.com/demo/espl",
                 "imgUrl": "images/projects/espl-full.png",
                 "mobileimgUrl": "images/projects/espl-full-mobile.png",
                 "imgAlt": "full size image of ESPL",
@@ -122,7 +122,7 @@
             "thumbAlt": "Tibia OTS thumbnail",
             "modal": {
                 "title": "Tibia OTS",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/tibia",
+                "liveUrl": "http://dzawadzinski.com/demo/tibia",
                 "imgUrl": "images/projects/tibiaots-full.png",
                 "mobileimgUrl": "images/projects/tibiaots-full-mobile.png",
                 "imgAlt": "full size image of tibia ots",
@@ -135,7 +135,7 @@
             "thumbAlt": "HLTV.org redesign thumbnail",
             "modal": {
                 "title": "HLTV.org redesign",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/hltv",
+                "liveUrl": "http://dzawadzinski.com/demo/hltv",
                 "imgUrl": "images/projects/hltv-full.png",
                 "mobileimgUrl": "images/projects/hltv-full-mobile.png",
                 "imgAlt": "full size image of hltv redesign",
@@ -172,7 +172,7 @@
             "thumbAlt": "Minecraft thumbnail",
             "modal": {
                 "title": "Minecraft",
-                "liveUrl": "http://damian-zawadzinski.pl/demo/minecraft",
+                "liveUrl": "http://dzawadzinski.com/demo/minecraft",
                 "imgUrl": "images/projects/minecraft-full.png",
                 "mobileimgUrl": "images/projects/minecraft-full-mobile.png",
                 "imgAlt": "full size image of minecraft",
